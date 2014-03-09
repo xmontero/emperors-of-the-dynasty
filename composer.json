@@ -1,8 +1,8 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "license": "MIT",
+    "name": "xmontero/emperors-of-the-dynasty",
+    "license": "GPL-3.0+",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "The \"Emperors of the Dynasty\" game",
     "autoload": {
         "psr-0": { "": "src/" }
     },
