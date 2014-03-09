@@ -1,3 +1,5 @@
+# Default symfony proposal.
+
 /web/bundles/
 /app/bootstrap.php.cache
 /app/cache/*
@@ -9,4 +11,10 @@
 /vendor/
 /bin/
 /composer.phar
+
+# Added by Xavi.
+
 /tmp/
+/.travis.yml
+/src/Acme/
+/app/config/
