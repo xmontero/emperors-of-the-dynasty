@@ -14,5 +14,7 @@
 
 # Added by Xavi.
 
-/tmp/
 /.travis.yml
+/app/SymfonyRequirements.php
+/app/check.php
+/tmp/
