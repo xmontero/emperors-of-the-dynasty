@@ -1,0 +1,6 @@
+parameters:
+
+services:
+    emperors.server:
+        class: Xmontero\Emperors\ServerBundle\Model\Server
+        arguments: [ '@logger' ]
