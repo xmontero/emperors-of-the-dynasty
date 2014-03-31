@@ -1,0 +1,4 @@
+XmonteroEmperorsClientBundle_root:
+    pattern: /
+    defaults: { _controller: XmonteroEmperorsClientBundle:Default:root }
+    requirements: { _method: GET }

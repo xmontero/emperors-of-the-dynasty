@@ -1,0 +1,3 @@
+XmonteroEmperorsClientBundle:
+    resource: "@XmonteroEmperorsClientBundle/Resources/config/routing.yml"
+    prefix:   /

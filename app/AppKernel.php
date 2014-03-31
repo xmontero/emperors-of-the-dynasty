@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             
             new Xmontero\Emperors\ServerBundle\XmonteroEmperorsServerBundle(),
+            new Xmontero\Emperors\ClientBundle\XmonteroEmperorsClientBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
