@@ -26,13 +26,13 @@ class StartCommand extends Command
 		$emperorsServer = $this->getContainer()->get( 'emperors.server' );
 		
 		$server = IoServer::factory(
-        new HttpServer(
-            new WsServer(
-                $emperorsServer
-            )
-        ),
-        8080
-    );
+		new HttpServer(
+			new WsServer(
+				$emperorsServer
+			)
+		),
+		8080
+	);
 		$server->run();
 	}
 }
