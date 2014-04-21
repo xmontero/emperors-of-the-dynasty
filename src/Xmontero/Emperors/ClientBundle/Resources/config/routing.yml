@@ -2,3 +2,8 @@ XmonteroEmperorsClientBundle_root:
     pattern: /
     defaults: { _controller: XmonteroEmperorsClientBundle:Default:root }
     requirements: { _method: GET }
+
+XmonteroEmperorsClientBundle_dirty:
+    pattern: /dirty/
+    defaults: { _controller: XmonteroEmperorsClientBundle:Default:dirty }
+    requirements: { _method: GET }
