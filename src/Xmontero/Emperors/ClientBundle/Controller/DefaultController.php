@@ -10,6 +10,7 @@ class DefaultController extends Controller
 {
 	public function rootAction( Request $request )
 	{
-		return $this->render( 'XmonteroEmperorsClientBundle:Pages:home.html.twig', array( 'name' => $this->get( 'security.context' )->getToken() ) );
+		return $this->render( 'XmonteroEmperorsClientBundle:Pages:2014-04apr-home.html.twig', array( 'name' => $this->get( 'security.context' )->getToken() ) );
+		//return $this->render( 'XmonteroEmperorsClientBundle:Pages:home.html.twig', array( 'name' => $this->get( 'security.context' )->getToken() ) );
 	}
 }
