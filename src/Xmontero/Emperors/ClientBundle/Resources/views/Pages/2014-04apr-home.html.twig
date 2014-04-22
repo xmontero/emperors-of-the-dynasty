@@ -27,23 +27,43 @@
 		<h2>Jugadores registrados para la primera partida</h2>
 		<h3>Controlando Emperadores</h3>
 		<table border=1>
-			<tr><th>#</th><th>Inscripción</th><th>Jugador Emperador</th></tr>
+			<tr>
+				<th>#</th>
+				<th>Inscripción</th>
+				<th>Jugador Emperador</th>
+				<th>Emperador</th>
+				<th>Sexo</th>
+				<th>Dinastía</th>
+			</tr>
 			{% for emperor in emperors %}
 				<tr>
 					<td>{{ emperor.id }}</td>
 					<td>{{ ( emperor.signupDate | date( "d-m-Y H:i:s T" ) ) }}</td>
 					<td><a target="_blank" href="{{ emperor.facebookPage }}">{{ emperor.playerName }}</a></td>
+					<td>{{ emperor.emperor }}</td>
+					<td>{{ emperor.gender }}</td>
+					<td>{{ emperor.dynasty }}</td>
 				</tr>
 			{% endfor %}
 		</table>
 		<h3>Controlando Peones</h3>
 		<table border=1>
-			<tr><th>#</th><th>Inscripción</th><th>Jugador Peón</th></tr>
+			<tr>
+				<th>#</th>
+				<th>Inscripción</th>
+				<th>Jugador Peón</th>
+				<th>Emperador que juega de peón</th>
+				<th>Sexo</th>
+				<th>Dinastía</th>
+			</tr>
 			{% for pawn in pawns %}
 				<tr>
 					<td>{{ pawn.id }}</td>
-					<td>{{ ( pawn.signupDate is null ) ? "-disponible-" : ( pawn.signupDate | date( "d-m-Y H:i:s T" ) ) }}</td>
-					<td><a target="_blank" href="{{ pawn.facebookPage is null ? "https://www.facebook.com/groups/1472958162921109/permalink/1473019182915007/?stream_ref=2" : pawn.facebookPage }}">{{ pawn.playerName is null ? "Apuntarse aquí" : pawn.playerName }}</a></td>
+					<td>{{ ( pawn.signupDate is null ) ? "-partida completa-" : ( pawn.signupDate | date( "d-m-Y H:i:s T" ) ) }}</td>
+					<td><a target="_blank" href="{{ pawn.facebookPage is null ? "https://www.facebook.com/groups/1472958162921109/permalink/1473019182915007/?stream_ref=2" : pawn.facebookPage }}">{{ pawn.playerName is null ? "Apuntarse a lista de espera" : pawn.playerName }}</a></td>
+					<td>{{ pawn.emperor }}</td>
+					<td>{{ pawn.gender }}</td>
+					<td>{{ pawn.dynasty }}</td>
 				</tr>
 			{% endfor %}
 		</table>
