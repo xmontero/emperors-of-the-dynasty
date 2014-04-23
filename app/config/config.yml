@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -55,6 +55,8 @@ doctrine:
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: "%kernel.root_dir%/data/data.db3"
         # path:     "%database_path%"
+        mapping_types:
+            enum: string
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -67,3 +69,9 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# FOS User bundle
+fos_user:
+    db_driver: orm
+    firewall_name: mail
+    user_class: Xmontero\Emperors\UserBundle\Entity\User
