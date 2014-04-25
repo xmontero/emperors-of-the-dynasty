@@ -1,0 +1,11 @@
+{% extends "XmonteroEmperorsClientBundle:Layout:layout.html.twig" %}
+
+{% block page %}
+	
+	<h2>Instrucciones</h2>
+	<ul>
+		<li>Si eres emperador, lee esto: <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsEmperors' ) }}">Instrucciones para emperadores.</a>
+		<li>Si eres peón, lee esto: <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsPawns' ) }}">Instrucciones para peones.</a>
+	</ul>
+	
+{% endblock %}

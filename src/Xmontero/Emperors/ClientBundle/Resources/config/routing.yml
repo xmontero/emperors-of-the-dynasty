@@ -3,6 +3,46 @@ XmonteroEmperorsClientBundle_root:
     defaults: { _controller: XmonteroEmperorsClientBundle:Default:root }
     requirements: { _method: GET }
 
+XmonteroEmperorsClientBundle_instructionsMenu:
+    pattern: /firstgame/instructions/menu/
+    defaults:
+        _controller: XmonteroEmperorsClientBundle:Default:dumpPage
+        template: XmonteroEmperorsClientBundle:Pages/FirstGame:instructions.html.twig
+    requirements: { _method: GET }
+
+XmonteroEmperorsClientBundle_instructionsGame:
+    pattern: /firstgame/instructions/game/
+    defaults:
+        _controller: XmonteroEmperorsClientBundle:Default:dumpPage
+        template: XmonteroEmperorsClientBundle:Pages/FirstGame:game.html.twig
+    requirements: { _method: GET }
+
+XmonteroEmperorsClientBundle_instructionsEmperors:
+    pattern: /firstgame/instructions/emperors/
+    defaults:
+        _controller: XmonteroEmperorsClientBundle:Default:dumpPage
+        template: XmonteroEmperorsClientBundle:Pages/FirstGame:emperors.html.twig
+    requirements: { _method: GET }
+
+XmonteroEmperorsClientBundle_instructionsPawns:
+    pattern: /firstgame/instructions/pawns/
+    defaults:
+        _controller: XmonteroEmperorsClientBundle:Default:dumpPage
+        template: XmonteroEmperorsClientBundle:Pages/FirstGame:pawns.html.twig
+    requirements: { _method: GET }
+
+XmonteroEmperorsClientBundle_board:
+    pattern: /firstgame/board/
+    defaults:
+        _controller: XmonteroEmperorsClientBundle:Default:dumpPage
+        template: XmonteroEmperorsClientBundle:Pages/FirstGame:board.html.twig
+    requirements: { _method: GET }
+
+XmonteroEmperorsClientBundle_players:
+    pattern: /firstgame/players/
+    defaults: { _controller: XmonteroEmperorsClientBundle:Default:playersList }
+    requirements: { _method: GET }
+
 XmonteroEmperorsClientBundle_dirty:
     pattern: /dirty/
     defaults: { _controller: XmonteroEmperorsClientBundle:Default:dirty }

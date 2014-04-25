@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<title>Emperors of the Dynasty - The game!</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<h1>EMPERORS OF THE DYNASTY - THE GAME!</h1>
+		  <a href="{{ path( 'XmonteroEmperorsClientBundle_root' ) }}">Inicio</a>
+		| <a href="{{ path( 'XmonteroEmperorsClientBundle_board' ) }}">Tablero</a>
+		| <a href="{{ path( 'XmonteroEmperorsClientBundle_players' ) }}">Jugadores</a>
+		| <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsMenu' ) }}">Instrucciones</a>
+		<hr>
+		{% block page %}
+		{% endblock %}
+	</body>
+</html>

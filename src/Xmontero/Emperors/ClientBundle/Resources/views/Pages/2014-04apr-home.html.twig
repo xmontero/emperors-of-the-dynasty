@@ -1,71 +1,26 @@
-<html>
-	<head>
-		<title>Emperors of the Dynasty - The game!</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<h1>EMPERORS OF THE DYNASTY</h1>
-		<h2>Resumen rápido</h2>
-		<p>
-			<b>Emperors of the Dynasty</b> es un juego multijugador, donde diferentes Dinastías se retan en campos de batalla para jugarse su reputación y su riqueza.
-		</p>
-		<p>
-			Cada <b>jugador</b> controla exactamente una Dinastía, que le servirá a lo largo de todas sus partidas. Una Dinastía está formada por varios Emperadores. La reputación de la Dinastía es la suma de las reputaciones de todos sus Emperadores.
-		</p>
-		<p>
-			El <b>objetivo</b> del juego es maximizar la reputación de la Dinastía.
-		</p>
-		<p>
-			El documento original está en inglés, pero lo he pasado por el google translator para facilitar la cosa a los que el inglés no es vuestro fuerte. Un día tendremos una traducción oficial. Mientras, googletranslator es nuestro amigo.
-		</p>
-		<ul>
-			<li><a href="/readme_google_translator.html">Traducción guarra de google-translator - Al menos se entiende algo (hasta que alguien me ayude a hacer una traducción oficial heh)</a></li>
-			Los gráficos se han roto, aquí está el <a href="https://github.com/xmontero/emperors-of-the-dynasty" target="_blank">doc original.</a>
-		</ul>
-		<h2>Primera partida de la historia</h2>
-		<p>Como aún no he escrito el juego para ordena y móvil, la primera partida será "manual", organizada en FaceBook en este grupo: <a href="https://www.facebook.com/groups/1472958162921109/" target="_blank">Emperors of the Dynasty - The Game!</a>
-		<h2>Jugadores registrados para la primera partida</h2>
-		<h3>Controlando Emperadores</h3>
-		<table border=1>
-			<tr>
-				<th>#</th>
-				<th>Inscripción</th>
-				<th>Jugador Emperador</th>
-				<th>Emperador</th>
-				<th>Sexo</th>
-				<th>Dinastía</th>
-			</tr>
-			{% for emperor in emperors %}
-				<tr>
-					<td>{{ emperor.id }}</td>
-					<td>{{ ( emperor.signupDate | date( "d-m-Y H:i:s T" ) ) }}</td>
-					<td><a target="_blank" href="{{ emperor.facebookPage }}">{{ emperor.playerName }}</a></td>
-					<td>{{ emperor.emperor }}</td>
-					<td>{{ emperor.gender }}</td>
-					<td>{{ emperor.dynasty }}</td>
-				</tr>
-			{% endfor %}
-		</table>
-		<h3>Controlando Peones</h3>
-		<table border=1>
-			<tr>
-				<th>#</th>
-				<th>Inscripción</th>
-				<th>Jugador Peón</th>
-				<th>Emperador que juega de peón</th>
-				<th>Sexo</th>
-				<th>Dinastía</th>
-			</tr>
-			{% for pawn in pawns %}
-				<tr>
-					<td>{{ pawn.id }}</td>
-					<td>{{ ( pawn.signupDate is null ) ? "-partida completa-" : ( pawn.signupDate | date( "d-m-Y H:i:s T" ) ) }}</td>
-					<td><a target="_blank" href="{{ pawn.facebookPage is null ? "https://www.facebook.com/groups/1472958162921109/permalink/1473019182915007/?stream_ref=2" : pawn.facebookPage }}">{{ pawn.playerName is null ? "Apuntarse a lista de espera" : pawn.playerName }}</a></td>
-					<td>{{ pawn.emperor }}</td>
-					<td>{{ pawn.gender }}</td>
-					<td>{{ pawn.dynasty }}</td>
-				</tr>
-			{% endfor %}
-		</table>
-	</body>
-</html>
+{% extends "XmonteroEmperorsClientBundle:Layout:layout.html.twig" %}
+
+{% block page %}
+	<h2>¿Qué es Emperors of the Dynasty?</h2>
+	<p>
+		<b>Emperors of the Dynasty</b> es un juego multijugador, donde diferentes Dinastías se retan en campos de batalla para jugarse su reputación y su riqueza.
+	</p>
+	<p>
+		Cada <b>jugador</b> controla exactamente una Dinastía, que le servirá a lo largo de todas sus partidas. Una Dinastía está formada por varios Emperadores. La reputación de la Dinastía es la suma de las reputaciones de todos sus Emperadores.
+	</p>
+	<p>
+		El <b>objetivo</b> del juego es maximizar la reputación de la Dinastía.
+	</p>
+	<p>
+		El documento original está en inglés, pero lo he pasado por el google translator para facilitar la cosa a los que el inglés no es vuestro fuerte. Un día tendremos una traducción oficial. Mientras, googletranslator es nuestro amigo.
+	</p>
+	<ul>
+		<li><a href="/readme_google_translator.html">Traducción guarra de google-translator - Al menos se entiende algo (hasta que alguien me ayude a hacer una traducción oficial heh)</a></li>
+		Los gráficos se han roto, aquí está el <a href="https://github.com/xmontero/emperors-of-the-dynasty" target="_blank">doc original.</a>
+	</ul>
+	<h2>Primera partida de la historia</h2>
+	<ul>
+		<li>Como aún no he escrito el juego para ordena y móvil, la primera partida será "manual", organizada en FaceBook en este grupo: <a href="https://www.facebook.com/groups/1472958162921109/" target="_blank">Emperors of the Dynasty - The Game!</a>
+		<li>El viernes 25 de abril a las 9:00pm hora española se iniciará la primera partida.
+	</ul>
+{% endblock %}
