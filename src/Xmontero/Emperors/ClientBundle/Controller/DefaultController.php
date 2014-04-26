@@ -37,11 +37,13 @@ class DefaultController extends Controller
 	{
 		$connection = $this->getDoctrine()->getManager()->getConnection();
 		
-		$statement = $connection->prepare( 'SELECT * FROM emperorsFirstGame ORDER BY id' );
+		$query = 'select pfg.id, pfg.emperor, pfg.gender, pfg.dynasty, u.signupDate, u.playerName, u.facebookPage from emperorsFirstGame pfg LEFT JOIN players u ON pfg.playerId = u.id ORDER BY pfg.id';
+		$statement = $connection->prepare( $query );
 		$statement->execute();
 		$emperors = $statement->fetchAll();
 		
-		$statement = $connection->prepare( 'SELECT * FROM pawnsFirstGame ORDER BY id' );
+		$query = 'select pfg.id, pfg.emperor, pfg.gender, pfg.dynasty, u.signupDate, u.playerName, u.facebookPage from pawnsFirstGame pfg LEFT JOIN players u ON pfg.playerId = u.id ORDER BY pfg.id';
+		$statement = $connection->prepare( $query );
 		$statement->execute();
 		$pawns = $statement->fetchAll();
 		

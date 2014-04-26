@@ -19,8 +19,9 @@ class AppKernel extends Kernel
             
             new FOS\UserBundle\FOSUserBundle(),
             
-            new Xmontero\Emperors\ServerBundle\XmonteroEmperorsServerBundle(),
             new Xmontero\Emperors\ClientBundle\XmonteroEmperorsClientBundle(),
+            new Xmontero\Emperors\ModelBundle\XmonteroEmperorsModelBundle(),
+            new Xmontero\Emperors\ServerBundle\XmonteroEmperorsServerBundle(),
             new Xmontero\Emperors\UserBundle\XmonteroEmperorsUserBundle(),
         );
 
