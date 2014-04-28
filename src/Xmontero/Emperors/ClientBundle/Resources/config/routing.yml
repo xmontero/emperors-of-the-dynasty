@@ -3,6 +3,11 @@ XmonteroEmperorsClientBundle_root:
     defaults: { _controller: XmonteroEmperorsClientBundle:Default:root }
     requirements: { _method: GET }
 
+XmonteroEmperorsClientBundle_game:
+    pattern: /game/{gameId}
+    defaults: { _controller: XmonteroEmperorsClientBundle:Default:game }
+    requirements: { _method: GET }
+
 XmonteroEmperorsClientBundle_instructionsMenu:
     pattern: /firstgame/instructions/menu/
     defaults:
@@ -33,9 +38,7 @@ XmonteroEmperorsClientBundle_instructionsPawns:
 
 XmonteroEmperorsClientBundle_board:
     pattern: /firstgame/board/
-    defaults:
-        _controller: XmonteroEmperorsClientBundle:Default:dumpPage
-        template: XmonteroEmperorsClientBundle:Pages/FirstGame:board.html.twig
+    defaults: { _controller: XmonteroEmperorsClientBundle:Default:board }
     requirements: { _method: GET }
 
 XmonteroEmperorsClientBundle_players:

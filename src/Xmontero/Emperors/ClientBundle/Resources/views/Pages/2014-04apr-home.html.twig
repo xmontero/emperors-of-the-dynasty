@@ -18,10 +18,6 @@
 		<li><a href="/readme_google_translator.html">Traducción guarra de google-translator - Al menos se entiende algo (hasta que alguien me ayude a hacer una traducción oficial heh)</a></li>
 		Los gráficos se han roto, aquí está el <a href="https://github.com/xmontero/emperors-of-the-dynasty" target="_blank">doc original.</a>
 	</ul>
-	<h2>Primera partida de la historia</h2>
-	<ul>
-		<li>Como aún no he escrito el juego para ordena y móvil, la primera partida será "manual".
-		<li style="color: red;">PARTIDA INICIADA: El viernes 25 de abril a las 9:00pm hora española:</li>
-		<li><b>Únete</b> al juego en nuestro <a href="https://www.facebook.com/groups/1472958162921109/" target="_blank">grupo de Facebook</a></li>
-	</ul>
+	<h2>Selecciona una partida</h2>
+	{% include "XmonteroEmperorsClientBundle:Widgets:gameList.html.twig" with { "games": games } %}
 {% endblock %}

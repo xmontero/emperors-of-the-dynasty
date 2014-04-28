@@ -1,0 +1,10 @@
+parameters:
+
+services:
+    emperors.game.manager:
+        class: Xmontero\Emperors\ModelBundle\Model\Game\GameManager
+        arguments: [ '@logger', '@emperors.objectstorage.manager' ]
+
+    emperors.objectstorage.manager:
+        class: Xmontero\Emperors\ModelBundle\Model\ObjectStorage\ObjectStorageManager
+        arguments: [ '@logger', '@doctrine' ]

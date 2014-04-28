@@ -11,6 +11,8 @@ class DefaultController extends Controller
 	public function rootAction( Request $request )
 	{
 		$scope = array();
+		
+		$scope[ 'games' ] = $this->get( 'emperors.game.manager' )->getOpenGames( 10 );
 		$scope[ 'name' ] = $this->get( 'security.context' )->getToken();
 		
 		return $this->render( 'XmonteroEmperorsClientBundle:Pages:2014-04apr-home.html.twig', $scope );
@@ -63,4 +65,15 @@ class DefaultController extends Controller
 		return $this->render( $template, $scope );
 	}
 	
+	public function boardAction( Request $request )
+	{
+		$manager = $this->get( 'emperors.game.manager' );
+		$game = $manager->getGameById( 1 );
+		
+		$scope = array();
+		$scope[ 'name' ] = $this->get( 'security.context' )->getToken();
+		$scope[ 'game' ] = $game;
+		
+		return $this->render( 'XmonteroEmperorsClientBundle:Pages/FirstGame:board.html.twig', $scope );
+	}
 }

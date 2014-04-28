@@ -1,0 +1,6 @@
+<table border=1>
+	<th>Partida</th><th>Iniciada</th><th>Jugadores Totales</th><th>Jugadores vivos</th>
+	{% for game in games %}
+		{% include "XmonteroEmperorsClientBundle:Widgets:gameListGame.html.twig" %}
+	{% endfor %}
+</table>
