@@ -37,7 +37,7 @@ XmonteroEmperorsClientBundle_instructionsPawns:
     requirements: { _method: GET }
 
 XmonteroEmperorsClientBundle_board:
-    pattern: /firstgame/board/
+    pattern: /firstgame/board/{turn}
     defaults: { _controller: XmonteroEmperorsClientBundle:Default:board }
     requirements: { _method: GET }
 

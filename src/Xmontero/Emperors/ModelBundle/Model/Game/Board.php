@@ -10,8 +10,33 @@ class Board
 	private $chests;
 	private $tiles;
 	
-	public function __construct( $objectStorageManager )
+	public function __construct( $objectStorageManager, $turn )
 	{
+		// Columns
+		
+		switch( $turn )
+		{
+			case 0:
+			
+				$prefix = 'old';
+				break;
+			
+			case 1:
+			
+				$prefix = 'current';
+				break;
+			
+			case 2:
+			
+				$prefix = 'next';
+				break;
+		}
+		
+		$xName = $prefix . 'X';
+		$yName = $prefix . 'Y';
+		$servedDynastyName = $prefix . 'ServedDynasty';
+		$experienceName = $prefix . 'Experience';
+		
 		// Tiles
 		
 		$tiles = array();
@@ -66,8 +91,8 @@ class Board
 			
 			$emperor = $objectStorageManager->getObjectById( $objectId );
 			
-			$x = $emperor[ 'x' ];
-			$y = $emperor[ 'y' ];
+			$x = $emperor[ $xName ];
+			$y = $emperor[ $yName ];
 			
 			$tile = $tiles[ $x ][ $y ];
 			$tile->class = 'emperor-' . $i;
@@ -88,13 +113,13 @@ class Board
 				
 				if( $pawn[ 'blob' ] != '**' )
 				{
-					$x = $pawn[ 'x' ];
-					$y = $pawn[ 'y' ];
+					$x = $pawn[ $xName ];
+					$y = $pawn[ $yName ];
 					
 					$specialClass = ( $pawn[ 'blob' ] == '*' ) ? 'special ' : '';
 					
 					$tile = $tiles[ $x ][ $y ];
-					$tile->class = $specialClass . 'pawn-' . $pawn[ 'servedDynasty' ];
+					$tile->class = $specialClass . 'pawn-' . $pawn[ $servedDynastyName ];
 					$tile->content = 'P' . $player . $piece;
 					
 					$pawns[] = $pawn;
@@ -110,14 +135,17 @@ class Board
 			
 			$chest = $objectStorageManager->getObjectById( $objectId );
 			
-			$x = $chest[ 'x' ];
-			$y = $chest[ 'y' ];
-			
-			$tile = $tiles[ $x ][ $y ];
-			$tile->class = 'chest-' . $i;
-			$tile->content = 'C' . chr( $i + ord( 'A' ) - 1 );
-			
-			$chests[] = $chest;
+			if( $chest[ 'blob' ] != '**' )
+			{
+				$x = $chest[ $xName ];
+				$y = $chest[ $yName ];
+				
+				$tile = $tiles[ $x ][ $y ];
+				$tile->class = 'chest-' . $i;
+				$tile->content = 'C' . chr( $i + ord( 'A' ) - 1 );
+				
+				$chests[] = $chest;
+			}
 		}
 		
 		// Store

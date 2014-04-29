@@ -65,14 +65,22 @@ class DefaultController extends Controller
 		return $this->render( $template, $scope );
 	}
 	
-	public function boardAction( Request $request )
+	public function boardAction( Request $request, $turn )
 	{
+		$dev = in_array( $this->get( 'kernel' )->getEnvironment(), array( 'test', 'dev' ) );
+		
+		if( ( $turn != 1 ) && ( ! $dev ) )
+		{
+			throw new \DomainException( 'Invalid turn in non-dev environment.' );
+		}
+		
 		$manager = $this->get( 'emperors.game.manager' );
 		$game = $manager->getGameById( 1 );
 		
 		$scope = array();
 		$scope[ 'name' ] = $this->get( 'security.context' )->getToken();
 		$scope[ 'game' ] = $game;
+		$scope[ 'turn' ] = $turn;
 		
 		return $this->render( 'XmonteroEmperorsClientBundle:Pages/FirstGame:board.html.twig', $scope );
 	}

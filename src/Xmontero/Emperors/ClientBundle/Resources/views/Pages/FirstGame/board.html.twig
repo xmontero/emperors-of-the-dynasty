@@ -99,7 +99,7 @@ td.chest-4
 }
 	</style>
 	<table class="board">
-	{% set board = game.board %}
+	{% set board = game.board( turn ) %}
 	{% set numberOfRows = board.numberOfRows %}
 	{% set numberOfColumns = board.numberOfColumns %}
 	{% for y in 0..numberOfRows %}

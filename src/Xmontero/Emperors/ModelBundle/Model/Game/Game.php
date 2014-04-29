@@ -24,9 +24,9 @@ class Game
 		return $result;
 	}
 	
-	public function getBoard()
+	public function getBoard( $turn )
 	{
-		$result = new Board( $this->objectStorageManager );
+		$result = new Board( $this->objectStorageManager, $turn );
 		return $result;
 	}
 	
