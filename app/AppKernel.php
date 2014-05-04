@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             
             new FOS\UserBundle\FOSUserBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             
             new Xmontero\Emperors\ClientBundle\XmonteroEmperorsClientBundle(),
             new Xmontero\Emperors\ModelBundle\XmonteroEmperorsModelBundle(),

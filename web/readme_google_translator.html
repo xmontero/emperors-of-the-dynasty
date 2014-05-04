@@ -1,0 +1,588 @@
+<html>
+    <head>
+        <title>Emperors of the Dynasty - The game!</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+<pre>
+Emperadores de la dinastía
+
+    Emperadores de la Dinastía es un juego de n jugadores .
+    Cada juego representa jugado un torneo, a veces también llamado una batalla o un combate.
+    Torneos suceden en diferentes campos de batalla.
+    En cada torneo , un jugador controla a un emperador y un par de peones (normalmente 4 ) sobre un tablero de azulejos , jugando contra otros jugadores.
+    Un jugador controla una dinastía de emperadores . Cuando un juego comienza , el jugador elige uno de los emperadores de la dinastía . El jugador puede celebrar varias partidas simultáneas . Pero un emperador sólo se puede utilizar en un torneo a la vez.
+    Al final del torneo, un emperador puede:
+        Sobrevive , y el jugador lo consigue listo para otro torneo.
+        Sea capturado por un contrario, en cuyo caso el emperador deja su dinastía actual y se une a la de otro jugador .
+        Die , y que se ha perdido para siempre.
+    El usuario siempre puede crear tantos emperadores como necesite , sin costo alguno para la dinastía .
+
+objetivo del juego
+Los jugadores regulares
+
+    El objetivo de un jugador regular es la construcción de la máxima reputación posible por su dinastía en el tiempo, primero en la formación de su emperadores y luego participar en tantos torneos como sea posible , y - por supuesto - ganarlos .
+    En un momento determinado , el campeón del mundo es el jugador que tiene la más alta reputación en su dinastía .
+    Las estrategias pueden variar de tener algunos emperadores con mucha reputación de tener muchos emperadores con menos reputación.
+
+Los jugadores casuales
+
+    Un jugador casual juega una batalla con 1 anónimo emperador y algunos peones , pero no obtener una dinastía .
+    Esto puede ser usado para la formación, o simplemente jugar por diversión. Funciona muy similar a los torneos " de entrenamiento" para los jugadores regulares.
+    El objetivo para un jugador casual es sólo ganar el torneo que está jugando pulg
+
+La junta
+
+    A balltefield está representada por una junta de azulejos.
+    Hay muchas formas y tamaños de mesa .
+
+Ejemplo de una partida de 4 jugadores
+
+Esto representa una posible formación de partida para una partida de 4 jugadores en un tablero pequeño .
+
+    Letras A, B , C y D representan 4 Dinastías , cada uno controlado por uno de los 4 jugadores.
+    Las letras entre paréntesis ( a) , ( b ) , ( c) y ( d ) son los emperadores de las dinastías .
+    Las letras sin paréntesis son los peones.
+
+            + --- +
+            | ( a) |
+    + --- + --- + --- + --- + --- +
+    | | A | a | A | |
+    + --- + --- + --- + --- + --- +
+    | D | | a | | b |
++ --- + --- + --- + --- + --- + --- + --- +
+| ( d ) | d | d | | b | b | ( b) |
++ --- + --- + --- + --- + --- + --- + --- +
+    | D | | C | | b |
+    + --- + --- + --- + --- + --- +
+    | | C | c | c | |
+    + --- + --- + --- + --- + --- +
+            | ( c ) |
+            + --- +
+
+Ejemplo de una partida de 8 jugadores
+
+Esto representa una posible formación de partida para una partida de 8 jugadores en un tablero de tamaño mediano.
+
+            + --- + + --- +
+            | (a ) | | ( b) |
+        + --- + --- + --- + --- + --- + --- + --- + --- +
+        | A | a | a | a | b | b | b | b |
+    + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+    | H | | | | | | | | | c |
++ --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+| ( h ) | h | | | | | | | | | c | ( c) |
++ --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+    | H | | | | | | | | | c |
+    + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+    | H | | | | | | | | | c |
+    + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+    | G | | | | | | | | | d |
+    + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+    | G | | | | | | | | | d |
++ --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+| ( g) | g | | | | | | | | | d | ( d) |
++ --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+    | G | | | | | | | | | d |
+    + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+        | F | f | f | f | e | e | e | e |
+        + --- + --- + --- + --- + --- + --- + --- + --- +
+            | ( f ) | | ( e) |
+            + --- + + --- +
+
+2 - jugador del juego pero con 8 peones por jugador
+
+        + --- +
+        | ( a) |
++ --- + --- + --- + --- + --- +
+| A | a | a | a | a |
++ --- + --- + --- + --- + --- +
+| | A | a | A | |
++ --- + --- + --- + --- + --- +
+| | | | | |
++ --- + --- + --- + --- + --- +
+| | B | b | b | |
++ --- + --- + --- + --- + --- +
+| B | b | b | b | b |
++ --- + --- + --- + --- + --- +
+        | ( b) |
+        + --- +
+
+Ejemplo de un campo de batalla irregular en forma de 3 - jugador con un tesoro (x ) en el medio
+
+            + --- +
+            | ( a) |
+    + --- + --- + --- + --- + --- + --- +
+    | | A | a | | | |
++ --- + --- + --- + --- + --- + --- + --- + --- +
+| | | A | a | | | | |
++ --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+| | | | | | | (X ) | | | | b | |
++ --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + - - +
+| | | C | | | | | | | | b | | |
++ --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + - - +
+    | C | c | c | | | | | | b | b | | |
+    + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- +
+        | ( c ) | | ( b) |
+        + --- + + --- +
+
+El objetivo de un solo combate
+
+El objetivo en un solo combate puede diferir de batalla en batalla . Se dependens de varios factores .
+
+Ejemplos de posibles objetivos podrían ser:
+
+    Introduzca la plaza frente a su emperador .
+    Tome todos los emperadores rivales.
+    Sobrevive al menos 20 se mueve con más de 3 piezas.
+    Tome cualquier Empreror rival que tiene más experiencia que la tuya.
+    Tome el opuesto Empreror rival con un solo movimiento de su emperador .
+    etcétera
+
+Los movimientos
+
+    Las piezas se mueven hacia arriba y hacia abajo, e izquierda y derecha . Pero nunca en diagonal ni en una jugada de caballo , etc
+
+movimientos de empeño
+
+    En el primer paso, todos los peones tienen " 1 " de la experiencia , y pueden moverse 1 plaza ahora.
+    Cada vez que un jugador mueve un peón, esa pieza en particular gana 1 de la experiencia.
+    La segunda vez que un jugador mueve un peón (con 2 de experiencia) , el peón puede moverse 2 casillas de distancia .
+    En general , un peón puede moverse "n" manzanas, si tiene " n " de la experiencia .
+
+emperador se mueve
+
+    El emperador también tiene experiencia , y al comienzo de la batalla también tiene " 1 " de la experiencia.
+    A medida que los peones , el Emperador se mueve hacia arriba y abajo , izquierda y derecha hasta "n" azulejos , si tiene "n " de la experiencia .
+    Pero de manera diferente a los peones , la experiencia del Emperador no crece por sus movimientos.
+    La experiencia del Emperador es siempre " el máximo " de las experiencias de sus peones .
+    Por ejemplo, si tiene 4 peones con 2, 3 , 7 y 2 , entonces el emperador tiene " 7 " de la experiencia .
+
+El modo de juego
+
+    Los emperadores de la dinastía de juego consiste en que todos los jugadores se mueven simultaneamente .
+    Cada jugador envía su movimiento y una vez que todos los opositores también han avanzado , la nueva formación se da a conocer a todos los jugadores.
+
+Los siguientes movimientos son posibles:
+
+    Imagínese n jugadores . Vamos a llamar a los jugadores A , B y C.
+    Si el jugador A mueve una pieza a una casilla de destino T , entonces puede suceder ( cada movimiento tiene un nombre ) :
+        Tile T está vacío pre -move .
+            Gratis : Si ningún otro jugador quiere mudarse allí , entonces A puede moverse allí.
+            Conflicto : Si cualquier otro jugador quiere mudarse allí , hay un conflicto y el movimiento se cancela.
+                Dependiendo del modo de juego , se pueden aplicar diferentes políticas de cancelación. Ejemplos:
+                    Rollback : Las piezas de todos los actores en conflicto volver al lugar original .
+                    Rebote: Las piezas de todos los jugadores no llegan a la casilla de destino T, pero avance tan cerca de ella como sea posible.
+                    Rollback y se quedan : Las piezas de todos los jugadores vuelven a su lugar original , a excepción de la que se hizo presente el movimiento más rápido , que alcanza el T. baldosas
+                    etcétera
+        Tile T ( pre -move ) contiene una pieza de otro jugador ( por ejemplo, el jugador B )
+            Escape: Si el jugador B se aleja de esa posición , baldosas de la T se vuelve libre y A llega a ese destino.
+            Tome : Si el jugador B no se mueve y se queda allí , el jugador A " toma" el pedazo de jugador B. Esto dará lugar a la toma de pieza de recuperarse de una baldosa libre , como un solo azulejo no puede mantener dos piezas ( el tomador y lo que se da ) .
+            Tome en rebote: Si el jugador B se aleja , pero se revierte o rebotado a la posición original, el jugador A " toma" jugador B. Es decir: Revertir y rebota tiene lugar antes de la "toma" piezas de opuestos .
+
+conflictos
+
+La política para resolver los conflictos ( " rollback " , "rebote ", " rollback y estancia" , "rebote y permanecer " o cualquier otra ) aparecerá anunciada anterior a un torneo a todos los jugadores , junto con el conjunto exacto de dichas normas, es utilizado para determinar la posición de las piezas después de un conflicto .
+tomando piezas
+Hipoteca sobre peón
+
+    Cuando un peón de la dinastía A toma un peón de la dinastía de B , entonces la pieza capturada no se elimina de la tabla, pero se reconvirtió a la Dyansty A lo que ahora está controlado por el jugador capturador .
+    La captura de la experiencia : Sin embargo, cuando esto sucede, los dos peones, capturador y capturado , restablezca su experiencia a 1.
+    La captura de rebote: La posición del capturador es " recuperado " de la baldosa libre después de la mudanza más cercano en el camino que él trazó .
+    Una excepción se hace : si no hay fichas libres en todo el camino trazado , el capturador todavía se coloca en su baldosa original, incluso si después de la mudanza está ocupado por otro jugador en movimiento , pero luego es capturado por el oponente de ir allí.
+
+Ejemplo 1 , toma la normalidad
+
+    Dinastías de juego son A, B y C.
+    A captura B , C , pero se mueve en un azulejo en el centro .
+
+Pre -move ( mapa actual )
+
++ --- + --- + --- + --- + --- +
+| | B | | | |
++ --- + --- + --- + --- + --- +
+| | | B | | |
++ --- + --- + --- + --- + --- +
+| C | | | | |
++ --- + --- + --- + --- + --- +
+| | | | | |
++ --- + --- + --- + --- + --- +
+| | | A | | |
++ --- + --- + --- + --- + --- +
+
+Move ( deseada )
+
+    Una apuesta por B.
+    B mueve un peón diferente, así que el capturado no se escape.
+    C se mueve a un lugar en el medio de la ruta de trazado por A.
+
++ --- + --- + --- + --- + --- +
+| B --- * | | | |
++ --- + --- + --- + --- + --- +
+| | | B a | | |
++ --- + --- + - | + --- + --- +
+| * ------ C | | | |
++ --- + --- + - | + --- + --- +
+| | | | | | |
++ --- + --- + - | + --- + --- +
+| | | * | | |
++ --- + --- + --- + --- + --- +
+
+Post- move ( resultado)
+
+    Una captura B , por lo que B es ahora parte de la dinastía A.
+    C llega a su destino , ya que era a la vez una baldosa libre de pre- y post- movimiento mudanza.
+    Un capturador rebota . Como la baldosa justo abajo (post -move ) está ocupado por C , todavía se remonta .
+
++ --- + --- + --- + --- + --- +
+| B | | | | |
++ --- + --- + --- + --- + --- +
+| | | A | | |
++ --- + --- + --- + --- + --- +
+| | | C | | |
++ --- + --- + --- + --- + --- +
+| | | A | | |
++ --- + --- + --- + --- + --- +
+| | | | | |
++ --- + --- + --- + --- + --- +
+
+Ejemplo 2 , rebote para un azulejo en conflicto
+
+    Dinastías de juego son A, B , C y D.
+    Una captura B.
+    C y D conflicto en el camino .
+    La resolución del conflicto sigue la política de " rollback " .
+
+Pre -move ( mapa actual )
+
++ --- + --- + --- + --- + --- +
+| | B | | | |
++ --- + --- + --- + --- + --- +
+| | | B | | |
++ --- + --- + --- + --- + --- +
+| C | | | d | |
++ --- + --- + --- + --- + --- +
+| | | | | |
++ --- + --- + --- + --- + --- +
+| | | A | | |
++ --- + --- + --- + --- + --- +
+
+Move ( deseada )
+
+    Una apuesta por B.
+    B mueve un peón diferente, así que el capturado no se escape.
+    C y D se mueven tanto a un lugar en el medio de la ruta de trazado por A.
+
++ --- + --- + --- + --- + --- +
+| B --- * | | | |
++ --- + --- + --- + --- + --- +
+| | | Ba | | |
++ --- + --- + - | - + --- + --- +
+| * ------ C | d - * | |
++ --- + --- + - | + --- + --- +
+| | | | | | |
++ --- + --- + - | - + --- + --- +
+| | | * | | |
++ --- + --- + --- + --- + --- +
+
+Post- move ( resultado)
+
+    Una captura B , por lo que B es ahora parte de la dinastía A.
+    C y D de conflictos para que se deshacen . Versiones anteriores se llevan a cabo antes de la captura .
+    Un capturador rebota . Como la baldosa justo abajo es gratuita gracias a la reversión, que va allí .
+
++ --- + --- + --- + --- + --- +
+| B | | | | |
++ --- + --- + --- + --- + --- +
+| | | A | | |
++ --- + --- + --- + --- + --- +
+| C | | a | d | |
++ --- + --- + --- + --- + --- +
+| | | | | |
++ --- + --- + --- + --- + --- +
+| | | | | |
++ --- + --- + --- + --- + --- +
+
+Ejemplo 3 , rebotar rendimientos en ser capturado
+
+    Dinastías de juego son A, B , C , D y E.
+    Una captura B.
+    Sin embargo, C , D y E ocupan todo el camino , por lo que un rebote a la posición original y es capturado por E.
+
+Pre -move ( mapa actual )
+
++ --- + --- + --- + --- + --- +
+| | B | | | |
++ --- + --- + --- + --- + --- +
+| | | B | | |
++ --- + --- + --- + --- + --- +
+| C | | | | |
++ --- + --- + --- + --- + --- +
+| | | | D | |
++ --- + --- + --- + --- + --- +
+| E | | a | | |
++ --- + --- + --- + --- + --- +
+
+Move ( deseada )
+
+    Una apuesta por B.
+    B mueve un peón diferente, así que el capturado no se escape.
+    C y D movimiento a un lugar en el medio de la ruta de trazado por A.
+    E se mueve a la original Una posición .
+    Tenga en cuenta que a medida que todos los movimientos son simultáneos , E no conoce las intenciones de los jugadores C y D , por lo que lo más probable es que si ni C o D se movían exactamente allí, A podría escapar de E.
+
++ --- + --- + --- + --- + --- +
+| B --- * | | | |
++ --- + --- + --- + --- + --- +
+| | | B a | | |
++ --- + --- + - | + --- + --- +
+| * ------ C | | | |
++ --- + --- + - / - + --- + --- +
+| | | | D - * | |
++ --- + --- + - \ - + --- + --- +
+| * ------ E * | | |
++ --- + --- + --- + --- + --- +
+
+Post- move ( resultado)
+
+    Una captura B , por lo que B es ahora parte de la dinastía A.
+    C y D Reache su destino - fichas libres pre - y post- movimiento.
+    Un capturador rebota .
+    Como la baldosa justo abajo (post -move ) está ocupado por C , todavía se remonta .
+    Como la baldosa justo en C (post -move ) está ocupada por D, todavía se remonta .
+    Como ahora el mosaico es el original, incluso ocupado por E , A se coloca allí. Por eso, cuando se encuentra con E A, E captura A.
+    Captura de una se reconvierte a la dinastía de correo .
+    Capturer E rebota una squre nuevo en su camino.
+
++ --- + --- + --- + --- + --- +
+| B | | | | |
++ --- + --- + --- + --- + --- +
+| | | A | | |
++ --- + --- + --- + --- + --- +
+| | | C | | |
++ --- + --- + --- + --- + --- +
+| | | D | | |
++ --- + --- + --- + --- + --- +
+| | E | e | | |
++ --- + --- + --- + --- + --- +
+
+rebote iterativo
+
+    El orden en el que se analizan los movimientos son :
+        Todas las piezas se trasladaron a una baldosa libre son " fijos " allí.
+        Todas las piezas en conflicto se deshacen (ya sea en la posición original, o para distancias más cortas , dependiendo del modo de rollback) .
+        Todas las piezas que hacen una toma, realizan la captura y rebotan a una baldosa libre o de su lugar inicial.
+        Destino de rebote se " propuso" como un movimiento , y luego el sistema procesa todos de nuevo , de forma iterativa hasta que se encuentre una solución estable .
+
+Ejemplo 4 , rebote iterativo
+
+    Dinastías de juego son A, B , C, D.
+    Una captura B, y rebota de vuelta a una ficha libre .
+    C capta D, y rebota de vuelta a una ficha libre .
+    Rebotados A y C rebotó hacer conflicto.
+    En este juego , las normas de conflicto son "rebote " .
+
+Pre -move ( mapa actual )
+
++ --- + --- + --- + --- + --- +
+| | B | | | |
++ --- + --- + --- + --- + --- +
+| | | B | | |
++ --- + --- + --- + --- + --- +
+| C | | | d | |
++ --- + --- + --- + --- + --- +
+| | | | D | |
++ --- + --- + --- + --- + --- +
+| | | A | | |
++ --- + --- + --- + --- + --- +
+
+Move ( deseada )
+
+    Una apuesta por B.
+    B se mueve a una ficha libre .
+    C va por D.
+    D se traslada a una baldosa libre .
+
++ --- + --- + --- + --- + --- +
+| B --- * | | | |
++ --- + --- + --- + --- + --- +
+| | | A b | | |
++ --- + --- + | - + --- + --- +
+| * ------ | --- C d | |
++ --- + --- + | - + --- + --- +
+| | | | D - * | |
++ --- + --- + | - + --- + --- +
+| | | * | | |
++ --- + --- + --- + --- + --- +
+
+Mover (iteración 1 , temporal )
+
+    Paso 1 . Tanto B y D para mover una ficha libre , por lo que se fijan allí.
+    Paso 2 . No hay conflictos en esta iteración . Confictos ocurren cuando post- mover dos piezas están en la misma ficha que pre - movida fue una baldosa libre .
+    Paso 3 . Una captura B de modo B se convierte en la dinastía A. Un capturador rebota . El azulejo es libre. Es un " destiantion propuesta" .
+    Aún en el paso 3 . C D capta de modo D se convierte en la dinastía C. Capturer C rebota . El azulejo es ocupado por un rebote , sino como movimientos son simultanea , ninguna lógica dice que A o C , deben prevalecer en esa casilla , por lo que se asume que A es allí como " propone " , no como "fijo ", y también C trata de ir allí como el resultado de rebote .
+
++ --- + --- + --- + --- + --- +
+| B | | | | |
++ --- + --- + --- + --- + --- +
+| | | A | | |
++ --- + --- + --- + --- + --- +
+| * ------ C a | c | |
++ --- + --- + - / - + --- + --- +
+| | | | D | | |
++ --- + --- + | - + --- + --- +
+| | | * | | |
++ --- + --- + --- + --- + --- +
+
+Post- movimiento (iteración 2 , resultado)
+
+    Capturer A y C no conflicto de una vez rebotaron .
+    Como normas de conflicto son también "rebote " , C se propone 1 izquierda , y A se propone 1 abajo .
+    Tile propuesta para C es libre, así que C está "fijo" allí.
+    Tile propuesta de A está ocupada por la D en movimiento , que se fijó en una iteración anterior , por lo que A sigue rebota una más, y vuelve a su posición inicial.
+
++ --- + --- + --- + --- + --- +
+| B | | | | |
++ --- + --- + --- + --- + --- +
+| | | A | | |
++ --- + --- + --- + --- + --- +
+| | C | | C | |
++ --- + --- + --- + --- + --- +
+| | | D | | |
++ --- + --- + --- + --- + --- +
+| | | A | | |
++ --- + --- + --- + --- + --- +
+
+Consejo de rebotes relacionados con la toma de
+
+    Uno puede pensar en el camino trazado , como un resorte .
+    Si la pieza se encuentra una ficha libre, él "fijo" y el resorte está roto, así que no hay "fuerza " se aplica a volver a su posición original.
+    Si la pieza no encuentra una ficha libre (captura , los conflictos, etc), entonces el muelle actúa suavemente tirando de la pieza de la espalda a través de la baldosa camino trazado por azulejo ; excepto en el caso de conflicto + rollback política que actúa como un movimiento de la pieza al origen directamente super- primavera.
+
+Tomando piezas que involucran el Emperador
+
+    Si el juego no establece otras normas , se aplicarán las mismas reglas que el " peón más de peón " .
+    Sin embargo por lo general el juego indicará normas específicas para esas situaciones.
+
+Emperador sobre el peón
+
+    Ejemplo de posibles reglas del emperador más empeño :
+        Si un Emperador tiene un peón , entonces el emperador es la que ocupa la casilla de destino , y el peón reconvertido se empuja más en la misma dirección que el emperador cargada.
+        Si un Emperador tiene un peón, al rebotar , éste tendrá prioridad sobre cualquier otro peón , produciendo en que el Emperador siempre ocupará la plaza más cercana a la utilizada para tomar el peón opuesto .
+        Al tomar un peón, peón del emperador de la más alta reputación se restablecerá a 1.
+        etcétera
+
+Peón sobre el emperador
+
+    Ejemplo de posibles reglas de peón más de emperador :
+        El Emperador tomado es asesinado.
+        El Emperador tomado no está muerto, pero se adhiere a la dinastía de la toma de jugador, y se retira del tablero.
+        Lo mismo que el anterior pero , en lugar de quitar la pieza, que está sustituido por un peón de la experiencia 1 de la dinastía que está ganando la toma.
+        Lo mismo que el anterior pero con la experiencia del emperador capturado .
+        etcétera
+
+Emperador sobre el emperador
+
+    Ejemplo de posibles reglas del emperador sobre el emperador :
+        El tomar emperador recibe la reputación del emperador tomado , pero el Emperador tomado aún permanece en su dinastía originales.
+        El Emperador tomado se reconvierte al acceso a la dinastía sólo para este combate, pero después, cada jugador conserva sus emperadores.
+        El Emperador tomada se reconvirtió de forma permanente a la dinastía takin y este cambio persiste después de este combate, por lo que el jugador perdió su emperador en el mundo de la clasificación.
+        etcétera
+
+La experiencia
+
+    Cada pieza tiene un nivel de experiencia .
+    El combate comienza con todas las experiencias a nivel 1 .
+    A medida que el tiempo transcurre y el juego se mueve , experiencias típicamente crecen , pero también pueden disminuir ( como por ejemplo cuando la captura ) .
+    La experiencia no es persistente a través de combates , y la experiencia ganada en un combate sea local para el combate. Si un emperador sobrevive y el mismo emperador inicia otro combate, que comenzará a partir del 1 de nuevo.
+
+La reputación
+
+    Los peones no tienen renombre alguno .
+    Los emperadores tienen reputación instransferible personal.
+    También hacer las dinastías .
+
+La reputación de un Emperador
+
+    Después de un combate, los emperadores que sobreviven ganarán ni perderán un cierto nivel de reputación.
+    La reputación persiste a través de combates .
+    Por ejemplo , un emperador con la reputación 490 iniciar un combate, se iniciará el combate con " reputación 490 " .
+    Tener un nivel de reputación no da ninguna ventaja a los oponentes.
+    Durante el combate, ciertos acontecimientos pueden ocurrir que la subvención nuevo nivel de reputación o recupera cierta cantidad de la reputación de un determinado emperador . Tal vez por el emperador que inició con 490, termina -alive - con 515.
+    Si eso sucede, entonces el Emperador se va a dormir a su palacio con ese nivel y se mantiene en ese nivel.
+    Emperadores inactivos (los que no van a la batalla ) pueden sufrir de acontecimientos que cambian su reputación. Por ejemplo , si se está poniendo viejo y nunca pasa a las batallas , otros podrían pensar que es affraid de su debilidad y de su reputación podría bajar .
+
+La reputación de la dinastía
+
+    La reputación de una dinastía es la suma de todas las reputaciones de todos los emperadores que no han muerto.
+    La reputación de la Dinastía crece cuando los emperadores pertenecientes a crecer su propia reputación .
+    La reputación de la dinastía también crece cuando en un torneo , el jugador tomó un nuevo emperador de una dinastía competidor y se adhiere a ella.
+    La reputación de la dinastía disminuye cuando los emperadores más bajo su propia reputación.
+    La reputación de la dinastía también disminuye si un Emperador es llevado por un competidor durante una batalla , y se une a una dinastía distinta.
+    La reputación de la dinastía puede disminuir también si un emperador muere.
+
+La riqueza de la dinastía
+
+    Cada dinastía tiene un cierto nivel de riqueza.
+    La riqueza puede estar compuesta de varios tipos de monedas , así como piedras preciosas y metales preciosos .
+    La riqueza puede ser intercambiada entre los jugadores para comprar ciertos artículos , como las llaves para ciertos campos de batalla.
+    Los emperadores se puede ir a un campo de batalla para apostar por otro emperador en vez de jugar el juego por sí mismos.
+    La riqueza de una dinastía puede aumentar si el juego emperador gana riqueza en la batalla, o si un emperador que apuesta gana la apuesta .
+    La riqueza de una dinastía puede disminuir si el emperador pierde una batalla o pierde una apuesta que se coloca en otro emperador que estaba tocando .
+    En contraposición a la reputación que es particular de cada emperador ... la riqueza no pertenece a un individuo sino a la dinastía en su conjunto.
+    Un Emperador sólo puede apostar como máximo la riqueza de la dinastía . No hay números negativos permitidos.
+
+Logging
+
+    Normalmente, el sistema registrará todos los eventos que suceden , como por ejemplo :
+        Cuando un peleas Emperador, el nombre del campo , que son los contendats , quién gana .
+        Cuando un emperador crece o se reduce su reputación y por qué.
+        Cuando una dinastía aumenta su riqueza o pierde su .
+        Cuando un emperador nace o cuando muere .
+    Algunos eventos son privadas : Por ejemplo, los cambios de riqueza podrían ser privadas en algunos casos.
+    Especialmente para la reputación de la dinastía , la información es pública , por lo que cualquier jugador puede explorar registro de la dinastía de los competidores y comprender cuántos emperadores que se compone de, y cómo, hystorically , la dinastía ha construido su reputación a lo largo del tiempo.
+    Emperadores que nacen y mueren sin participar en cualquier torneo serio , se eliminan del registro ( no hacen la historia).
+
+Los tipos de torneos
+
+    Cuando un jugador elige un Emperador para jugar en un combate que por lo general puede ser de 5 tipos :
+        Formación:
+            La obra se ignora a todos los efectos.
+            Nada se registra . Aún no existe un registro para que el emperador de jugar en ese campo en ese momento.
+            Es perfecto para "tratar " las estrategias sin dejar rastro grabación de la misma .
+            No hay cambios de reputación
+            No hay cambios en el patrimonio.
+            Los emperadores no puede morir .
+            Los emperadores no se puede adherir a la dinastía de un competidor.
+            Este modo es principalmente para principiantes, y también para los usuarios con experiencia al jugar con otros usuarios , crear torneos amistosos donde no hay nada que perder.
+            La intención de dar al jugador la oportunidad de pasar el tiempo jugando disfrutar sin preocuparse por los resultados.
+        Para un regalo :
+            Ganar representa ganar riqueza y / o reputación.
+            Perder no tiene ningún homólogos .
+            Las reglas son - torneo específico .
+        Por el honor :
+            Los jugadores apuestan cierto número de puntos de reputación.
+            Ganar gana reputación. Pero perder pierde reputación.
+            Las reglas son - torneo específico .
+        Conquer :
+            El emperador capturado deja su dinastía actual y se une a la dinastía controlada por el jugador que captura .
+            Esta es una forma rápida de ganar toda la reputación de ese oponente capturado el emperador . O perder la suya si es capturado por un oponente !
+        A la muerte :
+            Es el torneo más grave : Cuando se captura un emperador, que es asesinado , por lo que el jugador que está siendo adoptado perderá el Emperador , así como su reputación en la dinastía .
+            El asesino emperador gana la reputación del emperador matado .
+            Al terminar la batalla, el registro de la dinastía reflejará la muerte.
+            Es el tipo de batallas que surgen los más expectativa y las transacciones más altos en las apuestas .
+
+Variantes
+
+    Appart de los tipos genéricos anteriores, cualquier torneo puede definir su propio conjunto de reglas.
+    Por ejemplo , para un torneo de 4 jugadores , que podría tener el siguiente conjunto de reglas:
+        4 cofres se colocan sobre el tablero, una para cada dinastía .
+        Cada emperador se requestested poner una cierta cantidad de la riqueza dentro de su pecho, por ejemplo, algo entre 100 y 1000 monedas de oro .
+        Ningún jugador sabe la cantidad que los otros están poniendo allí.
+        Emperadores captura de un cofre ganan su contenido, y la dinastía que puso el contenido, dominical pierda esa riqueza.
+        Para evitar los Dyansties poner la cantidad mínima , la reputación del emperador que pone la máxima riqueza capturado plantea por un cierto número acordado de puntos ( siendo generosos ) , y quien pase la riqueza capturado mínimo en el juego se reduce en la misma cantidad de puntos de reputación ( por ser tacaño ) .
+        Si un pecho no es capturado , su contenido no se conoce por lo que la reputación no se ve afectada .
+</pre>
+    </body>
+</html>

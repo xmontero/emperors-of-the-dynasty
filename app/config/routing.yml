@@ -1,8 +1,6 @@
-XmonteroEmperorsClientBundle:
-    resource: "@XmonteroEmperorsClientBundle/Resources/config/routing.yml"
-    prefix:   /
+#app/config/routing.yml
 
-# FOS
+# FosUserBundle Routes
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -22,3 +20,29 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
+# HWIOAuthBundle routes
+
+hwi_oauth_security:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /login
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix: /login
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix: /login
+
+facebook_login:
+    pattern: /login/check-facebook
+
+google_login:
+    pattern: /login/check-google
+
+# Xmontero Bundles
+
+XmonteroEmperorsClientBundle:
+    resource: "@XmonteroEmperorsClientBundle/Resources/config/routing.yml"
+    prefix:   /
