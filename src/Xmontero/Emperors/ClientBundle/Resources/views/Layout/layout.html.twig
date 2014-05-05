@@ -12,6 +12,7 @@
 		| <a href="https://www.facebook.com/groups/1472958162921109/" target="_blank">Facebook</a>
 		| {{ "now" | date( timeFormat, "Europe/Paris") }}
 		| {{ "now" | date( timeFormat, "UTC") }}
+		| {% include "XmonteroEmperorsClientBundle:Widgets:login.html.twig" %}
 		<hr>
 		{% block page %}
 		{% endblock %}

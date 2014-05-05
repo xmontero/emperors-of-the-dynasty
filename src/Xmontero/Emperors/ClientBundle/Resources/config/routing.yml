@@ -37,12 +37,12 @@ XmonteroEmperorsClientBundle_instructionsPawns:
     requirements: { _method: GET }
 
 XmonteroEmperorsClientBundle_board:
-    pattern: /firstgame/board/{turn}
+    pattern: /game/board/{turn}
     defaults: { _controller: XmonteroEmperorsClientBundle:Default:board }
     requirements: { _method: GET }
 
 XmonteroEmperorsClientBundle_players:
-    pattern: /firstgame/players/
+    pattern: /game/players/
     defaults: { _controller: XmonteroEmperorsClientBundle:Default:playersList }
     requirements: { _method: GET }
 

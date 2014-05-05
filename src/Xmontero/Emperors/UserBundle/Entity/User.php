@@ -44,14 +44,17 @@ class User extends BaseUser
 	{
 		$this->facebook_id = $id;
 	}
+	
 	public function getFacebookId()
 	{
 		return $this->facebook_id;
 	}
+	
 	public function setFacebookAccessToken( $token )
 	{
 		$this->facebook_access_token = $token;
 	}
+	
 	public function getFacebookAccessToken()
 	{
 		return $this->facebook_access_token;
@@ -61,6 +64,7 @@ class User extends BaseUser
 	{
 		$this->google_id = $id;
 	}
+	
 	public function getGoogleId()
 	{
 		return $this->google_id;
@@ -69,6 +73,7 @@ class User extends BaseUser
 	{
 		$this->google_access_token = $token;
 	}
+	
 	public function getGoogleAccessToken()
 	{
 		return $this->google_access_token;
@@ -78,8 +83,15 @@ class User extends BaseUser
 	{
 		$this->oauth_response = $response;
 	}
+	
 	public function getOAuthResponse()
 	{
 		return $this->oauth_response;
+	}
+	
+	public function getOAuthName()
+	{
+		$response = json_decode( $this->oauth_response );
+		return $response->name;
 	}
 }
