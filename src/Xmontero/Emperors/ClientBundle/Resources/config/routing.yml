@@ -46,6 +46,13 @@ XmonteroEmperorsClientBundle_players:
     defaults: { _controller: XmonteroEmperorsClientBundle:Default:playersList }
     requirements: { _method: GET }
 
+XmonteroEmperorsClientBundle_privacy:
+    pattern: /privacy/
+    defaults:
+        _controller: XmonteroEmperorsClientBundle:Default:dumpPage
+        template: XmonteroEmperorsClientBundle:Pages:privacy.html.twig
+    requirements: { _method: GET }
+
 XmonteroEmperorsClientBundle_dirty:
     pattern: /dirty/
     defaults: { _controller: XmonteroEmperorsClientBundle:Default:dirty }
