@@ -10,3 +10,98 @@ h4
 {
 	font-family: 'UnifrakturCook', cursive;
 }
+
+table.board
+{
+	border: 1px solid gray;
+}
+
+table.board td
+{
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+	text-align: center;
+}
+
+td.origin
+{
+	background: white;
+}
+
+td.border
+{
+	background: #658060;
+}
+
+td.top-header,
+td.left-header
+{
+	background: #DDDDDD;
+}
+
+td.free
+{
+	background: #93C18B;
+}
+
+td.emperor-1,
+td.pawn-1
+{
+	background: #FF7D7D;
+}
+
+td.emperor-2,
+td.pawn-2
+{
+	background: #FFBD7D;
+}
+
+td.emperor-3,
+td.pawn-3
+{
+	background: #FDFF7D;
+}
+
+td.emperor-4,
+td.pawn-4
+{
+	background: #BDFF7D;
+}
+
+td.emperor-5,
+td.pawn-5
+{
+	background: #7DFFD6;
+}
+
+td.emperor-6,
+td.pawn-6
+{
+	background: #7DBDFF;
+}
+
+td.emperor-7,
+td.pawn-7
+{
+	background: #927DFF;
+}
+
+td.emperor-8,
+td.pawn-8
+{
+	background: #FF7DD3;
+}
+
+td.special
+{
+	color: red;
+}
+
+td.chest-1,
+td.chest-2,
+td.chest-3,
+td.chest-4
+{
+	background: #BDA75A;
+}
