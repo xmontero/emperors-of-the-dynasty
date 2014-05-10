@@ -20,11 +20,16 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             
+            # Src
             new Xmontero\Emperors\AdminBundle\XmonteroEmperorsAdminBundle(),
             new Xmontero\Emperors\ClientBundle\XmonteroEmperorsClientBundle(),
+            new Xmontero\Emperors\LayoutBundle\XmonteroEmperorsLayoutBundle(),
             new Xmontero\Emperors\ModelBundle\XmonteroEmperorsModelBundle(),
             new Xmontero\Emperors\ServerBundle\XmonteroEmperorsServerBundle(),
             new Xmontero\Emperors\UserBundle\XmonteroEmperorsUserBundle(),
+            
+            # Assets
+            new Xmontero\Emperors\AssetsBundle\XmonteroEmperorsAssetsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

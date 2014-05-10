@@ -13,6 +13,31 @@ h4
 	text-shadow: 0 0 5px rgba(194, 105, 0, 0.5);
 }
 
+table
+{
+	background: none repeat scroll 0 0 #FFEFDF;
+	border: 0 none;
+}
+
+th
+{
+	background: none repeat scroll 0 0 #600000;
+	color: #FFFF80;
+}
+
+td
+{
+	background: none repeat scroll 0 0 #FFEFDF;
+	color: #600000;
+}
+
+th,
+td
+{
+	border: 0 none;
+	padding: 0 5px;
+}
+
 table.board
 {
 	border: 1px solid gray;
