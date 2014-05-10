@@ -1,7 +1,10 @@
 {% if app.user %}
-    {% set name = app.user.oauthname %}
-    Welcome {{ name }}
-    | <a href="{{ path( 'fos_user_security_logout' ) }}">Logout</a>
+	{% set name = app.user.oauthname %}
+	Welcome {{ name }}
+	{% if is_granted( 'ROLE_ADMIN' ) %}
+		| <a href="{{ path( 'XmonteroEmperorsAdminBundle_root' ) }}">Admin</a>
+	{% endif %}
+	| <a href="{{ path( 'fos_user_security_logout' ) }}">Logout</a>
 {% else %}
-    <a href="{{ path( 'hwi_oauth_service_redirect', { "service": "facebook" } ) }}">Login with facebook</a>
+	<a href="{{ path( 'hwi_oauth_service_redirect', { "service": "facebook" } ) }}">Login with facebook</a>
 {% endif %}

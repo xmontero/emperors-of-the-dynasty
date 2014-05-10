@@ -43,6 +43,10 @@ google_login:
 
 # Xmontero Bundles
 
+XmonteroEmperorsAdminBundle:
+    resource: "@XmonteroEmperorsAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin/
+
 XmonteroEmperorsClientBundle:
     resource: "@XmonteroEmperorsClientBundle/Resources/config/routing.yml"
     prefix:   /

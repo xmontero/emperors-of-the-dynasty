@@ -52,8 +52,3 @@ XmonteroEmperorsClientBundle_privacy:
         _controller: XmonteroEmperorsClientBundle:Default:dumpPage
         template: XmonteroEmperorsClientBundle:Pages:privacy.html.twig
     requirements: { _method: GET }
-
-XmonteroEmperorsClientBundle_dirty:
-    pattern: /dirty/
-    defaults: { _controller: XmonteroEmperorsClientBundle:Default:dirty }
-    requirements: { _method: GET }

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             
+            new Xmontero\Emperors\AdminBundle\XmonteroEmperorsAdminBundle(),
             new Xmontero\Emperors\ClientBundle\XmonteroEmperorsClientBundle(),
             new Xmontero\Emperors\ModelBundle\XmonteroEmperorsModelBundle(),
             new Xmontero\Emperors\ServerBundle\XmonteroEmperorsServerBundle(),
