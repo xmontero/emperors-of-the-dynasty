@@ -9,6 +9,8 @@ h3,
 h4
 {
 	font-family: 'UnifrakturCook', cursive;
+	color: #600000;
+	text-shadow: 0 0 5px rgba(194, 105, 0, 0.5);
 }
 
 table.board
