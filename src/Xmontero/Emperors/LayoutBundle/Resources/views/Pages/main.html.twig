@@ -4,22 +4,29 @@
 		<meta charset="UTF-8">
 		<link href='http://fonts.googleapis.com/css?family=UnifrakturCook:700' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Alegreya&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-		<!--link rel="stylesheet" href="/css/reset.css" /-->
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400italic,700,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/css/reset.css" />
 		<link rel="stylesheet" href="/css/emperors.css" />
 	</head>
 	<body>
-		{% set timeFormat = "d-M H:i T" %}
-		<h1>Emperors of the Dynasty - the game!</h1>
-		  <a href="{{ path( 'XmonteroEmperorsClientBundle_root' ) }}">Inicio</a>
-		| <a href="{{ path( 'XmonteroEmperorsClientBundle_players' ) }}">Jugadores</a>
-		| <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsMenu' ) }}">Instrucciones</a>
-		| <a href="{{ path( 'XmonteroEmperorsClientBundle_privacy' ) }}">Privacidad</a>
-		| <a href="https://www.facebook.com/groups/1472958162921109/" target="_blank">Facebook</a>
-		| {{ "now" | date( timeFormat, "Europe/Paris") }}
-		| {{ "now" | date( timeFormat, "UTC") }}
-		| {% include "XmonteroEmperorsClientBundle:Widgets:login.html.twig" %}
-		<hr>
-		{% block page %}
-		{% endblock %}
+		<div id="header">
+			{% set timeFormat = "d-M H:i T" %}
+			<h1>Emperors of the Dynasty - the game!</h1>
+			  <a href="{{ path( 'XmonteroEmperorsClientBundle_root' ) }}">Inicio</a>
+			| <a href="{{ path( 'XmonteroEmperorsClientBundle_players' ) }}">Jugadores</a>
+			| <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsMenu' ) }}">Instrucciones</a>
+			| <a href="{{ path( 'XmonteroEmperorsClientBundle_privacy' ) }}">Privacidad</a>
+			| <a href="https://www.facebook.com/groups/1472958162921109/" target="_blank">Facebook</a>
+			| {{ "now" | date( timeFormat, "Europe/Paris") }}
+			| {{ "now" | date( timeFormat, "UTC") }}
+			| {% include "XmonteroEmperorsClientBundle:Widgets:login.html.twig" %}
+		</div>
+		<div id="body">
+			{% block page %}
+			{% endblock %}
+		</div>
+		<div id="footer">
+			&copy; 2014, &copy; Xavier Montero Amorós
+		</div>
 	</body>
 </html>

@@ -2,7 +2,9 @@
 
 {% block page %}
 	<h2>Este es el tablero de la primera partida</h2>
-	<h3 style="color:red;">No actualizado a turno 4 todavía</h3>
+	<div class="inset" style="color:red;">
+		No actualizado a turno 4 todavía.
+	</div>
 	<table class="board">
 	{% set board = game.board( turn ) %}
 	{% set numberOfRows = board.numberOfRows %}
@@ -18,10 +20,22 @@
 		</tr>
 	{% endfor %}
 	</table>
-<ul>
-<li>E = Emperador. El número representa la Dinastía. Por ejemplo E5 es el Emperador de la Dinastía 5.
-<li>P = Peón. El primer número es la Dinastía, el segundo el número de peón dentro de esa formación. Por ejemplo P32 es el 2º peón de la Dinastía 3.
-<li style="color: red;">Peón rojo: Ha cambiado de peonero en este turno. Aún no he tenido tiempo de cambiar el programa para que refleje los nuevos nombres. Ver en Facebook.</li>
-<li>C = Cofre del tesoro
-</ul>
+	&nbsp;
+	<table>
+		<tr>
+			<th>Código</th><th>Nombre</th><th>Descripción</th>
+		</tr>
+		<tr>
+			<td>E</td><td>Emperador</td><td>El número representa la Dinastía. Por ejemplo E5 es el Emperador de la Dinastía 5.</td>
+		</tr>
+		<tr>
+			<td>P</td><td>Peón</td><td>El primer número es la Dinastía, el segundo el número de peón dentro de esa formación. Por ejemplo P32 es el 2º peón de la Dinastía 3.</td>
+		</tr>
+		<tr>
+			<td style="color:red;">P</td><td>Peón rojo</td><td>Ha cambiado de peonero en este turno. Aún no he tenido tiempo de cambiar el programa para que refleje los nuevos nombres. Ver en Facebook.</td>
+		</tr>
+		<tr>
+			<td>C</td><td>Cofre del tesoro</td><td>Contiene las monedas que cada emperador puso al inicio de la partida.</td>
+		</tr>
+	</table>
 {% endblock %}

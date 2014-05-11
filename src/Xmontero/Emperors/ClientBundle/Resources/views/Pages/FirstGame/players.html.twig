@@ -2,17 +2,19 @@
 
 {% block page %}
 	<h3>Emparejamientos 1a partida</h3>
-	<ul>
-		{% for i in 0..7 %}
-			{% set emperor = emperors[ i ] %}
-			{% set pawn = pawns[ i ] %}
-			<li>Los peones de
-			<a target="_blank" href="{{ pawn.facebookPage }}">{{ pawn.emperor }} de {{ pawn.dynasty }}</a>
-			servirán a
-			<a target="_blank" href="{{ emperor.facebookPage }}">{{ emperor.emperor }} de {{ emperor.dynasty }}</a>
-			</li>
-		{% endfor %}
-	</ul>
+	<div class="inset">
+		<ul>
+			{% for i in 0..7 %}
+				{% set emperor = emperors[ i ] %}
+				{% set pawn = pawns[ i ] %}
+				<li>Los peones de
+				<a target="_blank" href="{{ pawn.facebookPage }}">{{ pawn.emperor }} de {{ pawn.dynasty }}</a>
+				servirán a
+				<a target="_blank" href="{{ emperor.facebookPage }}">{{ emperor.emperor }} de {{ emperor.dynasty }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 	<h3>Jugadores controlando Emperadores</h3>
 	<table border=1>
 		<tr>

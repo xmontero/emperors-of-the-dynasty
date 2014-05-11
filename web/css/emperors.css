@@ -1,42 +1,196 @@
+/* -- body --------------------------------------------------------------- */
+
 body
 {
 	font-family: 'Alegreya', serif;
+	background: url(/bundles/xmonteroemperorsassets/img/backgrounds/background0172-lores.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	color: #FFEFBF;
+	text-shadow: -1px -1px 1px rgba(0,0,0,0.5), 1px 1px 1px rgba(0,0,0,0.5), 3px 3px 2px rgba(0,0,0,1.0);
+	font-size: 1.2em;
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
+
+/* -- pre ---------------------------------------------------------------- */
+
+pre
+{
+	font-family: 'Ubuntu Mono', monospace;
+}
+
+/* -- titles ------------------------------------------------------------- */
 
 h1,
 h2,
 h3,
+h4,
+h5,
+h6
+{
+	margin: 0.4em 0;
+	color: #FFFF40;
+	font-family: 'UnifrakturCook', cursive;
+	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7), 0 0 0.4em rgba(255, 255, 255, 1.0), 0 0 0.6em rgba(255, 255, 255, 1.0)
+}
+
+h1
+{
+	font-size: 2.0em;
+}
+
+h2
+{
+	font-size: 1.8em;
+}
+
+h3
+{
+	font-size: 1.6em;
+}
+
 h4
 {
-	font-family: 'UnifrakturCook', cursive;
-	color: #600000;
-	text-shadow: 0 0 5px rgba(194, 105, 0, 0.5);
+	font-size: 1.4em;
 }
+
+h5
+{
+	font-size: 1.2em;
+}
+
+h6
+{
+	font-size: 1.1em;
+}
+
+/* -- paragraphs --------------------------------------------------------- */
+
+p
+{
+	margin-bottom: 1em;
+}
+
+/* -- lists -------------------------------------------------------------- */
+
+ul,
+ol
+{
+	padding: 0 0 0 1.6em;
+	list-style: disc;
+}
+
+ol
+{
+	list-style: decimal;
+}
+
+/* -- links -------------------------------------------------------------- */
+
+a
+{
+	color: #FF60A0;
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+a:active
+{
+	color: #FF80C0;
+	text-decoration: underline;
+}
+
+/* -- containers --------------------------------------------------------- */
+
+#header
+{
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 20px;
+}
+
+#body
+{
+	padding: 20px;
+}
+
+#footer
+{
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 20px;
+}
+
+.inset
+{
+	background-color: rgba(0, 0, 0, 0.7);
+	padding: 20px;
+}
+
+table,
+.inset
+{
+	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+	border-right: 1px solid rgba(255, 255, 255, 0.4);
+	box-shadow: 5px 5px 10px 0 #000000 inset;
+}
+
+/* -- tables ------------------------------------------------------------- */
 
 table
 {
-	background: none repeat scroll 0 0 #FFEFDF;
-	border: 0 none;
+	background: url(/bundles/xmonteroemperorsassets/img/backgrounds/retroBlue.jpg) no-repeat center center scroll; 
 }
 
 th
 {
-	background: none repeat scroll 0 0 #600000;
+	background-color: rgba(0,0,0,0.3);
 	color: #FFFF80;
+}
+
+tr
+{
+	background-color: rgba(0,0,0,0.5);
+}
+
+tr:first-child:hover
+{
+	background-color: rgba(0,0,0,0.5);
+}
+
+tr:hover
+{
+	background-color: rgba(0,0,0,0.3);
 }
 
 td
 {
-	background: none repeat scroll 0 0 #FFEFDF;
-	color: #600000;
+}
+
+td:first-child
+{
+	background-color: rgba(0,0,0,0.5);
+}
+
+td:last-child
+{
+	border-right: 0px;
 }
 
 th,
 td
 {
-	border: 0 none;
-	padding: 0 5px;
+	border-right: 1px solid rgba(255,255,255,0.1);
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+	padding: 5px 10px;
 }
+
+/* -- board -------------------------------------------------------------- */
 
 table.board
 {
