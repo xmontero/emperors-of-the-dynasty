@@ -1,7 +1,6 @@
-{% extends "XmonteroEmperorsClientBundle:Layout:layout.html.twig" %}
+{% extends "XmonteroEmperorsAdminBundle:Layout:layout.html.twig" %}
 
 {% block page %}
-		<h2>Resumen rápido</h2>
-		Hola {{ name }}
-
+	<h1>Dashboard</h1>
+	{% include "XmonteroEmperorsAdminBundle:Widgets/Dashboard:games.html.twig" %}
 {% endblock %}
