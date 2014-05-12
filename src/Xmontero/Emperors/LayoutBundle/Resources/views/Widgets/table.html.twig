@@ -1,0 +1,16 @@
+<table>
+	{% for header in table.headers %}
+		<tr>
+			{% for headerCell in header.cells %}
+				<th>{{ headerCell.value }}</th>
+			{% endfor %}
+		</tr>
+	{% endfor %}
+	{% for row in table.dataRows %}
+		<tr>
+			{% for dataCell in row.cells %}
+				{% include "XmonteroEmperorsLayoutBundle:Widgets:tableCell.html.twig" %}
+			{% endfor %}
+		</tr>
+	{% endfor %}
+</table>

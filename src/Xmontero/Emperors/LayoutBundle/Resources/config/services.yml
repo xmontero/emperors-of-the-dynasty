@@ -1,0 +1,6 @@
+parameters:
+
+services:
+    emperors.layout.uiManager:
+        class: Xmontero\Emperors\LayoutBundle\Model\UiManager
+        arguments: []

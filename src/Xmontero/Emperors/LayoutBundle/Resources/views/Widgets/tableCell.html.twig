@@ -1,0 +1,11 @@
+<td>
+	{% set dataType = dataCell.dataType %}
+	{% if dataType == 'link' %}
+		{% set target = ( dataCell.value.newWindow ? ' target="_blank"' : '' ) %}
+		<a href="{{ dataCell.value.url }}"{{ target | raw }}>{{ dataCell.value.display }}</a>
+	{% elseif dataType == 'bool' %}
+		{{ dataCell.value ? 'true' : 'false' }}
+	{% else %}
+		{{ dataCell.value }}
+	{% endif %}
+</td>
