@@ -11,16 +11,7 @@
 	<body>
 		<div id="header">
 			{% block header %}
-				{% set timeFormat = "d-M H:i T" %}
-				<h1>Emperors of the Dynasty - the game!</h1>
-				  <a href="{{ path( 'XmonteroEmperorsClientBundle_root' ) }}">Inicio</a>
-				| <a href="{{ path( 'XmonteroEmperorsClientBundle_players' ) }}">Jugadores</a>
-				| <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsMenu' ) }}">Instrucciones</a>
-				| <a href="{{ path( 'XmonteroEmperorsClientBundle_privacy' ) }}">Privacidad</a>
-				| <a href="https://www.facebook.com/groups/1472958162921109/" target="_blank">Facebook</a>
-				| {{ "now" | date( timeFormat, "Europe/Paris") }}
-				| {{ "now" | date( timeFormat, "UTC") }}
-				| {% include "XmonteroEmperorsClientBundle:Widgets:login.html.twig" %}
+				{% include "XmonteroEmperorsLayoutBundle:Widgets/Main:header.html.twig" %}
 			{% endblock %}
 		</div>
 		<div id="body">
@@ -28,7 +19,9 @@
 			{% endblock %}
 		</div>
 		<div id="footer">
-			&copy; 2014, &copy; Xavier Montero Amorós
+			{% block footer %}
+				{% include "XmonteroEmperorsLayoutBundle:Widgets/Main:footer.html.twig" %}
+			{% endblock %}
 		</div>
 	</body>
 </html>

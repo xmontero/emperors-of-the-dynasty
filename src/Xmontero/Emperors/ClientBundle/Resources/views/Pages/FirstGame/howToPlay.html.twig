@@ -1,8 +1,6 @@
 {% extends "XmonteroEmperorsClientBundle:Layout:layout.html.twig" %}
 
 {% block page %}
-	<h2>Selecciona una partida</h2>
-	{% include "XmonteroEmperorsClientBundle:Widgets:gameList.html.twig" with { "games": games } %}
 	<h2>¿Qué es Emperors of the Dynasty?</h2>
 	<div class="inset">
 		<p>
@@ -22,4 +20,10 @@
 			Los gráficos se han roto, aquí está el <a href="https://github.com/xmontero/emperors-of-the-dynasty" target="_blank">doc original.</a>
 		</ul>
 	</div>
+	<h2>Instrucciones</h2>
+	<ul>
+		<li>Si eres emperador, lee esto: <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsEmperors' ) }}">Instrucciones para emperadores.</a>
+		<li>Si eres peón, lee esto: <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsPawns' ) }}">Instrucciones para peones.</a>
+	</ul>
+	
 {% endblock %}

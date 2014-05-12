@@ -15,7 +15,7 @@ class DefaultController extends Controller
 		$scope[ 'games' ] = $this->get( 'emperors.game.manager' )->getOpenGames( 10 );
 		$scope[ 'name' ] = $this->get( 'security.context' )->getToken();
 		
-		return $this->render( 'XmonteroEmperorsClientBundle:Pages:2014-04apr-home.html.twig', $scope );
+		return $this->render( 'XmonteroEmperorsClientBundle:Pages:games.html.twig', $scope );
 		//return $this->render( 'XmonteroEmperorsClientBundle:Pages:home.html.twig', array( 'name' => $this->get( 'security.context' )->getToken() ) );
 	}
 	

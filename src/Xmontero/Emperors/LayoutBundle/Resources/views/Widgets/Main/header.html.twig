@@ -1,0 +1,9 @@
+{% set timeFormat = "d-M H:i T" %}
+<h1>Emperors of the Dynasty - the game!</h1>
+  <a href="{{ path( 'XmonteroEmperorsClientBundle_root' ) }}">Partidas</a>
+| <a href="{{ path( 'XmonteroEmperorsClientBundle_players' ) }}">Dinastías</a>
+| <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsMenu' ) }}">¿Cómo jugar?</a>
+| <a href="https://www.facebook.com/groups/1472958162921109/" target="_blank">Social</a>
+| {{ "now" | date( timeFormat, "Europe/Paris") }}
+| {{ "now" | date( timeFormat, "UTC") }}
+| {% include "XmonteroEmperorsLayoutBundle:Widgets/Main:login.html.twig" %}

@@ -1,0 +1,6 @@
+{% extends "XmonteroEmperorsClientBundle:Layout:layout.html.twig" %}
+
+{% block page %}
+	<h2>Selecciona una partida</h2>
+	{% include "XmonteroEmperorsClientBundle:Widgets:gameList.html.twig" with { "games": games } %}
+{% endblock %}
