@@ -1,0 +1,6 @@
+{% extends "XmonteroEmperorsAdminBundle:Layout:layout.html.twig" %}
+
+{% block page %}
+	<h1>Users</h1>
+	{% include "XmonteroEmperorsAdminBundle:Widgets:users.html.twig" with { "table": usersTable } %}
+{% endblock %}

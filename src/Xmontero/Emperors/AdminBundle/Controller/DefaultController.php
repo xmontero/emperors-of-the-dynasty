@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-	public function rootAction( Request $request )
+	public function dashboardAction( Request $request )
 	{
 		$scope = array();
 		

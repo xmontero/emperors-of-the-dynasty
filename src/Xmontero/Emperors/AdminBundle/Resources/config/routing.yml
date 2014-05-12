@@ -1,6 +1,11 @@
-XmonteroEmperorsAdminBundle_root:
+XmonteroEmperorsAdminBundle_dashboard:
     pattern: /
-    defaults: { _controller: XmonteroEmperorsAdminBundle:Default:root }
+    defaults: { _controller: XmonteroEmperorsAdminBundle:Default:dashboard }
+    requirements: { _method: GET }
+
+XmonteroEmperorsAdminBundle_users:
+    pattern: /users/
+    defaults: { _controller: XmonteroEmperorsAdminBundle:Users:main }
     requirements: { _method: GET }
 
 XmonteroEmperorsClientBundle_dirty:

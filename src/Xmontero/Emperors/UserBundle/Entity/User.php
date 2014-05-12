@@ -89,9 +89,20 @@ class User extends BaseUser
 		return $this->oauth_response;
 	}
 	
-	public function getOAuthName()
+	public function isFacebook()
+	{
+		return ( ! is_null( $this->facebook_id ) );
+	}
+	
+	public function getRealCompleteName()
 	{
 		$response = json_decode( $this->oauth_response );
 		return $response->name;
+	}
+	
+	public function getFacebookUrl()
+	{
+		$response = json_decode( $this->oauth_response );
+		return $response->link;
 	}
 }

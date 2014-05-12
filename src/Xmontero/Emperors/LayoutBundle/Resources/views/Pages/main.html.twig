@@ -10,16 +10,18 @@
 	</head>
 	<body>
 		<div id="header">
-			{% set timeFormat = "d-M H:i T" %}
-			<h1>Emperors of the Dynasty - the game!</h1>
-			  <a href="{{ path( 'XmonteroEmperorsClientBundle_root' ) }}">Inicio</a>
-			| <a href="{{ path( 'XmonteroEmperorsClientBundle_players' ) }}">Jugadores</a>
-			| <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsMenu' ) }}">Instrucciones</a>
-			| <a href="{{ path( 'XmonteroEmperorsClientBundle_privacy' ) }}">Privacidad</a>
-			| <a href="https://www.facebook.com/groups/1472958162921109/" target="_blank">Facebook</a>
-			| {{ "now" | date( timeFormat, "Europe/Paris") }}
-			| {{ "now" | date( timeFormat, "UTC") }}
-			| {% include "XmonteroEmperorsClientBundle:Widgets:login.html.twig" %}
+			{% block header %}
+				{% set timeFormat = "d-M H:i T" %}
+				<h1>Emperors of the Dynasty - the game!</h1>
+				  <a href="{{ path( 'XmonteroEmperorsClientBundle_root' ) }}">Inicio</a>
+				| <a href="{{ path( 'XmonteroEmperorsClientBundle_players' ) }}">Jugadores</a>
+				| <a href="{{ path( 'XmonteroEmperorsClientBundle_instructionsMenu' ) }}">Instrucciones</a>
+				| <a href="{{ path( 'XmonteroEmperorsClientBundle_privacy' ) }}">Privacidad</a>
+				| <a href="https://www.facebook.com/groups/1472958162921109/" target="_blank">Facebook</a>
+				| {{ "now" | date( timeFormat, "Europe/Paris") }}
+				| {{ "now" | date( timeFormat, "UTC") }}
+				| {% include "XmonteroEmperorsClientBundle:Widgets:login.html.twig" %}
+			{% endblock %}
 		</div>
 		<div id="body">
 			{% block page %}

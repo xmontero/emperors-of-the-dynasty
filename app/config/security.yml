@@ -49,6 +49,7 @@ security:
                 target: /
 
             anonymous: true
+            switch_user: true
 
         login:
             pattern: ^/login$
