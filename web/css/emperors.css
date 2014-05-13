@@ -240,10 +240,12 @@ div.board .tile .content
 	background: #658060;
 }
 
-.top-header,
-.left-header
+div.board .tile.top-header,
+div.board .tile.left-header
 {
 	background: #DDDDDD;
+	border-right: 1px solid rgba(0,0,0,0.1);
+	border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .free
