@@ -1,0 +1,12 @@
+<div class="board">
+	{% set numberOfRows = board.numberOfRows %}
+	{% set numberOfColumns = board.numberOfColumns %}
+	{% for y in 0..numberOfRows %}
+		<div class="tileRow">
+			{% for x in 0..numberOfColumns %}
+				{% set tile = board.getTile( x, y ) %}
+				{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" %}
+			{% endfor %}
+		</div>
+	{% endfor %}
+</div>

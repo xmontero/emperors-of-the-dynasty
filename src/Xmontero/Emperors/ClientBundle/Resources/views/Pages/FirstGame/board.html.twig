@@ -5,21 +5,8 @@
 	<div class="inset" style="color:red;">
 		No actualizado a turno 4 todavía.
 	</div>
-	<table class="board">
-	{% set board = game.board( turn ) %}
-	{% set numberOfRows = board.numberOfRows %}
-	{% set numberOfColumns = board.numberOfColumns %}
-	{% for y in 0..numberOfRows %}
-		<tr>
-		{% for x in 0..numberOfColumns %}
-			{% set tile = board.getTile( x, y ) %}
-			<td class="{{ tile.class }}">
-				{{ tile.content }}
-			</td>
-		{% endfor %}
-		</tr>
-	{% endfor %}
-	</table>
+	&nbsp;
+	{% include "XmonteroEmperorsClientBundle:Widgets/Board:board.html.twig" with { board: game.board( turn ) } only %}
 	&nbsp;
 	<table>
 		<tr>
