@@ -1,0 +1,51 @@
+Board
+=======================================
+
+BoardManager
+---------------------------------------
+Board createBoardFromScratch( int width, int height );
+
+Board
+---------------------------------------
+int getWidth();
+int getHeight();
+* void addColumn( int x );
+* void addRow( int y );
+Tile getTile( int x, int y );
+string getTileId( int x, int y );
+string getColumnId( int x );
+string getRowId( int y );
+void load( jsonString document );
+jsonString save();
+Items getItems();
+Items getVisibleItems();
+Items getHiddenItems();
+Items getPieces();
+Tile getTileByItem( Item item );
+
+Tile
+---------------------------------------
+void setProperty( string $key, $value );
+mixed getProperty( string $key )
+Board getBoard();
+
+Piece extends Item
+---------------------------------------
+
+Chest extends Item
+---------------------------------------
+Items getItems();
+
+Item
+---------------------------------------
+bool getPlacedInBoard();
+Board getBoard();
+void getTile( Tile );
+void moveTo( Tile );
+void removeFromBoard();
+void placeInBoard( Tile );
+
+Log
+---------------------------------------
+void Log( LogExpression expresion);
+LogExpressionsWithDates getHistory();

@@ -226,6 +226,12 @@ div.board .tile
 	color: black;
 }
 
+div.board .tile:hover
+{
+	background: rgba(255,255,255,0.5);
+	cursor: pointer;
+}
+
 div.board .tile .content
 {
 }
@@ -238,6 +244,9 @@ div.board .tile .content
 .border
 {
 	background: #658060;
+	box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+	cursor: pointer;
+	z-index: 100;
 }
 
 div.board .tile.top-header,

@@ -8,6 +8,11 @@ XmonteroEmperorsAdminBundle_users:
     defaults: { _controller: XmonteroEmperorsAdminBundle:Users:main }
     requirements: { _method: GET }
 
+XmonteroEmperorsAdminBundle_boardEditor:
+    pattern: /board/editor/
+    defaults: { _controller: XmonteroEmperorsAdminBundle:BoardEditor:showEditor }
+    requirements: { _method: GET }
+
 XmonteroEmperorsClientBundle_dirty:
     pattern: /dirty/
     defaults: { _controller: XmonteroEmperorsAdminBundle:Default:dirty }

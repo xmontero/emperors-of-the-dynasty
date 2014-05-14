@@ -1,6 +1,10 @@
 parameters:
 
 services:
+    emperors.board.manager:
+        class: Xmontero\Emperors\ModelBundle\Model\Game\BoardManager
+        arguments: [ '@logger', '@emperors.objectstorage.manager' ]
+
     emperors.game.manager:
         class: Xmontero\Emperors\ModelBundle\Model\Game\GameManager
         arguments: [ '@logger', '@emperors.objectstorage.manager' ]
