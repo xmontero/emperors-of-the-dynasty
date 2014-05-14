@@ -4,12 +4,10 @@ namespace Xmontero\Emperors\ModelBundle\Model\Game;
 
 class BoardManager
 {
-	private $logger;
 	private $objectStorageManager;
 	
-	public function __construct( $logger, $objectStorageManager )
+	public function __construct( $objectStorageManager )
 	{
-		$this->logger = $logger;
 		$this->objectStorageManager = $objectStorageManager;
 	}
 	

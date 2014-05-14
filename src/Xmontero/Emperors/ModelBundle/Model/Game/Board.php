@@ -10,6 +10,8 @@ class Board
 	private $chests;
 	private $tiles;
 	private $tileColumns;
+	private $pieces;
+	private $items;
 	
 	private $width;
 	private $height;
@@ -18,6 +20,8 @@ class Board
 	{
 		$this->width = $width;
 		$this->height = $height;
+		$this->pieces = new Items;
+		$this->items = new Items;
 		
 		if( ! is_null( $objectStorageManager ) )
 		{
@@ -207,5 +211,20 @@ class Board
 	public function getHeight()
 	{
 		return $this->height;
+	}
+	
+	public function getItems()
+	{
+		return $this->items;
+	}
+	
+	public function getPieces()
+	{
+		return $this->pieces;
+	}
+	
+	public function getItemsAndPieces()
+	{
+		return $this->items;
 	}
 }

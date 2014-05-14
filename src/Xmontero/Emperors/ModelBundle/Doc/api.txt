@@ -1,42 +1,44 @@
 Board
 =======================================
 
-BoardManager
+BoardManager : Manager
 ---------------------------------------
 Board createBoardFromScratch( int width, int height );
+Board loadBoardFromJson( jsonString document );
 
-Board
+Board : Object
 ---------------------------------------
+Board( jsonString document );
 int getWidth();
 int getHeight();
-* void addColumn( int x );
-* void addRow( int y );
+void addColumn( int x );
+void addRow( int y );
 Tile getTile( int x, int y );
 string getTileId( int x, int y );
 string getColumnId( int x );
 string getRowId( int y );
-void load( jsonString document );
 jsonString save();
+Items getItemsAndPieces();
 Items getItems();
 Items getVisibleItems();
 Items getHiddenItems();
 Items getPieces();
 Tile getTileByItem( Item item );
 
-Tile
+Tile : Object
 ---------------------------------------
 void setProperty( string $key, $value );
 mixed getProperty( string $key )
 Board getBoard();
 
-Piece extends Item
+Piece : Item
 ---------------------------------------
 
-Chest extends Item
+Chest : Item
 ---------------------------------------
 Items getItems();
 
-Item
+Item : Object
 ---------------------------------------
 bool getPlacedInBoard();
 Board getBoard();
@@ -45,7 +47,85 @@ void moveTo( Tile );
 void removeFromBoard();
 void placeInBoard( Tile );
 
-Log
+Log ???
 ---------------------------------------
 void Log( LogExpression expresion);
 LogExpressionsWithDates getHistory();
+
+Game
+=======================================
+
+GameManager : Manager
+---------------------------------------
+Ids getOpenGameIds();
+Game loadGame( Id gameId );
+Game newGame();
+bool gameExists( Id gameId );
+void deleteGame( Id gameId );
+Ids processGameTimeOuts();
+
+Games : Collection
+---------------------------------------
+
+Game
+---------------------------------------
+Id getId();
+bool getIsOpen();
+Board getBoard();
+void setBoard( newBoard );
+PlayersInGame getPlayers();
+Rules getRules();
+Turns getTurns();
+Turn closeTurn();
+void registerDesire( PlayerInGame, Desire );
+void start();
+int getAcceptedNumberOfPlayers();
+void setAcceptedNumberOfPlayers( numberOfPlayers );
+History getHistory();
+void save();
+void delete();
+void setCloseTurnDueDate( DateTimeInUTC );
+void isPastDueDate();
+
+Wealth
+=======================================
+
+Items ???
+---------------------------------------
+Monomials getMonomials();
+History getHistory();
+
+Monomials : Collection
+---------------------------------------
+
+Monomial : Object ???
+---------------------------------------
+int getCoefficient();
+Item getItem();
+
+Dynasties
+=======================================
+
+DynastyManager
+---------------------------------------
+int convertRomanToArabic( string romanNumeral );
+string convertArabicToRoman( int arabicNumeral );
+
+Dynasty
+---------------------------------------
+Wealth getWealth();
+Reputation getReputation();
+DateTime creationDateInUtc();
+string getName();
+Emperors getAllEmperors();
+Emperors getAliveEmperors();
+Emperor createEmperorFromScratch( string name );
+Emperor createEmperorFromEmperor( Emperor emperor );
+
+Emperor
+---------------------------------------
+string getName();
+string getAlias();
+int getOrdinalAsNumber();
+string getOrdinalAsRomanNumerals();
+int getOrdinalAsArabicNumerals();
