@@ -17,6 +17,7 @@ Tile getTile( int x, int y );
 string getTileId( int x, int y );
 string getColumnId( int x );
 string getRowId( int y );
+void load( jsonString document );
 jsonString save();
 Items getItemsAndPieces();
 Items getItems();

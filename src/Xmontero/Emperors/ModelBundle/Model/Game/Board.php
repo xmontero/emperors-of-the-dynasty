@@ -18,8 +18,7 @@ class Board
 	
 	public function __construct( $objectStorageManager, $turn, $width, $height )
 	{
-		$this->width = $width;
-		$this->height = $height;
+		$this->setSize( $width, $height );
 		$this->pieces = new Items;
 		$this->items = new Items;
 		
@@ -226,5 +225,31 @@ class Board
 	public function getItemsAndPieces()
 	{
 		return $this->items;
+	}
+	
+	public function load( $document )
+	{
+		$desiredBoard = json_decode( $document );
+		
+		if( is_null( $desiredBoard ) )
+		{
+			throw new \InvalidArgumentException( 'Invalid json.' );
+		}
+		
+		$this->setSize( $desiredBoard->width, $desiredBoard->height );
+	}
+	
+	public function save()
+	{
+		$document = json_encode( $this );
+		return $document;
+	}
+	
+	// -- PRIVATE ------------------------------------------
+	
+	private function setSize( $width, $height )
+	{
+		$this->width = $width;
+		$this->height = $height;
 	}
 }

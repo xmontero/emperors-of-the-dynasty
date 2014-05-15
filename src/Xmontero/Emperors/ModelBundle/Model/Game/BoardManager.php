@@ -16,4 +16,12 @@ class BoardManager
 		$board = new Board( $this->objectStorageManager, 1, $x, $y );
 		return $board;
 	}
+	
+	public function loadBoardFromJson( $document )
+	{
+		$board = new Board( null, 1, 0, 0 );
+		$board->load( $document );
+		
+		return $board;
+	}
 }
