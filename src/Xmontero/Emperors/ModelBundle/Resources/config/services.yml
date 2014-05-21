@@ -2,7 +2,7 @@ parameters:
 
 services:
     emperors.board.manager:
-        class: Xmontero\Emperors\ModelBundle\Model\Game\BoardManager
+        class: Xmontero\Emperors\ModelBundle\Model\Board\BoardManager
         arguments: [ '@emperors.objectstorage.manager' ]
 
     emperors.game.manager:

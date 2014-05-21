@@ -2,6 +2,8 @@
 
 namespace Xmontero\Emperors\ModelBundle\Model\Game;
 
+use Xmontero\Emperors\ModelBundle\Model\Board\Board;
+
 class Game
 {
 	private $id;
@@ -26,8 +28,9 @@ class Game
 	
 	public function getBoard( $turn )
 	{
-		$result = new Board( $this->objectStorageManager, $turn, 14, 14 );
-		return $result;
+		$board = new Board( 14, 14 );
+		$board->oldLoad( $this->objectStorageManager, $turn, 14, 14 );
+		return $board;
 	}
 	
 	public function getNumberOfPlayers()

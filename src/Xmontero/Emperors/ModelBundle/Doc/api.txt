@@ -1,60 +1,12 @@
-Board
-=======================================
+Game namespace
+===============================================================
 
-BoardManager : Manager
----------------------------------------
-Board createBoardFromScratch( int width, int height );
-Board loadBoardFromJson( jsonString document );
-
-Board : Object
----------------------------------------
-Board( jsonString document );
-int getWidth();
-int getHeight();
-void addColumn( int x );
-void addRow( int y );
-Tile getTile( int x, int y );
-string getTileId( int x, int y );
-string getColumnId( int x );
-string getRowId( int y );
-void load( jsonString document );
-jsonString save();
-Items getItemsAndPieces();
-Items getItems();
-Items getVisibleItems();
-Items getHiddenItems();
-Items getPieces();
-Tile getTileByItem( Item item );
-
-Tile : Object
----------------------------------------
-void setProperty( string $key, $value );
-mixed getProperty( string $key )
-Board getBoard();
-
-Piece : Item
----------------------------------------
-
-Chest : Item
----------------------------------------
-Items getItems();
-
-Item : Object
----------------------------------------
-bool getPlacedInBoard();
-Board getBoard();
-void getTile( Tile );
-void moveTo( Tile );
-void removeFromBoard();
-void placeInBoard( Tile );
-
-Log ???
----------------------------------------
-void Log( LogExpression expresion);
-LogExpressionsWithDates getHistory();
-
-Game
-=======================================
+A game is made of:
+- One board (in the future could be an array of boards)
+- A set of players
+- A set of pieces
+- A set of rules
+- A set of turns, specially important the "open turn"
 
 GameManager : Manager
 ---------------------------------------
@@ -68,7 +20,7 @@ Ids processGameTimeOuts();
 Games : Collection
 ---------------------------------------
 
-Game
+Game : Object
 ---------------------------------------
 Id getId();
 bool getIsOpen();
@@ -88,24 +40,129 @@ void delete();
 void setCloseTurnDueDate( DateTimeInUTC );
 void isPastDueDate();
 
-Wealth
-=======================================
+Board namespace
+===============================================================
 
-Items ???
+I'm not sure if the board should know nothing about the pieces and delegate that knowledge to the game or not.
+On one side, the real logics of the board should be know its physics, square? hexagonal? and which tiles connect with which other tiles, its shape etc. This approach would represent a physical board with no pieces on it, the pure "board" concept.
+On the other side, sometimes you may want to represent a specific board in the screen with a set of pieces, but that does not represent any specific game, just "a board with pieces", to demonstrate for example possible movements or to test rules.
+Maybe we have in fact 2 concepts: "Board" and "BoardWithPieces" and the latter should consider the verbs about movements (even could hold a set of movement rules).
+Can we avoid circular references? Have a board that knows nothing about the rules?
+Even in the real world, the very same "board" seves chess and draughters, and independenly of the rules (the board is rule-agnostic), the tiles have properties (black, white, coords, etc) and the board itself has (size, etc). Maybe the most we could say is "you can place pieces in the tiles", even pieces being abstract (pieces of chess, pieces of draughers).
+
+BoardManager : Manager
 ---------------------------------------
-Monomials getMonomials();
-History getHistory();
+Board createBoardFromScratch( int width, int height );
+Board loadBoardFromJson( jsonString document );
 
-Monomials : Collection
+Board : Object
+---------------------------------------
+Board( optional int $width, optional int $height );
+int getWidth();
+int getHeight();
+void addColumnAt( int x );
+void addRowAt( int y );
+Tile getTile( int x, int y );
+string getTileId( int x, int y );
+string getColumnId( int x );
+string getRowId( int y );
+void load( jsonString document );
+jsonString save();
+Pieces getPieces();
+Tile getTileByPiece( Piece piece );
+void attachPiece( int x, int y, Piece piece );	// Only if the piece was not in the board.
+void movePiece( int x, int y, Piece piece );	// Only if the piece existed in the board.
+void detachPiece( Piece piece );				// Only if the piece existed in the board.
+
+Tiles : Collection
+---------------------------------------
+void load( jsonString document );
+jsonString saveToJson();
+object saveToObject();
+
+interface ITile
+---------------------------------------
+// Always available.
+bool isPlacedInBoard();
+void setProperty( string $key, $value );
+mixed getProperty( string $key )
+bool propertyExists( string $key );
+void load( jsonString document );
+jsonString save();
+Pieces getPieces();
+void attachPiece( Piece piece );	// Only if the piece was not in the tile.
+void detachPiece( Piece piece );	// Only if the piece existed in the tile.
+
+// Only available when the piece is placed in the board.
+Board getBoard();
+
+Tile : implements ITile
 ---------------------------------------
 
-Monomial : Object ???
+interface IPiece
 ---------------------------------------
-int getCoefficient();
-Item getItem();
+// Always available.
+/** @return bool */ public function isPlacedInBoard();
+/** @return bool */ public function istPlacedInTile();
+/** @return string */ public function getType();
 
-Dynasties
-=======================================
+// Only available when the piece is not placed in the board.
+/** @return void */ public function placeInBoard( Board $board, /* int */ $x, /* int */ $y );
+
+// Only available when the piece is not placed in a tile.
+/** @return void */ public function placeInTile( Tile $tile );
+
+// Only available when the piece is placed in the board.
+/** @return Board */ public function getBoard();
+/** @return void */ public function moveToTile( Tile $tile );
+/** @return void */ public function moveToPosition( /* int */ $x, /* int */ $y );
+/** @return void */ public function removeFromBoard();
+
+// Only available when the piece is placed in a tile.
+/** @return Tile */ public function getTile();
+/** @return bool */ public function isVisible();
+/** @return void */ public function setVisible( /* bool */ $newVisible ); 
+/** @return void */ public function removeFromTile();
+
+interface IPieces
+---------------------------------------
+
+Pieces namespace
+===============================================================
+
+PieceHelper : implements IItem
+---------------------------------------
+
+Pieces\Items namespace
+===============================================================
+
+abstract Item : implements IPiece
+---------------------------------------
+
+Chest : Item
+---------------------------------------
+Items getItems();
+
+Life : Item
+---------------------------------------
+
+Pieces\Tokens namespace
+===============================================================
+
+abstract Token : implements IPiece
+---------------------------------------
+
+Emperor : Token
+---------------------------------------
+Dynasty\Emperor getDynastyEmperorBelongingTo()
+
+Pawn : Token
+---------------------------------------
+Dynasty\Emperor getDynastyEmperorBelongingTo()
+Emperor getEmperorWorkingBy()
+
+Dynasty namespace
+===============================================================
 
 DynastyManager
 ---------------------------------------
@@ -130,3 +187,28 @@ string getAlias();
 int getOrdinalAsNumber();
 string getOrdinalAsRomanNumerals();
 int getOrdinalAsArabicNumerals();
+
+===============================================================
+===============================================================
+===============================================================
+
+Log ???
+---------------------------------------
+void Log( LogExpression expresion);
+LogExpressionsWithDates getHistory();
+
+Wealth
+===============================================================
+
+Items ???
+---------------------------------------
+Monomials getMonomials();
+History getHistory();
+
+Monomials : Collection
+---------------------------------------
+
+Monomial : Object ???
+---------------------------------------
+int getCoefficient();
+Item getItem();

@@ -2,7 +2,9 @@
 
 namespace Xmontero\Emperors\ModelBundle\Model\ObjectStorage;
 
-class ObjectStorageManager
+use Xmontero\Emperors\ModelBundle\Model\Base\Manager;
+
+class ObjectStorageManager extends Manager
 {
 	private $logger;
 	private $doctrine;

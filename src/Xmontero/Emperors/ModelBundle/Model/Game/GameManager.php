@@ -2,7 +2,9 @@
 
 namespace Xmontero\Emperors\ModelBundle\Model\Game;
 
-class GameManager
+use Xmontero\Emperors\ModelBundle\Model\Base\Manager;
+
+class GameManager extends Manager
 {
 	private $logger;
 	private $objectStorageManager;
