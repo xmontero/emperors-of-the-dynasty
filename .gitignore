@@ -17,4 +17,5 @@
 /.travis.yml
 /app/SymfonyRequirements.php
 /app/check.php
+/doc/generated/
 /tmp/
