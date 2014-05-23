@@ -278,7 +278,7 @@ class Board
 			throw new \InvalidArgumentException( 'Invalid json.' );
 		}
 		
-		$this->setSize( $desiredBoard->width, $desiredBoard->height );
+		$this->loadFromValidJson( $desiredBoard );
 	}
 	
 	public function save()
@@ -412,11 +412,89 @@ class Board
 	
 	// -- PRIVATE ------------------------------------------
 	
+	// Loading.
+	
+	private function loadFromValidJson( $desiredBoard )
+	{
+		$this->loadSizeFromValidJson( $desiredBoard );
+		$this->loadTilesFromValidJson( $desiredBoard );
+	}
+	
+	private function loadSizeFromValidJson( $desiredBoard )
+	{
+		$this->assertIsSet( isset( $desiredBoard->width ), 'width' );
+		$this->assertIsSet( isset( $desiredBoard->height ), 'height' );
+		
+		$this->setSize( $desiredBoard->width, $desiredBoard->height );
+	}
+	
+	private function loadTilesFromValidJson( $desiredBoard )
+	{
+		$this->assertIsSet( isset( $desiredBoard->tiles ), 'tiles' );
+		
+		$this->setTiles( $desiredBoard->tiles );
+	}
+	
 	private function setSize( $width, $height )
 	{
+		$this->assertType( $width, "integer" );
+		$this->assertType( $height, "integer" );
+		
 		$this->width = $width;
 		$this->height = $height;
 	}
+	
+	private function setTiles( $tiles )
+	{
+		$this->assertType( $tiles, "object" );
+		
+		for( $y = 1; $y <= $this->height; $y++ )
+		{
+			for( $x = 1; $x <= $this->width; $x++ )
+			{
+				$tileId = $this->buildTileIdFromCoordinates( $x, $y );
+				/*
+				$isset = isset( $tiles->{ $tileId } );
+				$this->assertIsSet( $isset, 'tiles->{' . $tileId . '}' );
+				
+				$tile = $tiles->{ $tileId };
+				*/
+			}
+		}
+	}
+	
+	// Assertions.
+	
+	private function assertIsSet( $setValue, $setKey )
+	{
+		if( ! $setValue )
+		{
+			throw new \RuntimeException( 'Error processing object. "' . $setKey . '" not set.' );
+		}
+	}
+	
+	private function assertType( $value, $expectedType )
+	{
+		$currentType = gettype( $value );
+		if( $currentType != $expectedType )
+		{
+			throw new \InvalidArgumentException( 'Expecting "' . $expectedType . '", got "' . $currentType . '".' );
+		}
+	}
+	
+	private function assertCoordinatesInBoard( $x, $y )
+	{
+		$this->assertType( $x, "integer" );
+		$this->assertType( $y, "integer" );
+		
+		if( ( $x < 1 ) || ( $x > $this->width ) || ( $y < 1 ) || ( $y > $this->height ) )
+		{
+			$msg = sprintf( 'Coordinates ( %d, %d ) out of bounds in a board of ( [ 1...%d ], [ 1...%d ] ).', $x, $y, $this->width, $this->height );
+			throw new \DomainException( $msg );
+		}
+	}
+	
+	// Row and column management.
 	
 	/*
 	private function createEmptyBoard()
@@ -452,6 +530,16 @@ class Board
 		}
 		
 		$column[ $desiredY ] = new Tile;
+	}
+	
+	// Utils.
+	
+	private function buildTileIdFromCoordinates( $x, $y )
+	{
+		$this->assertCoordinatesInBoard( $x, $y );
+		
+		$tileId = ( ( string )$x ) . '-' . ( ( string ) $y );
+		return $tileId;
 	}
 	
 	private function base26ToString( $x )

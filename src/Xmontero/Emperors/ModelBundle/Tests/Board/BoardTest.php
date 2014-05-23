@@ -406,12 +406,7 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	
 	public function testLoad()
 	{
-		$document = '
-		{
-			"width": 9,
-			"height": 12
-		}
-		';
+		$document = file_get_contents( __DIR__ . '/Data/BoardTestLoad.json' );
 		
 		$board = new Board;
 		$board->load( $document );
@@ -419,6 +414,15 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 9, $board->getWidth() );
 		$this->assertEquals( 12, $board->getHeight() );
 		$this->assertEquals( 0, $board->getPieces()->count() );
+	}
+	
+	public function testLoadNoTilesGeneratesException()
+	{
+		$document = file_get_contents( __DIR__ . '/Data/BoardTestLoadNoTilesGeneratesException.json' );
+		
+		$board = new Board;
+		$this->setExpectedException( 'RuntimeException' );
+		$board->load( $document );
 	}
 	
 	public function testSave()

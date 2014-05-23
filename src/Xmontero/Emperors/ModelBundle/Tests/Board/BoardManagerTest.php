@@ -28,11 +28,11 @@ class BoardManagerTest extends \PHPUnit_Framework_TestCase
 	
 	public function testLoadBoardFromJson()
 	{
-		$document = '{ "width": 4, "height": 8 }';
+		$document = file_get_contents( __DIR__ . '/Data/BoardTestLoad.json' );
 		$board = $this->sut->loadBoardFromJson( $document );
 		$this->assertInstanceOf( 'Xmontero\Emperors\ModelBundle\Model\Board\Board', $board );
-		$this->assertEquals( 4, $board->getWidth() );
-		$this->assertEquals( 8, $board->getHeight() );
+		$this->assertEquals( 9, $board->getWidth() );
+		$this->assertEquals( 12, $board->getHeight() );
 		$this->assertEquals( 0, $board->getPieces()->count() );
 	}
 	
