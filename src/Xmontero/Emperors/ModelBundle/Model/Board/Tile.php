@@ -7,15 +7,34 @@ use Xmontero\Emperors\ModelBundle\Model\Game\Pieces\Pieces;
 
 class Tile implements ITile
 {
+	private $offBoard;
 	private $properties;
 	private $visiblePieces;
 	private $hiddenPieces;
 	
 	public function __construct()
 	{
+		$this->setOffBoard();
 		$this->properties = new Base\Collection;
 		$this->visiblePieces = new Pieces;
 		$this->hiddenPieces = new Pieces;
+	}
+	
+	// OffBoard
+	
+	public function isOffBoard()
+	{
+		return $this->offBoard;
+	}
+	
+	public function setOnBoard()
+	{
+		$this->offBoard = false;
+	}
+	
+	public function setOffBoard()
+	{
+		$this->offBoard = true;
 	}
 	
 	// Properties

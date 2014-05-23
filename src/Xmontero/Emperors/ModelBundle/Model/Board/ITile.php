@@ -4,6 +4,11 @@ namespace Xmontero\Emperors\ModelBundle\Model\Board;
 
 interface ITile
 {
+	// OffBoard
+	public function isOffBoard();
+	public function setOnBoard();
+	public function setOffBoard();
+	
 	// Properties
 	public function getProperty( $key );
 	public function setProperty( $key, $value );
