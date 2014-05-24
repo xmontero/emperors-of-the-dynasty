@@ -5,17 +5,20 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TileTest extends \PHPUnit_Framework_TestCase
 {
-	public function testOffBoard()
+	public function testOffOnBoard()
 	{
 		$sut = new Tile;
 		
-		$this->assertTrue( $sut->isOffBoard() );
-		
-		$sut->setOnBoard();
 		$this->assertFalse( $sut->isOffBoard() );
+		$this->assertTrue( $sut->isOnBoard() );
 		
 		$sut->setOffBoard();
 		$this->assertTrue( $sut->isOffBoard() );
+		$this->assertFalse( $sut->isOnBoard() );
+		
+		$sut->setOnBoard();
+		$this->assertFalse( $sut->isOffBoard() );
+		$this->assertTrue( $sut->isOnBoard() );
 	}
 	
 	public function testValidProperty()

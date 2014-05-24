@@ -1,5 +1,13 @@
-<div class="tile {{ tile.property( 'class' ) }}">
+{% if tile.propertyExists( 'class' ) %}
+	{% set class = tile.property( 'class' ) %}
+{% else %}
+	{% set class = 'free' %}
+{% endif %}
+
+<div class="tile {{ class }}">
 	<div class="content">
-		{{ tile.property( 'text' ) }}
+		{% if tile.propertyExists( 'text' ) %}
+			{{ tile.property( 'text' ) }}
+		{% endif %}
 	</div>
 </div>

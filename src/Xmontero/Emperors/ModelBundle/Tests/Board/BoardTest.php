@@ -428,17 +428,23 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	public function testSave()
 	{
 		$board = new Board( 9, 12 );
+		
+		$board->getTile( 1, 1 )->setProperty( 'foo', 'bar' );
+		$board->getTile( 9, 12 )->setProperty( 'foo', 'bar' );
+		
 		$document = $board->saveToJson();
 		
 		$dummy = json_decode( $document );
 		
 		$this->assertEquals( 9, $dummy->width );
 		$this->assertEquals( 12, $dummy->height );
-
+		
 		$this->assertFalse( array_key_exists( '0-1', $dummy->tiles ) );
 		$this->assertFalse( array_key_exists( '1-0', $dummy->tiles ) );
 		$this->assertTrue( array_key_exists( '1-1', $dummy->tiles ) );
-
+		
+		$this->assertFalse( array_key_exists( '5-5', $dummy->tiles ) );
+		
 		$this->assertTrue( array_key_exists( '9-12', $dummy->tiles ) );
 		$this->assertFalse( array_key_exists( '10-12', $dummy->tiles ) );
 		$this->assertFalse( array_key_exists( '9-13', $dummy->tiles ) );

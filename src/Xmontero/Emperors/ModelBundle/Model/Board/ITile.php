@@ -4,10 +4,11 @@ namespace Xmontero\Emperors\ModelBundle\Model\Board;
 
 interface ITile
 {
-	// OffBoard
+	// Off/OnBoard
 	public function isOffBoard();
-	public function setOnBoard();
+	public function isOnBoard();
 	public function setOffBoard();
+	public function setOnBoard();
 	
 	// Properties
 	public function getProperty( $key );
@@ -25,6 +26,8 @@ interface ITile
 	public function pieceExists( IPiece $piece );
 	
 	// State
+	public function isInResetState();
+	public function reset();
+	public function loadFromObject( $documentObject );
 	public function saveToObject();
-	public function saveToJson();
 }

@@ -7,34 +7,36 @@ use Xmontero\Emperors\ModelBundle\Model\Game\Pieces\Pieces;
 
 class Tile implements ITile
 {
-	private $offBoard;
+	private $onBoard;
 	private $properties;
 	private $visiblePieces;
 	private $hiddenPieces;
 	
 	public function __construct()
 	{
-		$this->setOffBoard();
-		$this->properties = new Base\Collection;
-		$this->visiblePieces = new Pieces;
-		$this->hiddenPieces = new Pieces;
+		$this->reset();
 	}
 	
 	// OffBoard
 	
 	public function isOffBoard()
 	{
-		return $this->offBoard;
+		return ( ! $this->onBoard );
 	}
 	
-	public function setOnBoard()
+	public function isOnBoard()
 	{
-		$this->offBoard = false;
+		return $this->onBoard;
 	}
 	
 	public function setOffBoard()
 	{
-		$this->offBoard = true;
+		$this->onBoard = false;
+	}
+	
+	public function setOnBoard()
+	{
+		$this->onBoard = true;
 	}
 	
 	// Properties
@@ -132,6 +134,37 @@ class Tile implements ITile
 	
 	// State
 	
+	public function isInResetState()
+	{
+		$isOnBoard = $this->isOnBoard();
+		$thereAreNoProperties = ( $this->properties->count() == 0 );
+		$thereAreNoHiddenPieces = ( $this->hiddenPieces->count() == 0 );
+		$thereAreNoVisiblePieces = ( $this->visiblePieces->count() == 0 );
+		
+		$isInResetState =
+		(
+			   $isOnBoard
+			&& $thereAreNoProperties
+			&& $thereAreNoVisiblePieces
+			&& $thereAreNoHiddenPieces
+		);
+		
+		return $isInResetState;
+	}
+	
+	public function reset()
+	{
+		$this->setOnBoard();
+		$this->properties = new Base\Collection;
+		$this->visiblePieces = new Pieces;
+		$this->hiddenPieces = new Pieces;
+	}
+	
+	public function loadFromObject( $documentObject )
+	{
+		throw new \Exception( 'Not implemented.' );
+	}
+	
 	public function saveToObject()
 	{
 		$tile = new \StdClass();
@@ -143,11 +176,6 @@ class Tile implements ITile
 		}
 		
 		return $tile;
-	}
-	
-	public function saveToJson()
-	{
-		return json_encode( $this->saveObject() );
 	}
 	
 	// -- Private ---------------------------------------------------------//

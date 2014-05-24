@@ -214,9 +214,6 @@ class Board
 	{
 		$tile = $this->tileColumns[ $x ][ $y ];
 		
-		$tile->setProperty( 'class', 'free' );
-		$tile->setProperty( 'text', '*' );
-		
 		return $tile;
 	}
 	
@@ -321,8 +318,12 @@ class Board
 			for( $y = 1; $y <= $this->height; $y++ )
 			{
 				$tile = $this->getTile( $x, $y );
-				$tileId = $this->buildTileIdFromCoordinates( $x, $y );
-				$tiles[ $tileId ] = $tile->saveToObject();
+				
+				if( ! $tile->isInResetState() )
+				{
+					$tileId = $this->buildTileIdFromCoordinates( $x, $y );
+					$tiles[ $tileId ] = $tile->saveToObject();
+				}
 			}
 		}
 		
