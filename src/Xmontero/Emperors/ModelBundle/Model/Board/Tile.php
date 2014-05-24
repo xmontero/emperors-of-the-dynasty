@@ -173,11 +173,19 @@ class Tile implements ITile
 	public function saveToObjectDocument()
 	{
 		$tile = new \StdClass();
-		$tile->properties = array();
 		
-		foreach( $this->properties as $key => $value )
+		if( $this->properties->count() > 0 )
 		{
-			$tile->properties[] = array( $key, $value );
+			$tile->properties = array();
+			foreach( $this->properties as $key => $value )
+			{
+				$tile->properties[] = array( $key, $value );
+			}
+		}
+		
+		if( $this->isOffBoard() )
+		{
+			$tile->offBoard = true;
 		}
 		
 		return $tile;

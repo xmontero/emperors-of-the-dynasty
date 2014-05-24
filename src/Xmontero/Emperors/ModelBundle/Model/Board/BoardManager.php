@@ -26,4 +26,27 @@ class BoardManager extends Manager
 		
 		return $board;
 	}
+	
+	public function loadBoardFromTemplate( $boardTemplate )
+	{
+		if( $boardTemplate != 'uukhumaki' )
+		{
+			throw new \DomainException( 'Template "' . $boardTemplate . '"" not found.' );
+		}
+			
+		$board = new Board( 14, 14 );
+		
+		for( $i = 1; $i <= $board->getWidth(); $i++ )
+		{
+			if( ( $i != 5 ) && ( $i != 10 ) )
+			{
+				$board->getTile( $i, 1 )->setOffBoard();
+				$board->getTile( $i, $board->getHeight() )->setOffBoard();
+				$board->getTile( 1, $i )->setOffBoard();
+				$board->getTile( $board->getWidth(), $i )->setOffBoard();
+			}
+		}
+		
+		return $board;
+	}
 }
