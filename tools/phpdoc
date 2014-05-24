@@ -1,0 +1,1 @@
+bin/phpdoc run -d ./src -t ./doc/generated/api
