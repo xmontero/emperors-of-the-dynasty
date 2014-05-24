@@ -250,15 +250,15 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @dataProvider providerGetTileId
+	 * @dataProvider providerGetTileName
 	 */
-	public function testGetTileId( $width, $height, $x, $y, $tileId )
+	public function testGetTileName( $width, $height, $x, $y, $tileName )
 	{
 		$sut = new Board( $width, $height);
-		$this->assertEquals( $tileId, $sut->getTileId( $x, $y ) );
+		$this->assertEquals( $tileName, $sut->getTileName( $x, $y ) );
 	}
 	
-	public function providerGetTileId()
+	public function providerGetTileName()
 	{
 		return array
 		(
@@ -273,16 +273,16 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @dataProvider providerGetTileIdDomainException
+	 * @dataProvider providerGetTileNameDomainException
 	 */
-	public function testGetTileIdDomainException( $width, $height, $x, $y )
+	public function testGetTileNameDomainException( $width, $height, $x, $y )
 	{
 		$sut = new Board( $width, $height );
 		$this->setExpectedException( 'DomainException' );
-		$sut->getTileId( $x, $y );
+		$sut->getTileName( $x, $y );
 	}
 	
-	public function providerGetTileIdDomainException()
+	public function providerGetTileNameDomainException()
 	{
 		return array
 		(
@@ -428,13 +428,20 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	public function testSave()
 	{
 		$board = new Board( 9, 12 );
-		$document = $board->save();
+		$document = $board->saveToJson();
 		
 		$dummy = json_decode( $document );
 		
 		$this->assertEquals( 9, $dummy->width );
 		$this->assertEquals( 12, $dummy->height );
-		$this->assertEquals( 9 * 12, count( $dummy->tiles ) );
+
+		$this->assertFalse( array_key_exists( '0-1', $dummy->tiles ) );
+		$this->assertFalse( array_key_exists( '1-0', $dummy->tiles ) );
+		$this->assertTrue( array_key_exists( '1-1', $dummy->tiles ) );
+
+		$this->assertTrue( array_key_exists( '9-12', $dummy->tiles ) );
+		$this->assertFalse( array_key_exists( '10-12', $dummy->tiles ) );
+		$this->assertFalse( array_key_exists( '9-13', $dummy->tiles ) );
 	}
 	
 	public function testGetHiddenAndVisiblePieces()

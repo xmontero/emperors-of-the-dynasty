@@ -1,11 +1,37 @@
 <div class="board">
 	{% set height = board.height %}
 	{% set width = board.width %}
-	{% for y in 0..height %}
+	
+	<div class="tileRow">
+	
+		{# Origin #}
+		
+		{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" with { "tile": board.legacyOrigin } %}
+		
+		{# Horizontal ruler #}
+		
+		{% for x in 1..width %}
+			{% set tile = board.legacyHorizontalRuler( x ) %}
+			{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" with { "tile": tile } %}
+		{% endfor %}
+		
+	</div>
+	
+	{# Rows with data #}
+	
+	{% for y in 1..height %}
 		<div class="tileRow">
-			{% for x in 0..width %}
-				{% set tile = board.getTileOld( x, y ) %}
-				{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" %}
+			
+			{# Vertical ruler #}
+			
+			{% set tile = board.legacyVerticalRuler( y ) %}
+			{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" with { "tile": tile } %}
+			
+			{# Data #}
+			
+			{% for x in 1..width %}
+				{% set tile = board.getTile( x, y ) %}
+				{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" with { "tile": tile } %}
 			{% endfor %}
 		</div>
 	{% endfor %}

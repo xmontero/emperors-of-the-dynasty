@@ -16,7 +16,6 @@ class BoardManager extends Manager
 	public function createBoardFromScratch( $width, $height )
 	{
 		$board = new Board( $width, $height );
-		$board->oldLoad( $this->objectStorageManager, 1, $width, $height );
 		return $board;
 	}
 	

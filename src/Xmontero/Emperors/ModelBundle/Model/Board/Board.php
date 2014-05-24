@@ -19,177 +19,163 @@ class Board
 	public function __construct( $width = 0, $height = 0 )
 	{
 		$this->setSize( $width, $height );
-		//$this->createEmptyBoard();
+		$this->createEmptyBoard();
 		
-		$this->oldLoad( null, null, $width, $height );
+		//$this->oldLoad( null, null, $width, $height );
 	}
 	
 	public function oldLoad( $objectStorageManager, $turn, $width, $height )
 	{
 		$this->setSize( $width, $height );
 		
-		if( ! is_null( $objectStorageManager ) )
+		if( is_null( $objectStorageManager ) )
 		{
-			// Columns
+			throw new \RuntimeException;
+		}
+		
+		// Columns
+		
+		switch( $turn )
+		{
+			case 0:
 			
-			switch( $turn )
+				$prefix = 'old';
+				break;
+			
+			case 1:
+			
+				$prefix = 'current';
+				break;
+			
+			case 2:
+			
+				$prefix = 'next';
+				break;
+		}
+		
+		$xName = $prefix . 'X';
+		$yName = $prefix . 'Y';
+		$servedDynastyName = $prefix . 'ServedDynasty';
+		$experienceName = $prefix . 'Experience';
+		
+		// Tiles
+		
+		$tiles = array();
+		for( $x = 0; $x <= $this->width; $x++ )
+		{
+			$tiles[ $x ] = array();
+			for( $y = 0; $y <= $this->height; $y++ )
 			{
-				case 0:
-				
-					$prefix = 'old';
-					break;
-				
-				case 1:
-				
-					$prefix = 'current';
-					break;
-				
-				case 2:
-				
-					$prefix = 'next';
-					break;
+				$tile = new \StdClass;
+				$tile->class = 'free';
+				$tile->content = '';
+				$tiles[ $x ][ $y ] = $tile;
 			}
-			
-			$xName = $prefix . 'X';
-			$yName = $prefix . 'Y';
-			$servedDynastyName = $prefix . 'ServedDynasty';
-			$experienceName = $prefix . 'Experience';
-			
-			// Tiles
-			
-			$tiles = array();
-			for( $x = 0; $x <= $this->width; $x++ )
+		}
+		
+		$origin = $tiles[ 0 ][ 0 ];
+		$origin->class = 'origin';
+		
+		// Top header
+		for( $x = 1; $x <= $this->width; $x++ )
+		{
+			$tile = $tiles[ $x ][ 0 ];
+			$tile->class = 'top-header';
+			$tile->content = $x;
+		}
+		
+		// Left header
+		for( $y = 1; $y <= $this->height; $y++ )
+		{
+			$tile = $tiles[ 0 ][ $y ];
+			$tile->class = 'left-header';
+			$tile->content = chr( $y + ord( 'A' ) -1 );
+		}
+		
+		// Border
+		for( $i = 1; $i <= $this->width; $i++ )
+		{
+			if( ( $i != 5 ) && ( $i != 10 ) )
 			{
-				$tiles[ $x ] = array();
-				for( $y = 0; $y <= $this->height; $y++ )
+				$tile = $tiles[ $i ][ 1 ]->class = 'border';
+				$tile = $tiles[ $i ][ $this->height ]->class = 'border';
+				$tile = $tiles[ 1 ][ $i ]->class = 'border';
+				$tile = $tiles[ $this->width ][ $i ]->class = 'border';
+			}
+		}
+		
+		// Emperors
+		$emperors = array();
+		for( $i = 1; $i <= 8; $i++ )
+		{
+			$objectId = 'emperor-' . $i;
+			
+			$emperor = $objectStorageManager->getObjectById( $objectId );
+			
+			$x = $emperor[ $xName ];
+			$y = $emperor[ $yName ];
+			
+			$tile = $tiles[ $x ][ $y ];
+			$tile->class = 'emperor-' . $i;
+			$tile->content = 'E' . $i;
+			
+			$emperors[] = $emperor;
+		}
+		
+		// Pawns
+		$pawns = array();
+		for( $player = 1; $player <= 8; $player++ )
+		{
+			for( $piece = 1; $piece <= 4; $piece++ )
+			{
+				$objectId = 'pawn-' . $player . '-' . $piece;
+				
+				$pawn = $objectStorageManager->getObjectById( $objectId );
+				
+				if( $pawn[ 'blob' ] != '**' )
 				{
-					$tile = new \StdClass;
-					$tile->class = 'free';
-					$tile->content = '';
-					$tiles[ $x ][ $y ] = $tile;
-				}
-			}
-			
-			$origin = $tiles[ 0 ][ 0 ];
-			$origin->class = 'origin';
-			
-			// Top header
-			for( $x = 1; $x <= $this->width; $x++ )
-			{
-				$tile = $tiles[ $x ][ 0 ];
-				$tile->class = 'top-header';
-				$tile->content = $x;
-			}
-			
-			// Left header
-			for( $y = 1; $y <= $this->height; $y++ )
-			{
-				$tile = $tiles[ 0 ][ $y ];
-				$tile->class = 'left-header';
-				$tile->content = chr( $y + ord( 'A' ) -1 );
-			}
-			
-			// Border
-			for( $i = 1; $i <= $this->width; $i++ )
-			{
-				if( ( $i != 5 ) && ( $i != 10 ) )
-				{
-					$tile = $tiles[ $i ][ 1 ]->class = 'border';
-					$tile = $tiles[ $i ][ $this->height ]->class = 'border';
-					$tile = $tiles[ 1 ][ $i ]->class = 'border';
-					$tile = $tiles[ $this->width ][ $i ]->class = 'border';
-				}
-			}
-			
-			// Emperors
-			$emperors = array();
-			for( $i = 1; $i <= 8; $i++ )
-			{
-				$objectId = 'emperor-' . $i;
-				
-				$emperor = $objectStorageManager->getObjectById( $objectId );
-				
-				$x = $emperor[ $xName ];
-				$y = $emperor[ $yName ];
-				
-				$tile = $tiles[ $x ][ $y ];
-				$tile->class = 'emperor-' . $i;
-				$tile->content = 'E' . $i;
-				
-				$emperors[] = $emperor;
-			}
-			
-			// Pawns
-			$pawns = array();
-			for( $player = 1; $player <= 8; $player++ )
-			{
-				for( $piece = 1; $piece <= 4; $piece++ )
-				{
-					$objectId = 'pawn-' . $player . '-' . $piece;
+					$x = $pawn[ $xName ];
+					$y = $pawn[ $yName ];
 					
-					$pawn = $objectStorageManager->getObjectById( $objectId );
-					
-					if( $pawn[ 'blob' ] != '**' )
-					{
-						$x = $pawn[ $xName ];
-						$y = $pawn[ $yName ];
-						
-						$specialClass = ( $pawn[ 'blob' ] == '*' ) ? 'special ' : '';
-						
-						$tile = $tiles[ $x ][ $y ];
-						$tile->class = $specialClass . 'pawn-' . $pawn[ $servedDynastyName ];
-						$tile->content = 'P' . $player . $piece;
-						
-						$pawns[] = $pawn;
-					}
-				}
-			}
-			
-			// Chests
-			$chests = array();
-			for( $i = 1; $i <= 4; $i++ )
-			{
-				$objectId = 'chest-' . $i;
-				
-				$chest = $objectStorageManager->getObjectById( $objectId );
-				
-				if( $chest[ 'blob' ] != '**' )
-				{
-					$x = $chest[ $xName ];
-					$y = $chest[ $yName ];
+					$specialClass = ( $pawn[ 'blob' ] == '*' ) ? 'special ' : '';
 					
 					$tile = $tiles[ $x ][ $y ];
-					$tile->class = 'chest-' . $i;
-					$tile->content = 'C' . chr( $i + ord( 'A' ) - 1 );
+					$tile->class = $specialClass . 'pawn-' . $pawn[ $servedDynastyName ];
+					$tile->content = 'P' . $player . $piece;
 					
-					$chests[] = $chest;
+					$pawns[] = $pawn;
 				}
 			}
-			
-			// Store
-			
-			$this->objectStorageManager = $objectStorageManager;
-			$this->emperors = $emperors;
-			$this->pawns = $pawns;
-			$this->chests = $chests;
-			$this->tiles = $tiles;
-			
 		}
-		else
+		
+		// Chests
+		$chests = array();
+		for( $i = 1; $i <= 4; $i++ )
 		{
-			$tileColumns = array();
-			for( $x = 0; $x <= $this->width; $x++ )
-			{
-				$tileColumns[ $x ] = array();
-				for( $y = 0; $y <= $this->height; $y++ )
-				{
-					$tile = new Tile;
-					$tileColumns[ $x ][ $y ] = $tile;
-				}
-			}
+			$objectId = 'chest-' . $i;
 			
-			$this->tileColumns = $tileColumns;
+			$chest = $objectStorageManager->getObjectById( $objectId );
+			
+			if( $chest[ 'blob' ] != '**' )
+			{
+				$x = $chest[ $xName ];
+				$y = $chest[ $yName ];
+				
+				$tile = $tiles[ $x ][ $y ];
+				$tile->class = 'chest-' . $i;
+				$tile->content = 'C' . chr( $i + ord( 'A' ) - 1 );
+				
+				$chests[] = $chest;
+			}
 		}
+		
+		// Store
+		
+		$this->objectStorageManager = $objectStorageManager;
+		$this->emperors = $emperors;
+		$this->pawns = $pawns;
+		$this->chests = $chests;
+		$this->tiles = $tiles;
 	}
 	
 	public function getTileOld( $x, $y )
@@ -197,9 +183,41 @@ class Board
 		return $this->tiles[ $x ][ $y ];
 	}
 	
+	public function getLegacyOrigin()
+	{
+		$tile = new Tile;
+		$tile->setProperty( 'class', 'origin' );
+		$tile->setProperty( 'text', '' );
+		
+		return $tile;
+	}
+	
+	public function getLegacyHorizontalRuler( $x )
+	{
+		$tile = new Tile;
+		$tile->setProperty( 'class', 'top-header' );
+		$tile->setProperty( 'text', $this->getColumnId( $x ) );
+		
+		return $tile;
+	}
+	
+	public function getLegacyVerticalRuler( $y )
+	{
+		$tile = new Tile;
+		$tile->setProperty( 'class', 'left-header' );
+		$tile->setProperty( 'text', $this->getRowId( $y ) );
+		
+		return $tile;
+	}
+	
 	public function getTile( $x, $y )
 	{
-		return $this->tileColumns[ $x ][ $y ];
+		$tile = $this->tileColumns[ $x ][ $y ];
+		
+		$tile->setProperty( 'class', 'free' );
+		$tile->setProperty( 'text', '*' );
+		
+		return $tile;
 	}
 	
 	public function getWidth()
@@ -281,7 +299,7 @@ class Board
 		$this->loadFromValidJson( $desiredBoard );
 	}
 	
-	public function save()
+	public function saveToJson()
 	{
 		$board = new \StdClass;
 		
@@ -298,6 +316,19 @@ class Board
 	{
 		$tiles = array();
 		
+		for( $x = 1; $x <= $this->width; $x++ )
+		{
+			for( $y = 1; $y <= $this->height; $y++ )
+			{
+				$tile = $this->getTile( $x, $y );
+				$tileId = $this->buildTileIdFromCoordinates( $x, $y );
+				$tiles[ $tileId ] = $tile->saveToObject();
+			}
+		}
+		
+		//var_dump($tiles);
+		
+		/*
 		$headerColumn = true;
 		foreach( $this->tileColumns as $column )
 		{
@@ -323,6 +354,7 @@ class Board
 				}
 			}
 		}
+		*/
 		
 		return $tiles;
 	}
@@ -364,7 +396,7 @@ class Board
 		$this->height++;
 	}
 	
-	public function getTileId( $x, $y )
+	public function getTileName( $x, $y )
 	{
 		$columnId = $this->getColumnId( $x );
 		$rowId = $this->getRowId( $y );
@@ -496,16 +528,28 @@ class Board
 	
 	// Row and column management.
 	
-	/*
 	private function createEmptyBoard()
 	{
+		$tileColumns = array();
+		for( $x = 0; $x <= $this->width; $x++ )
+		{
+			$tileColumns[ $x ] = array();
+			for( $y = 0; $y <= $this->height; $y++ )
+			{
+				$tile = new Tile;
+				$tileColumns[ $x ][ $y ] = $tile;
+			}
+		}
+		
+		$this->tileColumns = $tileColumns;
+		/*
 		for( $x = 1; $x <= $this->width; $x++ )
 		{
 			$column = $this->createEmptyColumn();
 			$this->tileColumns[] = $column;
 		}
+		*/
 	}
-	*/
 	
 	private function createEmptyColumn()
 	{

@@ -65,7 +65,7 @@ class Tile implements ITile
 	
 	// Pieces
 	
-	// Always avaiable.
+	// Always available.
 	
 	public function getVisiblePieces()
 	{
