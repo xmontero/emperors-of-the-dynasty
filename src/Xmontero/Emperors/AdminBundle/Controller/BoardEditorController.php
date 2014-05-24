@@ -13,6 +13,7 @@ class BoardEditorController extends Controller
 		$scope = array();
 		
 		$board = $boardManager->createBoardFromScratch( 14, 14 );
+		$board->getTile( 1, 1 )->setOffBoard();
 		$scope[ 'board' ] = $board;
 		
 		return $this->render( 'XmonteroEmperorsAdminBundle:Pages/BoardEditor:editor.html.twig', $scope );

@@ -28,6 +28,6 @@ interface ITile
 	// State
 	public function isInResetState();
 	public function reset();
-	public function loadFromObject( $documentObject );
-	public function saveToObject();
+	public function loadFromObjectDocument( $objectDocument );
+	public function saveToObjectDocument();
 }

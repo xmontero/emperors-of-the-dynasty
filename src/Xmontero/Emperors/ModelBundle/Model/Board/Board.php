@@ -19,9 +19,6 @@ class Board
 	public function __construct( $width = 0, $height = 0 )
 	{
 		$this->setSize( $width, $height );
-		$this->createEmptyBoard();
-		
-		//$this->oldLoad( null, null, $width, $height );
 	}
 	
 	public function oldLoad( $objectStorageManager, $turn, $width, $height )
@@ -61,35 +58,16 @@ class Board
 		// Tiles
 		
 		$tiles = array();
-		for( $x = 0; $x <= $this->width; $x++ )
+		for( $x = 1; $x <= $this->width; $x++ )
 		{
 			$tiles[ $x ] = array();
-			for( $y = 0; $y <= $this->height; $y++ )
+			for( $y = 1; $y <= $this->height; $y++ )
 			{
 				$tile = new \StdClass;
 				$tile->class = 'free';
 				$tile->content = '';
 				$tiles[ $x ][ $y ] = $tile;
 			}
-		}
-		
-		$origin = $tiles[ 0 ][ 0 ];
-		$origin->class = 'origin';
-		
-		// Top header
-		for( $x = 1; $x <= $this->width; $x++ )
-		{
-			$tile = $tiles[ $x ][ 0 ];
-			$tile->class = 'top-header';
-			$tile->content = $x;
-		}
-		
-		// Left header
-		for( $y = 1; $y <= $this->height; $y++ )
-		{
-			$tile = $tiles[ 0 ][ $y ];
-			$tile->class = 'left-header';
-			$tile->content = chr( $y + ord( 'A' ) -1 );
 		}
 		
 		// Border
@@ -176,38 +154,6 @@ class Board
 		$this->pawns = $pawns;
 		$this->chests = $chests;
 		$this->tiles = $tiles;
-	}
-	
-	public function getTileOld( $x, $y )
-	{
-		return $this->tiles[ $x ][ $y ];
-	}
-	
-	public function getLegacyOrigin()
-	{
-		$tile = new Tile;
-		$tile->setProperty( 'class', 'origin' );
-		$tile->setProperty( 'text', '' );
-		
-		return $tile;
-	}
-	
-	public function getLegacyHorizontalRuler( $x )
-	{
-		$tile = new Tile;
-		$tile->setProperty( 'class', 'top-header' );
-		$tile->setProperty( 'text', $this->getColumnId( $x ) );
-		
-		return $tile;
-	}
-	
-	public function getLegacyVerticalRuler( $y )
-	{
-		$tile = new Tile;
-		$tile->setProperty( 'class', 'left-header' );
-		$tile->setProperty( 'text', $this->getRowId( $y ) );
-		
-		return $tile;
 	}
 	
 	public function getTile( $x, $y )
@@ -345,7 +291,7 @@ class Board
 				if( ! $tile->isInResetState() )
 				{
 					$tileId = $this->buildTileIdFromCoordinates( $x, $y );
-					$tiles[ $tileId ] = $tile->saveToObject();
+					$tiles[ $tileId ] = $tile->saveToObjectDocument();
 				}
 			}
 		}
@@ -488,7 +434,7 @@ class Board
 	{
 		if( isset( $desiredBoard->tiles ) )
 		{
-			$this->setTiles( $desiredBoard->tiles );
+			$this->loadTilesFromExistingObjectDocument( $desiredBoard->tiles );
 		}
 		else
 		{
@@ -496,16 +442,7 @@ class Board
 		}
 	}
 	
-	private function setSize( $width, $height )
-	{
-		$this->assertType( $width, "integer" );
-		$this->assertType( $height, "integer" );
-		
-		$this->width = $width;
-		$this->height = $height;
-	}
-	
-	private function setTiles( $tiles )
+	private function loadTilesFromExistingObjectDocument( $tiles )
 	{
 		$this->assertType( $tiles, "object" );
 		
@@ -514,14 +451,29 @@ class Board
 			for( $x = 1; $x <= $this->width; $x++ )
 			{
 				$tileId = $this->buildTileIdFromCoordinates( $x, $y );
-				/*
-				$isset = isset( $tiles->{ $tileId } );
-				$this->assertIsSet( $isset, 'tiles->{' . $tileId . '}' );
 				
-				$tile = $tiles->{ $tileId };
-				*/
+				if( isset( $tiles->{ $tileId } ) )
+				{
+					$tile = $this->getTile( $x, $y );
+					$tileObjectDocument = $tiles->{ $tileId };
+					
+					$tile->loadFromObjectDocument( $tileObjectDocument );
+				}
 			}
 		}
+	}
+	
+	// Size.
+	
+	private function setSize( $width, $height )
+	{
+		$this->assertType( $width, "integer" );
+		$this->assertType( $height, "integer" );
+		
+		$this->width = $width;
+		$this->height = $height;
+		
+		$this->createEmptyBoard();
 	}
 	
 	// Assertions.

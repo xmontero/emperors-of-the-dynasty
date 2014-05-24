@@ -160,12 +160,17 @@ class Tile implements ITile
 		$this->hiddenPieces = new Pieces;
 	}
 	
-	public function loadFromObject( $documentObject )
+	public function loadFromObjectDocument( $objectDocument )
 	{
-		throw new \Exception( 'Not implemented.' );
+		$this->reset();
+		
+		if( isset( $objectDocument->offBoard ) )
+		{
+			$this->setOffBoard();
+		}
 	}
 	
-	public function saveToObject()
+	public function saveToObjectDocument()
 	{
 		$tile = new \StdClass();
 		$tile->properties = array();

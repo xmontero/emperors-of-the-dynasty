@@ -1,7 +1,7 @@
 {% if tile.propertyExists( 'class' ) %}
 	{% set class = tile.property( 'class' ) %}
 {% else %}
-	{% set class = 'free' %}
+	{% set class = tile.onBoard ? 'free' : 'border' %}
 {% endif %}
 
 <div class="tile {{ class }}">

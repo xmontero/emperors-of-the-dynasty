@@ -10,56 +10,56 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 {
 	public function testBoardCreationWidthAndHeight()
 	{
-		$sut = new Board( 10, 5 );
-		$this->assertEquals( 10, $sut->getWidth() );
-		$this->assertEquals( 5, $sut->getHeight() );
+		$sutBoard = new Board( 10, 5 );
+		$this->assertEquals( 10, $sutBoard->getWidth() );
+		$this->assertEquals( 5, $sutBoard->getHeight() );
 	}
 	
 	public function testGetTile()
 	{
-		$sut = new Board( 10, 5 );
-		$this->assertInstanceOf( get_class( new Tile ), $sut->getTile( 3, 3 ) );
-		// PHP 5.5 => $this->assertInstanceOf( Tile::class, $sut->getTile( 3, 3 ) );
+		$sutBoard = new Board( 10, 5 );
+		$this->assertInstanceOf( get_class( new Tile ), $sutBoard->getTile( 3, 3 ) );
+		// PHP 5.5 => $this->assertInstanceOf( Tile::class, $sutBoard->getTile( 3, 3 ) );
 	}
 	
 	public function testAddColumnAt()
 	{
 		$dummyKey = 'myDummyKey';
-		$sut = new Board( 3, 3 );
+		$sutBoard = new Board( 3, 3 );
 		
-		$sut->getTile( 1, 1 )->setProperty( $dummyKey, 'a' );
-		$sut->getTile( 1, 2 )->setProperty( $dummyKey, 'b' );
-		$sut->getTile( 2, 1 )->setProperty( $dummyKey, 'c' );
-		$sut->getTile( 2, 2 )->setProperty( $dummyKey, 'd' );
+		$sutBoard->getTile( 1, 1 )->setProperty( $dummyKey, 'a' );
+		$sutBoard->getTile( 1, 2 )->setProperty( $dummyKey, 'b' );
+		$sutBoard->getTile( 2, 1 )->setProperty( $dummyKey, 'c' );
+		$sutBoard->getTile( 2, 2 )->setProperty( $dummyKey, 'd' );
 		
-		$this->assertEquals( 3, $sut->getWidth() );
+		$this->assertEquals( 3, $sutBoard->getWidth() );
 		
-		$sut->addColumnAt( 2 );
-		$this->assertEquals( 4, $sut->getWidth() );
+		$sutBoard->addColumnAt( 2 );
+		$this->assertEquals( 4, $sutBoard->getWidth() );
 		
-		$this->assertFalse( $sut->getTile( 2, 1 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 2, 2 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 2, 1 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 2, 2 )->propertyExists( $dummyKey ) );
 		
-		$this->assertEquals( 'a', $sut->getTile( 1, 1 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'b', $sut->getTile( 1, 2 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'c', $sut->getTile( 3, 1 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'd', $sut->getTile( 3, 2 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'a', $sutBoard->getTile( 1, 1 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'b', $sutBoard->getTile( 1, 2 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'c', $sutBoard->getTile( 3, 1 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'd', $sutBoard->getTile( 3, 2 )->getProperty( $dummyKey ) );
 	}
 	
 	public function testAddColumnAtBig()
 	{
 		$dummyKey = 'myDummyKey';
-		$sut = new Board( 10, 5 );
+		$sutBoard = new Board( 10, 5 );
 		
-		$sut->getTile( 1, 1 )->setProperty( $dummyKey, 'a' );
-		$sut->getTile( 1, 3 )->setProperty( $dummyKey, 'b' );
-		$sut->getTile( 1, 5 )->setProperty( $dummyKey, 'c' );
-		$sut->getTile( 3, 1 )->setProperty( $dummyKey, 'd' );
-		$sut->getTile( 3, 3 )->setProperty( $dummyKey, 'e' );
-		$sut->getTile( 3, 5 )->setProperty( $dummyKey, 'f' );
-		$sut->getTile( 10, 1 )->setProperty( $dummyKey, 'g' );
-		$sut->getTile( 10, 3 )->setProperty( $dummyKey, 'h' );
-		$sut->getTile( 10, 5 )->setProperty( $dummyKey, 'i' );
+		$sutBoard->getTile( 1, 1 )->setProperty( $dummyKey, 'a' );
+		$sutBoard->getTile( 1, 3 )->setProperty( $dummyKey, 'b' );
+		$sutBoard->getTile( 1, 5 )->setProperty( $dummyKey, 'c' );
+		$sutBoard->getTile( 3, 1 )->setProperty( $dummyKey, 'd' );
+		$sutBoard->getTile( 3, 3 )->setProperty( $dummyKey, 'e' );
+		$sutBoard->getTile( 3, 5 )->setProperty( $dummyKey, 'f' );
+		$sutBoard->getTile( 10, 1 )->setProperty( $dummyKey, 'g' );
+		$sutBoard->getTile( 10, 3 )->setProperty( $dummyKey, 'h' );
+		$sutBoard->getTile( 10, 5 )->setProperty( $dummyKey, 'i' );
 		
 		//     1   2   3   4   5   6   7   8   9  10
 		//   +---+---+---+---+---+---+---+---+---+---+
@@ -74,16 +74,16 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 		// 5 | c |   | f |   |   |   |   |   |   | i |
 		//   +---+---+---+---+---+---+---+---+---+---+
 		
-		$this->assertEquals( 10, $sut->getWidth() );
+		$this->assertEquals( 10, $sutBoard->getWidth() );
 		
-		$sut->addColumnAt( 11 );
-		$this->assertEquals( 11, $sut->getWidth() );
+		$sutBoard->addColumnAt( 11 );
+		$this->assertEquals( 11, $sutBoard->getWidth() );
 		
-		$sut->addColumnAt( 4 );
-		$this->assertEquals( 12, $sut->getWidth() );
+		$sutBoard->addColumnAt( 4 );
+		$this->assertEquals( 12, $sutBoard->getWidth() );
 		
-		$sut->addColumnAt( 1 );
-		$this->assertEquals( 13, $sut->getWidth() );
+		$sutBoard->addColumnAt( 1 );
+		$this->assertEquals( 13, $sutBoard->getWidth() );
 		
 		//     1   2   3   4   5   6   7   8   9  10  11  12  13
 		//   +---+---+---+---+---+---+---+---+---+---+---+---+---+
@@ -98,79 +98,79 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 		// 5 | x | c |   | f | x |   |   |   |   |   |   | i | x |
 		//   +---+---+---+---+---+---+---+---+---+---+---+---+---+
 		
-		$this->assertFalse( $sut->getTile( 1, 1 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 1, 3 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 1, 5 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 5, 1 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 5, 3 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 5, 5 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 13, 1 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 13, 3 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 13, 5 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 1, 1 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 1, 3 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 1, 5 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 5, 1 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 5, 3 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 5, 5 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 13, 1 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 13, 3 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 13, 5 )->propertyExists( $dummyKey ) );
 		
-		$this->assertEquals( 'a', $sut->getTile( 2, 1 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'b', $sut->getTile( 2, 3 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'c', $sut->getTile( 2, 5 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'd', $sut->getTile( 4, 1 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'e', $sut->getTile( 4, 3 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'f', $sut->getTile( 4, 5 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'g', $sut->getTile( 12, 1 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'h', $sut->getTile( 12, 3 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'i', $sut->getTile( 12, 5 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'a', $sutBoard->getTile( 2, 1 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'b', $sutBoard->getTile( 2, 3 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'c', $sutBoard->getTile( 2, 5 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'd', $sutBoard->getTile( 4, 1 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'e', $sutBoard->getTile( 4, 3 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'f', $sutBoard->getTile( 4, 5 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'g', $sutBoard->getTile( 12, 1 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'h', $sutBoard->getTile( 12, 3 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'i', $sutBoard->getTile( 12, 5 )->getProperty( $dummyKey ) );
 	}
 	
 	public function testAddColumnIndexTooLow()
 	{
-		$sut = new Board( 10, 5 );
+		$sutBoard = new Board( 10, 5 );
 		$this->setExpectedException( 'DomainException' );
-		$sut->addColumnAt( 0 );
+		$sutBoard->addColumnAt( 0 );
 	}
 	
 	public function testAddColumnIndexTooHigh()
 	{
-		$sut = new Board( 10, 5 );
+		$sutBoard = new Board( 10, 5 );
 		$this->setExpectedException( 'DomainException' );
-		$sut->addColumnAt( 12 );
+		$sutBoard->addColumnAt( 12 );
 	}
 	
 	public function testAddRowAt()
 	{
 		$dummyKey = 'myDummyKey';
-		$sut = new Board( 3, 3 );
+		$sutBoard = new Board( 3, 3 );
 		
-		$sut->getTile( 1, 1 )->setProperty( $dummyKey, 'a' );
-		$sut->getTile( 1, 2 )->setProperty( $dummyKey, 'b' );
-		$sut->getTile( 2, 1 )->setProperty( $dummyKey, 'c' );
-		$sut->getTile( 2, 2 )->setProperty( $dummyKey, 'd' );
+		$sutBoard->getTile( 1, 1 )->setProperty( $dummyKey, 'a' );
+		$sutBoard->getTile( 1, 2 )->setProperty( $dummyKey, 'b' );
+		$sutBoard->getTile( 2, 1 )->setProperty( $dummyKey, 'c' );
+		$sutBoard->getTile( 2, 2 )->setProperty( $dummyKey, 'd' );
 		
-		$this->assertEquals( 3, $sut->getHeight() );
+		$this->assertEquals( 3, $sutBoard->getHeight() );
 		
-		$sut->addRowAt( 2 );
-		$this->assertEquals( 4, $sut->getHeight() );
+		$sutBoard->addRowAt( 2 );
+		$this->assertEquals( 4, $sutBoard->getHeight() );
 		
-		$this->assertFalse( $sut->getTile( 1, 2 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 2, 2 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 1, 2 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 2, 2 )->propertyExists( $dummyKey ) );
 		
-		$this->assertEquals( 'a', $sut->getTile( 1, 1 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'b', $sut->getTile( 1, 3 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'c', $sut->getTile( 2, 1 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'd', $sut->getTile( 2, 3 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'a', $sutBoard->getTile( 1, 1 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'b', $sutBoard->getTile( 1, 3 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'c', $sutBoard->getTile( 2, 1 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'd', $sutBoard->getTile( 2, 3 )->getProperty( $dummyKey ) );
 	}
 	
 	public function testAddRowAtBig()
 	{
 		$dummyKey = 'myDummyKey';
-		$sut = new Board( 10, 5 );
+		$sutBoard = new Board( 10, 5 );
 		
-		$sut->getTile( 1, 1 )->setProperty( $dummyKey, 'a' );
-		$sut->getTile( 1, 3 )->setProperty( $dummyKey, 'b' );
-		$sut->getTile( 1, 5 )->setProperty( $dummyKey, 'c' );
-		$sut->getTile( 3, 1 )->setProperty( $dummyKey, 'd' );
-		$sut->getTile( 3, 3 )->setProperty( $dummyKey, 'e' );
-		$sut->getTile( 3, 5 )->setProperty( $dummyKey, 'f' );
-		$sut->getTile( 10, 1 )->setProperty( $dummyKey, 'g' );
-		$sut->getTile( 10, 3 )->setProperty( $dummyKey, 'h' );
-		$sut->getTile( 10, 5 )->setProperty( $dummyKey, 'i' );
+		$sutBoard->getTile( 1, 1 )->setProperty( $dummyKey, 'a' );
+		$sutBoard->getTile( 1, 3 )->setProperty( $dummyKey, 'b' );
+		$sutBoard->getTile( 1, 5 )->setProperty( $dummyKey, 'c' );
+		$sutBoard->getTile( 3, 1 )->setProperty( $dummyKey, 'd' );
+		$sutBoard->getTile( 3, 3 )->setProperty( $dummyKey, 'e' );
+		$sutBoard->getTile( 3, 5 )->setProperty( $dummyKey, 'f' );
+		$sutBoard->getTile( 10, 1 )->setProperty( $dummyKey, 'g' );
+		$sutBoard->getTile( 10, 3 )->setProperty( $dummyKey, 'h' );
+		$sutBoard->getTile( 10, 5 )->setProperty( $dummyKey, 'i' );
 		
 		//     1   2   3   4   5   6   7   8   9  10
 		//   +---+---+---+---+---+---+---+---+---+---+
@@ -185,16 +185,16 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 		// 5 | c |   | f |   |   |   |   |   |   | i |
 		//   +---+---+---+---+---+---+---+---+---+---+
 		
-		$this->assertEquals( 5, $sut->getHeight() );
+		$this->assertEquals( 5, $sutBoard->getHeight() );
 		
-		$sut->addRowAt( 6 );
-		$this->assertEquals( 6, $sut->getHeight() );
+		$sutBoard->addRowAt( 6 );
+		$this->assertEquals( 6, $sutBoard->getHeight() );
 		
-		$sut->addRowAt( 4 );
-		$this->assertEquals( 7, $sut->getHeight() );
+		$sutBoard->addRowAt( 4 );
+		$this->assertEquals( 7, $sutBoard->getHeight() );
 		
-		$sut->addRowAt( 1 );
-		$this->assertEquals( 8, $sut->getHeight() );
+		$sutBoard->addRowAt( 1 );
+		$this->assertEquals( 8, $sutBoard->getHeight() );
 		
 		//     1   2   3   4   5   6   7   8   9  10
 		//   +---+---+---+---+---+---+---+---+---+---+
@@ -215,39 +215,39 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 		// 8 | x | x | x | x | x | x | x | x | x | x |
 		//   +---+---+---+---+---+---+---+---+---+---+
 		
-		$this->assertFalse( $sut->getTile( 1, 1 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 1, 5 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 1, 8 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 3, 1 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 3, 5 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 3, 8 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 10, 1 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 10, 5 )->propertyExists( $dummyKey ) );
-		$this->assertFalse( $sut->getTile( 10, 8 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 1, 1 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 1, 5 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 1, 8 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 3, 1 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 3, 5 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 3, 8 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 10, 1 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 10, 5 )->propertyExists( $dummyKey ) );
+		$this->assertFalse( $sutBoard->getTile( 10, 8 )->propertyExists( $dummyKey ) );
 		
-		$this->assertEquals( 'a', $sut->getTile( 1, 2 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'b', $sut->getTile( 1, 4 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'c', $sut->getTile( 1, 7 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'd', $sut->getTile( 3, 2 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'e', $sut->getTile( 3, 4 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'f', $sut->getTile( 3, 7 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'g', $sut->getTile( 10, 2 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'h', $sut->getTile( 10, 4 )->getProperty( $dummyKey ) );
-		$this->assertEquals( 'i', $sut->getTile( 10, 7 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'a', $sutBoard->getTile( 1, 2 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'b', $sutBoard->getTile( 1, 4 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'c', $sutBoard->getTile( 1, 7 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'd', $sutBoard->getTile( 3, 2 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'e', $sutBoard->getTile( 3, 4 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'f', $sutBoard->getTile( 3, 7 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'g', $sutBoard->getTile( 10, 2 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'h', $sutBoard->getTile( 10, 4 )->getProperty( $dummyKey ) );
+		$this->assertEquals( 'i', $sutBoard->getTile( 10, 7 )->getProperty( $dummyKey ) );
 	}
 	
 	public function testAddRowIndexTooLow()
 	{
-		$sut = new Board( 10, 5 );
+		$sutBoard = new Board( 10, 5 );
 		$this->setExpectedException( 'DomainException' );
-		$sut->addRowAt( 0 );
+		$sutBoard->addRowAt( 0 );
 	}
 	
 	public function testAddRowIndexTooHigh()
 	{
-		$sut = new Board( 10, 5 );
+		$sutBoard = new Board( 10, 5 );
 		$this->setExpectedException( 'DomainException' );
-		$sut->addRowAt( 7 );
+		$sutBoard->addRowAt( 7 );
 	}
 	
 	/**
@@ -255,8 +255,8 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetTileName( $width, $height, $x, $y, $tileName )
 	{
-		$sut = new Board( $width, $height);
-		$this->assertEquals( $tileName, $sut->getTileName( $x, $y ) );
+		$sutBoard = new Board( $width, $height);
+		$this->assertEquals( $tileName, $sutBoard->getTileName( $x, $y ) );
 	}
 	
 	public function providerGetTileName()
@@ -278,9 +278,9 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetTileNameDomainException( $width, $height, $x, $y )
 	{
-		$sut = new Board( $width, $height );
+		$sutBoard = new Board( $width, $height );
 		$this->setExpectedException( 'DomainException' );
-		$sut->getTileName( $x, $y );
+		$sutBoard->getTileName( $x, $y );
 	}
 	
 	public function providerGetTileNameDomainException()
@@ -297,8 +297,8 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetRowId( $width, $height, $y, $expectedRowId )
 	{
-		$sut = new Board( $width, $height);
-		$actualRowId = $sut->getRowId( $y );
+		$sutBoard = new Board( $width, $height);
+		$actualRowId = $sutBoard->getRowId( $y );
 		$this->assertInternalType( 'string', $actualRowId );
 		$this->assertEquals( $expectedRowId, $actualRowId );
 	}
@@ -316,9 +316,9 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetRowIdDomainException( $width, $height, $y )
 	{
-		$sut = new Board( $width, $height);
+		$sutBoard = new Board( $width, $height);
 		$this->setExpectedException( 'DomainException' );
-		$sut->getRowId( $y );
+		$sutBoard->getRowId( $y );
 	}
 	
 	public function providerGetRowIdDomainException()
@@ -335,14 +335,14 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetColumnId( $width, $height, $tests )
 	{
-		$sut = new Board( $width, $height);
+		$sutBoard = new Board( $width, $height);
 		
 		foreach( $tests as $test )
 		{
 			$x = $test[ 0 ];
 			$expectedColumnId = $test[ 1 ];
 			
-			$actualColumnId = $sut->getColumnId( $x );
+			$actualColumnId = $sutBoard->getColumnId( $x );
 			$this->assertInternalType( 'string', $actualColumnId );
 			$this->assertEquals( $expectedColumnId, $actualColumnId );
 		}
@@ -391,9 +391,9 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetColumnIdDomainException( $width, $height, $x )
 	{
-		$sut = new Board( $width, $height);
+		$sutBoard = new Board( $width, $height);
 		$this->setExpectedException( 'DomainException' );
-		$sut->getColumnId( $x );
+		$sutBoard->getColumnId( $x );
 	}
 	
 	public function providerGetColumnIdDomainException()
@@ -409,22 +409,26 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	{
 		$document = file_get_contents( __DIR__ . '/Data/BoardTestLoad.json' );
 		
-		$board = new Board;
-		$board->loadFromJson( $document );
+		$sutBoard = new Board;
+		$sutBoard->loadFromJson( $document );
 		
-		$this->assertEquals( 9, $board->getWidth() );
-		$this->assertEquals( 12, $board->getHeight() );
-		$this->assertEquals( 0, $board->getPieces()->count() );
+		$this->assertEquals( 9, $sutBoard->getWidth() );
+		$this->assertEquals( 12, $sutBoard->getHeight() );
+		
+		$this->assertTrue( $sutBoard->getTile( 3, 4 )->isOffBoard() );
+		$this->assertFalse( $sutBoard->getTile( 1, 1 )->isOffBoard() );
+		
+		$this->assertEquals( 0, $sutBoard->getPieces()->count() );
 	}
 	
 	public function testLoadFromJsonNoTiles()
 	{
 		$document = file_get_contents( __DIR__ . '/Data/BoardNoTiles.json' );
 		
-		$board = new Board;
-		$board->loadFromJson( $document );
+		$sutBoard = new Board;
+		$sutBoard->loadFromJson( $document );
 		
-		$tiles = $board->getTiles();
+		$tiles = $sutBoard->getTiles();
 		
 		$this->assertEquals( 9 * 12, $tiles->count() );
 		
@@ -440,12 +444,12 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	
 	public function testSave()
 	{
-		$board = new Board( 9, 12 );
+		$sutBoard = new Board( 9, 12 );
 		
-		$board->getTile( 1, 1 )->setProperty( 'foo', 'bar' );
-		$board->getTile( 9, 12 )->setProperty( 'foo', 'bar' );
+		$sutBoard->getTile( 1, 1 )->setProperty( 'foo', 'bar' );
+		$sutBoard->getTile( 9, 12 )->setProperty( 'foo', 'bar' );
 		
-		$document = $board->saveToJson();
+		$document = $sutBoard->saveToJson();
 		
 		$dummy = json_decode( $document );
 		
@@ -465,7 +469,7 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 	
 	public function testGetHiddenAndVisiblePieces()
 	{
-		$board = new Board( 4, 6 );
+		$sutBoard = new Board( 4, 6 );
 		
 		$chest1 = new Pieces\Items\Chest;
 		$chest2 = new Pieces\Items\Chest;
@@ -479,15 +483,15 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 		$pawn2 = new Pieces\Tokens\Pawn;
 		$pawn3 = new Pieces\Tokens\Pawn;
 		
-		$board->placePiece( 2, 2, $chest1, false );
-		$board->placePiece( 2, 2, $chest2, true );
-		$board->placePiece( 3, 3, $life1, false );
-		$board->placePiece( 1, 4, $life2, true );
-		$board->placePiece( 2, 2, $emperor1, false );
-		$board->placePiece( 3, 3, $pawn1, true );
-		$board->placePiece( 1, 4, $pawn2, true );
+		$sutBoard->placePiece( 2, 2, $chest1, false );
+		$sutBoard->placePiece( 2, 2, $chest2, true );
+		$sutBoard->placePiece( 3, 3, $life1, false );
+		$sutBoard->placePiece( 1, 4, $life2, true );
+		$sutBoard->placePiece( 2, 2, $emperor1, false );
+		$sutBoard->placePiece( 3, 3, $pawn1, true );
+		$sutBoard->placePiece( 1, 4, $pawn2, true );
 		
-		$pieces = $board->getPieces();
+		$pieces = $sutBoard->getPieces();
 		
 		$this->assertEquals( 7, $pieces->count() );
 		
@@ -506,7 +510,7 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse( $pieces->contains( $emperor2 ) );
 		$this->assertFalse( $pieces->contains( $pawn3 ) );
 		
-		$visiblePieces = $board->getVisiblePieces();
+		$visiblePieces = $sutBoard->getVisiblePieces();
 		
 		$this->assertEquals( 4, $visiblePieces->count() );
 		
@@ -525,7 +529,7 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse( $visiblePieces->contains( $emperor2 ) );
 		$this->assertFalse( $visiblePieces->contains( $pawn3 ) );
 		
-		$hiddenPieces = $board->getHiddenPieces();
+		$hiddenPieces = $sutBoard->getHiddenPieces();
 		
 		$this->assertEquals( 3, $hiddenPieces->count() );
 		

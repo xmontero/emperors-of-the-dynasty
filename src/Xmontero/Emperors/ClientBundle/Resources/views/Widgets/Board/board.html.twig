@@ -5,14 +5,15 @@
 	<div class="tileRow">
 	
 		{# Origin #}
-		
-		{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" with { "tile": board.legacyOrigin } %}
+		<div class="tile origin"></div>
 		
 		{# Horizontal ruler #}
-		
 		{% for x in 1..width %}
-			{% set tile = board.legacyHorizontalRuler( x ) %}
-			{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" with { "tile": tile } %}
+			<div class="tile top-header">
+				<div class="content">
+					{{ board.getColumnId( x ) }}
+				</div>
+			</div>
 		{% endfor %}
 		
 	</div>
@@ -23,9 +24,11 @@
 		<div class="tileRow">
 			
 			{# Vertical ruler #}
-			
-			{% set tile = board.legacyVerticalRuler( y ) %}
-			{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" with { "tile": tile } %}
+			<div class="tile top-header">
+				<div class="content">
+					{{ board.getRowId( y ) }}
+				</div>
+			</div>
 			
 			{# Data #}
 			
