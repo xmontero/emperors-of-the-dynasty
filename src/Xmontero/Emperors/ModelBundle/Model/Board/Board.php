@@ -302,7 +302,12 @@ class Board
 		
 		$board->width = $this->width;
 		$board->height = $this->height;
-		$board->tiles = $this->saveTilesObject();
+		
+		$tiles = $this->saveTilesObject();
+		if( count( $tiles ) > 0 )
+		{
+			$board->tiles = $tiles;
+		}
 		
 		$document = json_encode( $board );
 		
