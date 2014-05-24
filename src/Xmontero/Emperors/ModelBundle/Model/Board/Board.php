@@ -217,6 +217,24 @@ class Board
 		return $tile;
 	}
 	
+	public function getTiles()
+	{
+		$tiles = new Tiles;
+		
+		for( $x = 1; $x <= $this->width; $x++ )
+		{
+			for( $y = 1; $y <= $this->height; $y++ )
+			{
+				$tileId = $this->buildTileIdFromCoordinates( $x, $y );
+				$tile = $this->getTile( $x, $y );
+				
+				$tiles[ $tileId ] = $tile;
+			}
+		}
+		
+		return $tiles;
+	}
+	
 	public function getWidth()
 	{
 		return $this->width;
@@ -284,16 +302,16 @@ class Board
 		return $result;
 	}
 	
-	public function load( $document )
+	public function loadFromJson( $jsonDocument )
 	{
-		$desiredBoard = json_decode( $document );
+		$desiredBoard = json_decode( $jsonDocument );
 		
 		if( is_null( $desiredBoard ) )
 		{
 			throw new \InvalidArgumentException( 'Invalid json.' );
 		}
 		
-		$this->loadFromValidJson( $desiredBoard );
+		$this->loadFromObjectDocument( $desiredBoard );
 	}
 	
 	public function saveToJson()
@@ -309,9 +327,9 @@ class Board
 			$board->tiles = $tiles;
 		}
 		
-		$document = json_encode( $board );
+		$jsonDocument = json_encode( $board );
 		
-		return $document;
+		return $jsonDocument;
 	}
 	
 	private function saveTilesObject()
@@ -452,13 +470,13 @@ class Board
 	
 	// Loading.
 	
-	private function loadFromValidJson( $desiredBoard )
+	private function loadFromObjectDocument( $desiredBoard )
 	{
-		$this->loadSizeFromValidJson( $desiredBoard );
-		$this->loadTilesFromValidJson( $desiredBoard );
+		$this->loadSizeFromObjectDocument( $desiredBoard );
+		$this->loadTilesFromObjectDocument( $desiredBoard );
 	}
 	
-	private function loadSizeFromValidJson( $desiredBoard )
+	private function loadSizeFromObjectDocument( $desiredBoard )
 	{
 		$this->assertIsSet( isset( $desiredBoard->width ), 'width' );
 		$this->assertIsSet( isset( $desiredBoard->height ), 'height' );
@@ -466,11 +484,16 @@ class Board
 		$this->setSize( $desiredBoard->width, $desiredBoard->height );
 	}
 	
-	private function loadTilesFromValidJson( $desiredBoard )
+	private function loadTilesFromObjectDocument( $desiredBoard )
 	{
-		$this->assertIsSet( isset( $desiredBoard->tiles ), 'tiles' );
-		
-		$this->setTiles( $desiredBoard->tiles );
+		if( isset( $desiredBoard->tiles ) )
+		{
+			$this->setTiles( $desiredBoard->tiles );
+		}
+		else
+		{
+			$this->createEmptyBoard();
+		}
 	}
 	
 	private function setSize( $width, $height )
@@ -537,10 +560,10 @@ class Board
 	private function createEmptyBoard()
 	{
 		$tileColumns = array();
-		for( $x = 0; $x <= $this->width; $x++ )
+		for( $x = 1; $x <= $this->width; $x++ )
 		{
 			$tileColumns[ $x ] = array();
-			for( $y = 0; $y <= $this->height; $y++ )
+			for( $y = 1; $y <= $this->height; $y++ )
 			{
 				$tile = new Tile;
 				$tileColumns[ $x ][ $y ] = $tile;

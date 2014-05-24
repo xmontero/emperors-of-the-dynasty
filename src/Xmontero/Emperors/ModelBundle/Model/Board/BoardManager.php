@@ -22,7 +22,7 @@ class BoardManager extends Manager
 	public function loadBoardFromJson( $document )
 	{
 		$board = new Board;
-		$board->load( $document );
+		$board->loadFromJson( $document );
 		
 		return $board;
 	}

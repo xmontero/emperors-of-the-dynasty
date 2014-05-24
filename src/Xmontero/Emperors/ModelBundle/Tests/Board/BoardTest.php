@@ -405,25 +405,37 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 		);
 	}
 	
-	public function testLoad()
+	public function testLoadFromJson()
 	{
 		$document = file_get_contents( __DIR__ . '/Data/BoardTestLoad.json' );
 		
 		$board = new Board;
-		$board->load( $document );
+		$board->loadFromJson( $document );
 		
 		$this->assertEquals( 9, $board->getWidth() );
 		$this->assertEquals( 12, $board->getHeight() );
 		$this->assertEquals( 0, $board->getPieces()->count() );
 	}
 	
-	public function testLoadNoTilesGeneratesException()
+	public function testLoadFromJsonNoTiles()
 	{
-		$document = file_get_contents( __DIR__ . '/Data/BoardTestLoadNoTilesGeneratesException.json' );
+		$document = file_get_contents( __DIR__ . '/Data/BoardNoTiles.json' );
 		
 		$board = new Board;
-		$this->setExpectedException( 'RuntimeException' );
-		$board->load( $document );
+		$board->loadFromJson( $document );
+		
+		$tiles = $board->getTiles();
+		
+		$this->assertEquals( 9 * 12, $tiles->count() );
+		
+		$allAreInResetState = true;
+		foreach( $tiles as $tile )
+		{
+			$thisIsInResetState = $tile->isInResetState();
+			$allAreInResetState = $allAreInResetState && $thisIsInResetState;
+		}
+		
+		$this->assertTrue( $allAreInResetState );
 	}
 	
 	public function testSave()
