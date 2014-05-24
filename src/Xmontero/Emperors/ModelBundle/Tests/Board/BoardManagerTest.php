@@ -1,4 +1,5 @@
 <?php
+namespace Xmontero\Emperors\ModelBundle\Tests\Board;
 
 use Xmontero\Emperors\ModelBundle\Model\Board;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
