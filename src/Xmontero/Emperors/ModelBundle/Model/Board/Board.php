@@ -343,7 +343,7 @@ class Board
 			$this->tileColumns[ $x ] = $this->tileColumns[ $x - 1 ];
 		}
 		
-		$newColumn = $this->createEmptyColumn();
+		$newColumn = $this->getEmptyColumn();
 		$this->tileColumns[ $desiredX ] = $newColumn;
 		
 		$this->width++;
@@ -438,13 +438,13 @@ class Board
 		}
 		else
 		{
-			$this->createEmptyBoard();
+			$this->setEmptyBoard();
 		}
 	}
 	
-	private function loadTilesFromExistingObjectDocument( $tiles )
+	private function loadTilesFromExistingObjectDocument( $tilesObjectDocument )
 	{
-		$this->assertType( $tiles, "object" );
+		$this->assertType( $tilesObjectDocument, "object" );
 		
 		for( $y = 1; $y <= $this->height; $y++ )
 		{
@@ -452,10 +452,10 @@ class Board
 			{
 				$tileId = $this->buildTileIdFromCoordinates( $x, $y );
 				
-				if( isset( $tiles->{ $tileId } ) )
+				if( isset( $tilesObjectDocument->{ $tileId } ) )
 				{
 					$tile = $this->getTile( $x, $y );
-					$tileObjectDocument = $tiles->{ $tileId };
+					$tileObjectDocument = $tilesObjectDocument->{ $tileId };
 					
 					$tile->loadFromObjectDocument( $tileObjectDocument );
 				}
@@ -473,7 +473,7 @@ class Board
 		$this->width = $width;
 		$this->height = $height;
 		
-		$this->createEmptyBoard();
+		$this->setEmptyBoard();
 	}
 	
 	// Assertions.
@@ -509,30 +509,18 @@ class Board
 	
 	// Row and column management.
 	
-	private function createEmptyBoard()
+	private function setEmptyBoard()
 	{
 		$tileColumns = array();
 		for( $x = 1; $x <= $this->width; $x++ )
 		{
-			$tileColumns[ $x ] = array();
-			for( $y = 1; $y <= $this->height; $y++ )
-			{
-				$tile = new Tile;
-				$tileColumns[ $x ][ $y ] = $tile;
-			}
+			$tileColumns[ $x ] = $this->getEmptyColumn();
 		}
 		
 		$this->tileColumns = $tileColumns;
-		/*
-		for( $x = 1; $x <= $this->width; $x++ )
-		{
-			$column = $this->createEmptyColumn();
-			$this->tileColumns[] = $column;
-		}
-		*/
 	}
 	
-	private function createEmptyColumn()
+	private function getEmptyColumn()
 	{
 		$column = array();
 		
