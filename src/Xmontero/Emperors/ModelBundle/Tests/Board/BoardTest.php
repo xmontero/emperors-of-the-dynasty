@@ -4,7 +4,7 @@ namespace Xmontero\Emperors\ModelBundle\Tests\Board;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Xmontero\Emperors\ModelBundle\Model\Board\Board;
 use Xmontero\Emperors\ModelBundle\Model\Board\Tile;
-use Xmontero\Emperors\ModelBundle\Model\Game\Pieces;
+use Xmontero\Emperors\ModelBundle\Model\Pieces;
 
 class BoardTest extends \PHPUnit_Framework_TestCase
 {

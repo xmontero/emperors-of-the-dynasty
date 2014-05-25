@@ -1,6 +1,6 @@
 <?php
 
-namespace Xmontero\Emperors\ModelBundle\Model\Game\Pieces;
+namespace Xmontero\Emperors\ModelBundle\Model\Pieces;
 
 use Xmontero\Emperors\ModelBundle\Model\Board;
 

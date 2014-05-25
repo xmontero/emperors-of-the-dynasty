@@ -3,7 +3,7 @@
 namespace Xmontero\Emperors\ModelBundle\Model\Board;
 
 use Xmontero\Emperors\ModelBundle\Model\Base;
-use Xmontero\Emperors\ModelBundle\Model\Game\Pieces\Pieces;
+use Xmontero\Emperors\ModelBundle\Model\Pieces\Pieces;
 
 class Tile implements ITile
 {
