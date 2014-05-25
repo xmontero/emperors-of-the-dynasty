@@ -8,5 +8,6 @@ class Emperor extends TokenHelper implements IToken
 	{
 		parent::__construct();
 		$this->type = 'emperor';
+		$this->namePrefix = 'E';
 	}
 }

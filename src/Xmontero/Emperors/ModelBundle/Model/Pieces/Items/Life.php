@@ -8,5 +8,6 @@ class Life extends ItemHelper implements IItem
 	{
 		parent::__construct();
 		$this->type = 'life';
+		$this->namePrefix = 'L';
 	}
 }

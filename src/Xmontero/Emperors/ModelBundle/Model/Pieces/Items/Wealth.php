@@ -8,5 +8,6 @@ class Wealth extends ItemHelper implements IItem
 	{
 		parent::__construct();
 		$this->type = 'wealth';
+		$this->namePrefix = 'W';
 	}
 }

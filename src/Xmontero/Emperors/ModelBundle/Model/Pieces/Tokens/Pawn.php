@@ -8,5 +8,6 @@ class Pawn extends TokenHelper implements IToken
 	{
 		parent::__construct();
 		$this->type = 'pawn';
+		$this->namePrefix = 'P';
 	}
 }

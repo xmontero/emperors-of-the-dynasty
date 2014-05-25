@@ -17,10 +17,25 @@ class BoardEditorController extends Controller
 		
 		$board = $boardManager->loadBoardFromTemplate( 'uukhumaki' );
 		
-		$chestA = $pieceManager->createNewPieceFromScratch( 'chest' );
-		$chestA->close();
+		// Chests
 		
-		$board->getTile( 4, 4 )->attachVisiblePiece( $chestA );
+		$chestClosed = $pieceManager->createNewPieceFromScratch( 'chest' );
+		$chestClosed->setId( 1 );
+		$chestClosed->close();
+		
+		$chestOpen = $pieceManager->createNewPieceFromScratch( 'chest' );
+		$chestOpen->setId( 2 );
+		$chestOpen->open();
+		
+		$chestHidden = $pieceManager->createNewPieceFromScratch( 'chest' );
+		$chestHidden->setId( 3 );
+		$chestHidden->close();
+		
+		$board->getTile( 4, 7 )->attachVisiblePiece( $chestClosed );
+		$board->getTile( 5, 7 )->attachVisiblePiece( $chestOpen );
+		$board->getTile( 6, 7 )->attachHiddenPiece( $chestHidden );
+		
+		// Show
 		
 		$clientBoard = $boardConverter->convert( $board );
 		$scope[ 'clientBoard' ] = $clientBoard;

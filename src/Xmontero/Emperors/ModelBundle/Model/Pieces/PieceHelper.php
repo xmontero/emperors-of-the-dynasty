@@ -8,16 +8,38 @@ use Xmontero\Emperors\ModelBundle\Model\Board;
 abstract class PieceHelper implements Board\IPiece
 {
 	protected $type;
+	protected $namePrefix;
+	protected $id;
 	private $tile;
 	
 	public function __construct()
 	{
 		$this->type = null;
+		$this->namePrefix = null;
 		$this->tile = null;
 		$this->visible = false;
 	}
 	
 	// -- Public ----------------------------------------------------------//
+	
+	public function getId()
+	{
+		return $this->id;
+	}
+	
+	public function setId( $id )
+	{
+		$this->id = $id;
+	}
+	
+	public function getName()
+	{
+		$prefix = $this->namePrefix;
+		$postfix = $this->getId();
+		
+		$name = $prefix . $postfix;
+		return $name;
+	}
 	
 	/*
 	// Always available.

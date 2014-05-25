@@ -10,6 +10,7 @@ class Chest extends ItemHelper implements IItem
 	{
 		parent::__construct();
 		$this->type = 'chest';
+		$this->namePrefix = 'C';
 		$this->close();
 	}
 	

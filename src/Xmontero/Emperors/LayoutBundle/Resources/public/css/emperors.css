@@ -322,7 +322,18 @@ div.board .tile.special
 .chest-1,
 .chest-2,
 .chest-3,
-.chest-4
+.chest-4,
+.chest
 {
 	background: #BDA75A;
+}
+
+.live
+{
+	background: #800;
+}
+
+.wealth
+{
+	background: #000;
 }

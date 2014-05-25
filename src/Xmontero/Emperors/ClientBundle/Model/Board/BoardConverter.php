@@ -67,21 +67,71 @@ class BoardConverter
 		}
 		else
 		{
-			if( $modelTile->propertyExists( 'class' ) )
+			$clientTile = $this->getOnBoardTile( $modelTile, $clientTile );
+		}
+		
+		return $clientTile;
+	}
+	
+	private function getOnBoardTile( $modelTile, & $clientTile )
+	{
+		if( $modelTile->isInResetState() )
+		{
+			$clientTile[ 'class' ] = 'free';
+		}
+		else
+		{
+			$clientTile = $this->getNonResetOnBoardTile( $modelTile, $clientTile );
+		}
+		
+		return $clientTile;
+	}
+	
+	private function getNonResetOnBoardTile( $modelTile, & $clientTile )
+	{
+		if( $modelTile->propertyExists( 'class' ) )
+		{
+			$clientTile = $this->getLegacyClassTile( $modelTile, $clientTile );
+		}
+		else
+		{
+			$modelPieces = $modelTile->getVisiblePieces();
+			if( $modelPieces->count() > 0 )
 			{
-				$clientTile[ 'class' ] = $modelTile->getProperty( 'class' );
+				if( $modelPieces->count() > 1 )
+				{
+					throw new \RuntimeException( 'The current version of the software does not support to represent 2 visible items in a tile.' );
+				}
+				
+				$modelPieces->rewind();
+				$modelPiece = $modelPieces->current();
+				
+				$clientTile[ 'class' ] = $modelPiece->getType();
+				$clientTile[ 'caption' ] = $modelPiece->getName();
 			}
 			else
 			{
 				$clientTile[ 'class' ] = 'free';
 			}
-			
-			if( $modelTile->propertyExists( 'text' ) )
-			{
-				$clientTile[ 'caption' ] = $modelTile->getProperty( 'text' );
-			}
 		}
 		
+		if( $modelTile->propertyExists( 'text' ) )
+		{
+			$clientTile = $this->getLegacyTextTile( $modelTile, $clientTile );
+		}
+		
+		return $clientTile;
+	}
+	
+	private function getLegacyClassTile( $modelTile, & $clientTile )
+	{
+		$clientTile[ 'class' ] = $modelTile->getProperty( 'class' );
+		return $clientTile;
+	}
+	
+	private function getLegacyTextTile( $modelTile, & $clientTile )
+	{
+		$clientTile[ 'caption' ] = $modelTile->getProperty( 'text' );
 		return $clientTile;
 	}
 }
