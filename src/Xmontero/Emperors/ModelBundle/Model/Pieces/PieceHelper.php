@@ -7,10 +7,12 @@ use Xmontero\Emperors\ModelBundle\Model\Board;
 
 abstract class PieceHelper implements Board\IPiece
 {
+	protected $type;
 	private $tile;
 	
 	public function __construct()
 	{
+		$this->type = null;
 		$this->tile = null;
 		$this->visible = false;
 	}
@@ -30,7 +32,12 @@ abstract class PieceHelper implements Board\IPiece
 	
 	public function getType()
 	{
-		throw new NotImplementeException;
+		if( is_null( $this->type ) )
+		{
+			throw new \RuntimeException;
+		}
+		
+		return $this->type;
 	}
 	
 	// Only available when the piece is not placed in a tile.

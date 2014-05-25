@@ -130,6 +130,12 @@ interface IPieces
 Pieces namespace
 ===============================================================
 
+PieceManager : Manager
+---------------------------------------
+getAvailableTypes();
+createNewPieceFromScratch( string type );
+loadPieceFromObjectDocument( object objectDocument );
+
 PieceHelper : implements IItem
 ---------------------------------------
 

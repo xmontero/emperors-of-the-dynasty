@@ -5,6 +5,10 @@ services:
         class: Xmontero\Emperors\ModelBundle\Model\Board\BoardManager
         arguments: [ '@emperors.objectstorage.manager' ]
 
+    emperors.piece.manager:
+        class: Xmontero\Emperors\ModelBundle\Model\Pieces\PieceManager
+        arguments: [ '@emperors.objectstorage.manager' ]
+
     emperors.game.manager:
         class: Xmontero\Emperors\ModelBundle\Model\Game\GameManager
         arguments: [ '@emperors.board.manager', '@emperors.objectstorage.manager' ]

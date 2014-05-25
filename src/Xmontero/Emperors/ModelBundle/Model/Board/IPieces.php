@@ -4,5 +4,5 @@ namespace Xmontero\Emperors\ModelBundle\Model\Board;
 
 interface IPieces
 {
-	public function filterByType( $type );
+	// public function filterByType( $type );
 }

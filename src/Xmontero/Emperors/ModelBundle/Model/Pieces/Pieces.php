@@ -6,6 +6,7 @@ use Xmontero\Emperors\ModelBundle\Model\Board;
 
 class Pieces extends \SplObjectStorage implements Board\IPieces
 {
+	/*
 	public function filterByType( $type )
 	{
 		switch( $type )
@@ -33,4 +34,5 @@ class Pieces extends \SplObjectStorage implements Board\IPieces
 		
 		return $result;
 	}
+	*/
 }
