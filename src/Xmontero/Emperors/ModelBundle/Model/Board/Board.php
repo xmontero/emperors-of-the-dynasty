@@ -271,7 +271,15 @@ class Board
 	public function placePiece( $x, $y, IPiece $piece, $visible )
 	{
 		$tile = $this->getTile( $x, $y );
-		$piece->placeInTile( $tile, $visible );
+		
+		if( $visible )
+		{
+			$tile->attachVisiblePiece( $piece );
+		}
+		else
+		{
+			$tile->attachHiddenPiece( $piece );
+		}
 	}
 	
 	// -- PRIVATE ------------------------------------------

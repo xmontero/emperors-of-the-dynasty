@@ -19,6 +19,7 @@ abstract class PieceHelper implements Board\IPiece
 	
 	// -- Public ----------------------------------------------------------//
 	
+	/*
 	// Always available.
 	public function isPlacedInBoard()
 	{
@@ -29,6 +30,7 @@ abstract class PieceHelper implements Board\IPiece
 	{
 		return ( ! is_null( $this->tile ) );
 	}
+	*/
 	
 	public function getType()
 	{
@@ -40,6 +42,7 @@ abstract class PieceHelper implements Board\IPiece
 		return $this->type;
 	}
 	
+	/*
 	// Only available when the piece is not placed in a tile.
 	public function placeInTile( Board\ITile $tile, $visible )
 	{
@@ -121,4 +124,5 @@ abstract class PieceHelper implements Board\IPiece
 			throw new \RuntimeException;
 		}
 	}
+	*/
 }
