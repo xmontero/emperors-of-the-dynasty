@@ -1,0 +1,6 @@
+parameters:
+
+services:
+    emperors.client.board.converter:
+        class: Xmontero\Emperors\ClientBundle\Model\Board\BoardConverter
+        arguments: []

@@ -282,6 +282,14 @@ class Board
 		}
 	}
 	
+	public function buildTileIdFromCoordinates( $x, $y )
+	{
+		$this->assertCoordinatesInBoard( $x, $y );
+		
+		$tileId = ( ( string )$x ) . '-' . ( ( string ) $y );
+		return $tileId;
+	}
+	
 	// -- PRIVATE ------------------------------------------
 	
 	// Loading.
@@ -416,14 +424,6 @@ class Board
 	}
 	
 	// Utils.
-	
-	private function buildTileIdFromCoordinates( $x, $y )
-	{
-		$this->assertCoordinatesInBoard( $x, $y );
-		
-		$tileId = ( ( string )$x ) . '-' . ( ( string ) $y );
-		return $tileId;
-	}
 	
 	private function base26ToString( $x )
 	{

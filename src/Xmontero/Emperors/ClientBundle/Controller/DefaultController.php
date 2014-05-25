@@ -74,12 +74,14 @@ class DefaultController extends Controller
 			throw new \DomainException( 'Invalid turn in non-dev environment.' );
 		}
 		
+		$boardConverter = $this->get( 'emperors.client.board.converter' );
 		$manager = $this->get( 'emperors.game.manager' );
 		$game = $manager->getGameById( 1 );
 		
 		$scope = array();
 		$scope[ 'name' ] = $this->get( 'security.context' )->getToken();
 		$scope[ 'game' ] = $game;
+		$scope[ 'board' ] = $boardConverter->convert( $game->getBoard( $turn ) );
 		$scope[ 'turn' ] = $turn;
 		
 		return $this->render( 'XmonteroEmperorsClientBundle:Pages/FirstGame:board.html.twig', $scope );

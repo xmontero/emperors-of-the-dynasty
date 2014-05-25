@@ -2,11 +2,11 @@
 
 {% block page %}
 	<h1>Board editor</h1>
-	{% include "XmonteroEmperorsAdminBundle:Widgets/BoardEditor:editor.html.twig" %}
+	{% include "XmonteroEmperorsAdminBundle:Widgets/BoardEditor:editor.html.twig" with { "board": clientBoard } only %}
 	<div>
 	SOURCE:
 		<div>
-			{{ board.saveToJson() }}
+			{{ modelBoard.saveToJson() }}
 		</div>
 	</div>
 {% endblock %}

@@ -9,13 +9,22 @@ class BoardEditorController extends Controller
 {
 	public function showEditorAction( Request $request )
 	{
+		$boardConverter = $this->get( 'emperors.client.board.converter' );
 		$boardManager = $this->get( 'emperors.board.manager' );
+		$pieceManager = $this->get( 'emperors.piece.manager' );
 		
 		$scope = array();
 		
 		$board = $boardManager->loadBoardFromTemplate( 'uukhumaki' );
 		
-		$scope[ 'board' ] = $board;
+		$chestA = $pieceManager->createNewPieceFromScratch( 'chest' );
+		$chestA->close();
+		
+		$board->getTile( 4, 4 )->attachVisiblePiece( $chestA );
+		
+		$clientBoard = $boardConverter->convert( $board );
+		$scope[ 'clientBoard' ] = $clientBoard;
+		$scope[ 'modelBoard' ] = $board;
 		
 		return $this->render( 'XmonteroEmperorsAdminBundle:Pages/BoardEditor:editor.html.twig', $scope );
 	}

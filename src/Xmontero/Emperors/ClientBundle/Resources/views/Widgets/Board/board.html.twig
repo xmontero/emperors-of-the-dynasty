@@ -11,7 +11,7 @@
 		{% for x in 1..width %}
 			<div class="tile top-header">
 				<div class="content">
-					{{ board.getColumnId( x ) }}
+					{{ board.columnIds[ x ] }}
 				</div>
 			</div>
 		{% endfor %}
@@ -26,14 +26,14 @@
 			{# Vertical ruler #}
 			<div class="tile top-header">
 				<div class="content">
-					{{ board.getRowId( y ) }}
+					{{ board.rowIds[ y ] }}
 				</div>
 			</div>
 			
 			{# Data #}
 			
 			{% for x in 1..width %}
-				{% set tile = board.getTile( x, y ) %}
+				{% set tile = board.tiles[ x ~ '-' ~ y ] %}
 				{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" with { "tile": tile } %}
 			{% endfor %}
 		</div>
