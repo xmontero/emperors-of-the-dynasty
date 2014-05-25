@@ -7,11 +7,13 @@ use Xmontero\Emperors\ModelBundle\Model\Board\Board;
 class Game
 {
 	private $id;
+	private $boardManager;
 	private $objectStorageManager;
 	
-	public function __construct( $id, $objectStorageManager )
+	public function __construct( $id, $boardManager, $objectStorageManager )
 	{
 		$this->id = $id;
+		$this->boardManager = $boardManager;
 		$this->objectStorageManager = $objectStorageManager;
 	}
 	
@@ -28,7 +30,7 @@ class Game
 	
 	public function getBoard( $turn )
 	{
-		$board = new Board( 14, 14 );
+		$board = $this->boardManager->loadBoardFromTemplate( 'uukhumaki' );
 		$board->oldLoad( $this->objectStorageManager, $turn, 14, 14 );
 		return $board;
 	}

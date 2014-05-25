@@ -2,17 +2,19 @@
 
 namespace Xmontero\Emperors\ModelBundle\Model\Game;
 
+use Xmontero\Emperors\ModelBundle\Model\Board\BoardManager;
+use Xmontero\Emperors\ModelBundle\Model\ObjectStorage\ObjectStorageManager;
 use Xmontero\Emperors\ModelBundle\Model\Base\Manager;
 
 class GameManager extends Manager
 {
-	private $logger;
+	private $boardManager;
 	private $objectStorageManager;
 	private $games;
 	
-	public function __construct( $logger, $objectStorageManager )
+	public function __construct( BoardManager $boardManager, ObjectStorageManager $objectStorageManager )
 	{
-		$this->logger = $logger;
+		$this->boardManager = $boardManager;
 		$this->objectStorageManager = $objectStorageManager;
 		$this->games = new Games;
 	}
@@ -42,7 +44,7 @@ class GameManager extends Manager
 	
 	public function getGameById( $id )
 	{
-		$result = new Game( $id, $this->objectStorageManager );
+		$result = new Game( $id, $this->boardManager, $this->objectStorageManager );
 		return $result;
 	}
 }

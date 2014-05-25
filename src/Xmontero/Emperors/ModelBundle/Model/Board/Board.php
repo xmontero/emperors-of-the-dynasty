@@ -9,7 +9,6 @@ class Board
 {
 	private $objectStorageManager;
 	
-	private $tiles;
 	private $tileColumns;
 	private $width;
 	private $height;
@@ -23,13 +22,6 @@ class Board
 	
 	public function oldLoad( $objectStorageManager, $turn, $width, $height )
 	{
-		$this->setSize( $width, $height );
-		
-		if( is_null( $objectStorageManager ) )
-		{
-			throw new \RuntimeException;
-		}
-		
 		// Columns
 		
 		switch( $turn )
@@ -67,18 +59,6 @@ class Board
 				$tile->class = 'free';
 				$tile->content = '';
 				$tiles[ $x ][ $y ] = $tile;
-			}
-		}
-		
-		// Border
-		for( $i = 1; $i <= $this->width; $i++ )
-		{
-			if( ( $i != 5 ) && ( $i != 10 ) )
-			{
-				$tile = $tiles[ $i ][ 1 ]->class = 'border';
-				$tile = $tiles[ $i ][ $this->height ]->class = 'border';
-				$tile = $tiles[ 1 ][ $i ]->class = 'border';
-				$tile = $tiles[ $this->width ][ $i ]->class = 'border';
 			}
 		}
 		
@@ -127,7 +107,6 @@ class Board
 		}
 		
 		// Chests
-		$chests = array();
 		for( $i = 1; $i <= 4; $i++ )
 		{
 			$objectId = 'chest-' . $i;
@@ -139,11 +118,12 @@ class Board
 				$x = $chest[ $xName ];
 				$y = $chest[ $yName ];
 				
-				$tile = $tiles[ $x ][ $y ];
-				$tile->class = 'chest-' . $i;
-				$tile->content = 'C' . chr( $i + ord( 'A' ) - 1 );
+				$class = 'chest-' . $i;
+				$content = 'C' . chr( $i + ord( 'A' ) - 1 );
 				
-				$chests[] = $chest;
+				$tile = $this->getTile( $x, $y );
+				$tile->setProperty( 'class', $class );
+				$tile->setProperty( 'text', $content );
 			}
 		}
 		
@@ -152,7 +132,6 @@ class Board
 		$this->objectStorageManager = $objectStorageManager;
 		$this->emperors = $emperors;
 		$this->pawns = $pawns;
-		$this->chests = $chests;
 		$this->tiles = $tiles;
 	}
 	

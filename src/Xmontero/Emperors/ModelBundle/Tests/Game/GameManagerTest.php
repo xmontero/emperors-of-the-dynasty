@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class GameManagerTest extends \PHPUnit_Framework_TestCase
 {
-	private $sut;
+	private $sutGameManager;
 	private $loggerStub;
 	private $objectStorageManagerStub;
 	
 	public function setup()
 	{
-		$loggerStub = $this->getMockBuilder( 'Logger' )
+		$boardManagerStub = $this->getMockBuilder( 'Xmontero\Emperors\ModelBundle\Model\Board\BoardManager' )
 			->disableOriginalConstructor()
 			->getMock();
 		
@@ -20,33 +20,33 @@ class GameManagerTest extends \PHPUnit_Framework_TestCase
 			->disableOriginalConstructor()
 			->getMock();
 		
-		$this->loggerStub = $loggerStub;
+		$this->boardManagerStub = $boardManagerStub;
 		$this->objectStorageManagerStub = $objectStorageManagerStub;
-		$this->sut = new Model\Game\GameManager( $loggerStub, $objectStorageManagerStub );
+		$this->sutGameManager = new Model\Game\GameManager( $boardManagerStub, $objectStorageManagerStub );
 	}
 	
 	public function teardown()
 	{
-		unset( $this->sut );
+		unset( $this->sutGameManager );
 		unset( $this->objectStorageManagerStub );
-		unset( $this->loggerStub );
+		unset( $this->boardManagerStub );
 	}
 	
 	public function testGetAllOpenGameIds()
 	{
-		$games = $this->sut->getAllOpenGameIds();
+		$games = $this->sutGameManager->getAllOpenGameIds();
 		$this->assertInstanceOf( 'ArrayObject', $games );
 	}
 	
 	public function testGetOpenGames()
 	{
-		$games = $this->sut->getOpenGames( 5 );
+		$games = $this->sutGameManager->getOpenGames( 5 );
 		$this->assertInstanceOf( 'ArrayObject', $games );
 	}
 	
 	public function testGetGameById()
 	{
-		$game = $this->sut->getGameById( 1 );
+		$game = $this->sutGameManager->getGameById( 1 );
 		$this->assertInstanceOf( 'Xmontero\Emperors\ModelBundle\Model\Game\Game', $game );
 	}
 }

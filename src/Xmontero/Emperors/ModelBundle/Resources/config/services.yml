@@ -7,7 +7,7 @@ services:
 
     emperors.game.manager:
         class: Xmontero\Emperors\ModelBundle\Model\Game\GameManager
-        arguments: [ '@logger', '@emperors.objectstorage.manager' ]
+        arguments: [ '@emperors.board.manager', '@emperors.objectstorage.manager' ]
 
     emperors.objectstorage.manager:
         class: Xmontero\Emperors\ModelBundle\Model\ObjectStorage\ObjectStorageManager
