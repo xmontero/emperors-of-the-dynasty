@@ -8,57 +8,67 @@ class TileTest extends \PHPUnit_Framework_TestCase
 {
 	public function testOffOnBoard()
 	{
-		$sut = new Tile;
+		$sutTile = new Tile;
 		
-		$this->assertFalse( $sut->isOffBoard() );
-		$this->assertTrue( $sut->isOnBoard() );
+		$this->assertFalse( $sutTile->isOffBoard() );
+		$this->assertTrue( $sutTile->isOnBoard() );
 		
-		$sut->setOffBoard();
-		$this->assertTrue( $sut->isOffBoard() );
-		$this->assertFalse( $sut->isOnBoard() );
+		$sutTile->setOffBoard();
+		$this->assertTrue( $sutTile->isOffBoard() );
+		$this->assertFalse( $sutTile->isOnBoard() );
 		
-		$sut->setOnBoard();
-		$this->assertFalse( $sut->isOffBoard() );
-		$this->assertTrue( $sut->isOnBoard() );
+		$sutTile->setOnBoard();
+		$this->assertFalse( $sutTile->isOffBoard() );
+		$this->assertTrue( $sutTile->isOnBoard() );
 	}
 	
-	public function testValidProperty()
+	public function testGetSetProperty()
 	{
-		$sut = new Tile;
+		$sutTile = new Tile;
 		
 		$object = new \StdClass;
-		$object->nano = 'pico';
+		$object->qux = 'quux';
 		
-		$sut->setProperty( 'abc', 'xyz' );
-		$sut->setProperty( '123', $object );
+		$sutTile->setProperty( 'foo', 'bar' );
+		$sutTile->setProperty( 'baz', $object );
 		
-		$propAbc = $sut->getProperty( 'abc' );
-		$prop123 = $sut->getProperty( '123' );
+		$propFoo = $sutTile->getProperty( 'foo' );
+		$propBaz = $sutTile->getProperty( 'baz' );
 		
-		$this->assertEquals( 'xyz', $propAbc );
-		$this->assertInstanceOf( '\StdClass', $prop123 );
-		$this->assertEquals( 'pico', $prop123->nano );
+		$this->assertEquals( 'bar', $propFoo );
+		$this->assertInstanceOf( '\StdClass', $propBaz );
+		$this->assertEquals( 'quux', $propBaz->qux );
 	}
 	
-	public function testNullProperty()
+	public function testNullPropertyThrowsException()
 	{
-		$sut = new Tile;
+		$sutTile = new Tile;
 		$this->setExpectedException( 'DomainException' );
-		$sut->getProperty( 'abc' );
+		$sutTile->getProperty( 'foo' );
 	}
 	
 	public function testPropertyExists()
 	{
-		$key = 'abc';
-		$sut = new Tile;
-		$sut->setProperty( $key, 'xyz' );
-		$this->assertTrue( $sut->propertyExists( $key ) );
+		$key = 'foo';
+		$sutTile = new Tile;
+		$sutTile->setProperty( $key, 'bar' );
+		$this->assertTrue( $sutTile->propertyExists( $key ) );
 	}
 	
 	public function testPropertyDoesNotExist()
 	{
-		$key = 'abc';
-		$sut = new Tile;
-		$this->assertFalse( $sut->propertyExists( $key ) );
+		$key = 'foo';
+		$sutTile = new Tile;
+		$this->assertFalse( $sutTile->propertyExists( $key ) );
+	}
+	
+	public function testSetPropertyOnOffBoardThrowsException()
+	{
+		$key = 'foo';
+		$sutTile = new Tile;
+		
+		$this->setExpectedException( 'RuntimeException' );
+		$sutTile->setOffBoard();
+		$sutTile->setProperty( 'foo', 'bar' );
 	}
 }

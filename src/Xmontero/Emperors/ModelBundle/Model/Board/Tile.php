@@ -57,6 +57,7 @@ class Tile implements ITile
 	
 	public function setProperty( $key, $value )
 	{
+		$this->assertIsOnBoard();
 		$this->properties->offsetSet( $key, $value );
 	}
 	
@@ -214,6 +215,14 @@ class Tile implements ITile
 	private function assertPieceDoesNotExist( IPiece $piece )
 	{
 		if( $this->pieceExists( $piece ) )
+		{
+			throw new \RuntimeException;
+		}
+	}
+	
+	private function assertIsOnBoard()
+	{
+		if( $this->isOffBoard() )
 		{
 			throw new \RuntimeException;
 		}
