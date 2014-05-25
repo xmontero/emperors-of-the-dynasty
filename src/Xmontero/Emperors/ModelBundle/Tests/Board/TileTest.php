@@ -2,7 +2,6 @@
 namespace Xmontero\Emperors\ModelBundle\Tests\Board;
 
 use Xmontero\Emperors\ModelBundle\Model\Board\Tile;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TileTest extends \PHPUnit_Framework_TestCase
 {

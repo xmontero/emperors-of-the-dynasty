@@ -1,7 +1,6 @@
 <?php
 namespace Xmontero\Emperors\ModelBundle\Tests\Board;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Xmontero\Emperors\ModelBundle\Model\Board\Board;
 use Xmontero\Emperors\ModelBundle\Model\Board\Tile;
 use Xmontero\Emperors\ModelBundle\Model\Pieces;

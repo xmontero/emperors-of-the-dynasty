@@ -2,7 +2,6 @@
 namespace Xmontero\Emperors\ModelBundle\Tests\Game;
 
 use Xmontero\Emperors\ModelBundle\Model;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class GameTest extends \PHPUnit_Framework_TestCase
 {
