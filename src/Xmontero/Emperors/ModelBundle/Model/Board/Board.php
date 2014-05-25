@@ -7,8 +7,6 @@ use Xmontero\Emperors\ModelBundle\Model\Game\Pieces\Pieces;
 
 class Board
 {
-	private $objectStorageManager;
-	
 	private $tileColumns;
 	private $width;
 	private $height;
@@ -47,23 +45,7 @@ class Board
 		$servedDynastyName = $prefix . 'ServedDynasty';
 		$experienceName = $prefix . 'Experience';
 		
-		// Tiles
-		
-		$tiles = array();
-		for( $x = 1; $x <= $this->width; $x++ )
-		{
-			$tiles[ $x ] = array();
-			for( $y = 1; $y <= $this->height; $y++ )
-			{
-				$tile = new \StdClass;
-				$tile->class = 'free';
-				$tile->content = '';
-				$tiles[ $x ][ $y ] = $tile;
-			}
-		}
-		
 		// Emperors
-		$emperors = array();
 		for( $i = 1; $i <= 8; $i++ )
 		{
 			$objectId = 'emperor-' . $i;
@@ -73,15 +55,15 @@ class Board
 			$x = $emperor[ $xName ];
 			$y = $emperor[ $yName ];
 			
-			$tile = $tiles[ $x ][ $y ];
-			$tile->class = 'emperor-' . $i;
-			$tile->content = 'E' . $i;
+			$class = 'emperor-' . $i;
+			$content = 'E' . $i;
 			
-			$emperors[] = $emperor;
+			$tile = $this->getTile( $x, $y );
+			$tile->setProperty( 'class', $class );
+			$tile->setProperty( 'text', $content );
 		}
 		
 		// Pawns
-		$pawns = array();
 		for( $player = 1; $player <= 8; $player++ )
 		{
 			for( $piece = 1; $piece <= 4; $piece++ )
@@ -96,12 +78,12 @@ class Board
 					$y = $pawn[ $yName ];
 					
 					$specialClass = ( $pawn[ 'blob' ] == '*' ) ? 'special ' : '';
+					$class = $specialClass . 'pawn-' . $pawn[ $servedDynastyName ];
+					$content = 'P' . $player . $piece;
 					
-					$tile = $tiles[ $x ][ $y ];
-					$tile->class = $specialClass . 'pawn-' . $pawn[ $servedDynastyName ];
-					$tile->content = 'P' . $player . $piece;
-					
-					$pawns[] = $pawn;
+					$tile = $this->getTile( $x, $y );
+					$tile->setProperty( 'class', $class );
+					$tile->setProperty( 'text', $content );
 				}
 			}
 		}
@@ -126,13 +108,6 @@ class Board
 				$tile->setProperty( 'text', $content );
 			}
 		}
-		
-		// Store
-		
-		$this->objectStorageManager = $objectStorageManager;
-		$this->emperors = $emperors;
-		$this->pawns = $pawns;
-		$this->tiles = $tiles;
 	}
 	
 	public function getTile( $x, $y )
