@@ -16,4 +16,15 @@ class ChestTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->assertEquals( 'chest', $this->sutPiece->getType() );
 	}
+	
+	public function testIsOpen()
+	{
+		$sutPiece = $this->sutPiece;
+		
+		$this->assertFalse( $sutPiece->isOpen() );
+		$sutPiece->open();
+		$this->assertTrue( $sutPiece->isOpen() );
+		$sutPiece->close();
+		$this->assertFalse( $sutPiece->isOpen() );
+	}
 }
