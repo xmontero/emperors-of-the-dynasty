@@ -1,41 +1,46 @@
-<div class="board">
-	{% set height = board.height %}
-	{% set width = board.width %}
-	
-	<div class="tileRow">
-	
-		{# Origin #}
-		<div class="tile origin"></div>
+<div class="boardWithTileDetails">
+	<div class="board">
+		{% set height = board.height %}
+		{% set width = board.width %}
 		
-		{# Horizontal ruler #}
-		{% for x in 1..width %}
-			<div class="tile top-header">
-				<div class="content">
-					{{ board.columnIds[ x ] }}
+		<div class="tileRow">
+		
+			{# Origin #}
+			<div class="tile origin"></div>
+			
+			{# Horizontal ruler #}
+			{% for x in 1..width %}
+				<div class="tile top-header">
+					<div class="content">
+						{{ board.columnIds[ x ] }}
+					</div>
 				</div>
+			{% endfor %}
+			
+		</div>
+		
+		{# Rows with data #}
+		
+		{% for y in 1..height %}
+			<div class="tileRow">
+				
+				{# Vertical ruler #}
+				<div class="tile top-header">
+					<div class="content">
+						{{ board.rowIds[ y ] }}
+					</div>
+				</div>
+				
+				{# Data #}
+				
+				{% for x in 1..width %}
+					{% set tile = board.tiles[ x ~ '-' ~ y ] %}
+					{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" with { "tile": tile } only %}
+				{% endfor %}
 			</div>
 		{% endfor %}
-		
 	</div>
-	
-	{# Rows with data #}
-	
-	{% for y in 1..height %}
-		<div class="tileRow">
-			
-			{# Vertical ruler #}
-			<div class="tile top-header">
-				<div class="content">
-					{{ board.rowIds[ y ] }}
-				</div>
-			</div>
-			
-			{# Data #}
-			
-			{% for x in 1..width %}
-				{% set tile = board.tiles[ x ~ '-' ~ y ] %}
-				{% include "XmonteroEmperorsClientBundle:Widgets/Board:tile.html.twig" with { "tile": tile } %}
-			{% endfor %}
-		</div>
-	{% endfor %}
+	<div class="tileDetails">
+		{% include "XmonteroEmperorsClientBundle:Widgets/Board:tileDetails.html.twig" with {} only %}
+	</div>
 </div>

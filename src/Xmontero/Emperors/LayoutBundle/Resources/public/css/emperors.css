@@ -203,9 +203,10 @@ div.board
 {
 	text-shadow: none;
 	font-size: 0em;
-	display: table;
+	display: inline-block;
 	border: 32px solid rgba(0,0,0,0.3);
 	box-shadow: 5px 5px 10px 2px rgba(20, 10, 0, 0.7);
+	vertical-align: top;
 }
 
 div.board .tileRow
@@ -336,4 +337,13 @@ div.board .tile.special
 .wealth
 {
 	background: #000;
+}
+
+div.tileDetails
+{
+	display: inline-block;
+	height: 500px;
+	margin-left: 20px;
+	vertical-align: top;
+	width: 500px;
 }
