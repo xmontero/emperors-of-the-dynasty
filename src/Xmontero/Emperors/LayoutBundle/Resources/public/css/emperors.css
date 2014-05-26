@@ -344,6 +344,7 @@ div.tileDetails
 	display: inline-block;
 	height: 500px;
 	margin-left: 20px;
+	margin-top: 20px;
 	vertical-align: top;
 	width: 500px;
 }

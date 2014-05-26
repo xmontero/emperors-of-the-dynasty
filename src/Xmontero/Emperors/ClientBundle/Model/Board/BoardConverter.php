@@ -61,6 +61,9 @@ class BoardConverter
 		$clientTile[ 'class' ] = 'hidden';
 		$clientTile[ 'caption' ] = '';
 		
+		$clientTile[ 'object' ] = array();
+		$clientTile[ 'object' ][ 'name' ] = 'yieaung';
+		
 		if( $modelTile->isOffBoard() )
 		{
 			$clientTile[ 'class' ] = 'border';
@@ -69,6 +72,8 @@ class BoardConverter
 		{
 			$clientTile = $this->getOnBoardTile( $modelTile, $clientTile );
 		}
+		
+		$clientTile[ 'json' ] = json_encode( $clientTile[ 'object' ] );
 		
 		return $clientTile;
 	}
