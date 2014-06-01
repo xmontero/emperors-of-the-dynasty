@@ -25,6 +25,11 @@ class Board
 		return $tile;
 	}
 	
+	public function getTileById( $tileId )
+	{
+		//
+	}
+	
 	public function getTiles()
 	{
 		$tiles = new Tiles;
@@ -140,57 +145,6 @@ class Board
 		return $jsonDocument;
 	}
 	
-	private function saveTilesObject()
-	{
-		$tiles = array();
-		
-		for( $x = 1; $x <= $this->width; $x++ )
-		{
-			for( $y = 1; $y <= $this->height; $y++ )
-			{
-				$tile = $this->getTile( $x, $y );
-				
-				if( ! $tile->isInResetState() )
-				{
-					$tileId = $this->buildTileIdFromCoordinates( $x, $y );
-					$tiles[ $tileId ] = $tile->saveToObjectDocument();
-				}
-			}
-		}
-		
-		//var_dump($tiles);
-		
-		/*
-		$headerColumn = true;
-		foreach( $this->tileColumns as $column )
-		{
-			if( $headerColumn )
-			{
-				$headerColumn = false;
-			}
-			else
-			{
-				$headerRow = true;
-				//$tiles[] = $column->saveObject();
-				foreach( $column as $tile )
-				{
-					if( $headerRow )
-					{
-						$headerRow = false;
-					}
-					else
-					{
-						$tileSaveObject = $tile->saveToObject();
-						$tiles[] = $tileSaveObject;
-					}
-				}
-			}
-		}
-		*/
-		
-		return $tiles;
-	}
-	
 	public function addColumnAt( $desiredX )
 	{
 		$width = $this->width;
@@ -290,6 +244,17 @@ class Board
 		return $tileId;
 	}
 	
+	public function splitTileIdInCoordinates( $tileId )
+	{
+		$parts = explode( '-', $tileId );
+		
+		$result = array();
+		$result[ 'x' ] = ( integer )$parts[ 0 ];
+		$result[ 'y' ] = ( integer )$parts[ 1 ];
+		
+		return $result;
+	}
+	
 	// -- PRIVATE ------------------------------------------
 	
 	// Loading.
@@ -339,6 +304,57 @@ class Board
 				}
 			}
 		}
+	}
+	
+	private function saveTilesObject()
+	{
+		$tiles = array();
+		
+		for( $x = 1; $x <= $this->width; $x++ )
+		{
+			for( $y = 1; $y <= $this->height; $y++ )
+			{
+				$tile = $this->getTile( $x, $y );
+				
+				if( ! $tile->isInResetState() )
+				{
+					$tileId = $this->buildTileIdFromCoordinates( $x, $y );
+					$tiles[ $tileId ] = $tile->saveToObjectDocument();
+				}
+			}
+		}
+		
+		//var_dump($tiles);
+		
+		/*
+		$headerColumn = true;
+		foreach( $this->tileColumns as $column )
+		{
+			if( $headerColumn )
+			{
+				$headerColumn = false;
+			}
+			else
+			{
+				$headerRow = true;
+				//$tiles[] = $column->saveObject();
+				foreach( $column as $tile )
+				{
+					if( $headerRow )
+					{
+						$headerRow = false;
+					}
+					else
+					{
+						$tileSaveObject = $tile->saveToObject();
+						$tiles[] = $tileSaveObject;
+					}
+				}
+			}
+		}
+		*/
+		
+		return $tiles;
 	}
 	
 	// Size.

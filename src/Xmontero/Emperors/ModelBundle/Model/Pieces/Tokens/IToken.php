@@ -6,4 +6,5 @@ use Xmontero\Emperors\ModelBundle\Model\Board\IPiece;
 
 interface IToken extends IPiece
 {
+	public function __construct( $playerId );
 }

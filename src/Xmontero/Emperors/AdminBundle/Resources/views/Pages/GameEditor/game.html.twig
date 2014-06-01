@@ -1,0 +1,18 @@
+{% extends "XmonteroEmperorsAdminBundle:Layout:layout.html.twig" %}
+
+{% block page %}
+
+	<h1>Game</h1>
+	
+	<div class="inset">
+		Displaying turn: {{ game.turn }}
+		<br>
+		Select turn: 
+		{% for turnId in 0..lastOpenTurn %}
+			<a href="{{ path( 'XmonteroEmperorsAdminBundle_getGame', { "gameId": game.id, "turn": turnId } ) }}"><span>{{ turnId }}</span></a>
+		{% endfor %}
+	</div>
+	
+	{% include "XmonteroEmperorsAdminBundle:Widgets/BoardEditor:editor.html.twig" with { "board": clientBoard } only %}
+	
+{% endblock %}

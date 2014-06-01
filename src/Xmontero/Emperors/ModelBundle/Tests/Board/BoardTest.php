@@ -476,11 +476,11 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 		$life1 = new Pieces\Items\Life;
 		$life2 = new Pieces\Items\Life;
 		$life3 = new Pieces\Items\Life;
-		$emperor1 = new Pieces\Tokens\Emperor;
-		$emperor2 = new Pieces\Tokens\Emperor;
-		$pawn1 = new Pieces\Tokens\Pawn;
-		$pawn2 = new Pieces\Tokens\Pawn;
-		$pawn3 = new Pieces\Tokens\Pawn;
+		$emperor1 = new Pieces\Tokens\Emperor( 1 );
+		$emperor2 = new Pieces\Tokens\Emperor( 2 );
+		$pawn1 = new Pieces\Tokens\Pawn( 3 );
+		$pawn2 = new Pieces\Tokens\Pawn( 4 );
+		$pawn3 = new Pieces\Tokens\Pawn( 5 );
 		
 		$sutBoard->placePiece( 2, 2, $chest1, false );
 		$sutBoard->placePiece( 2, 2, $chest2, true );

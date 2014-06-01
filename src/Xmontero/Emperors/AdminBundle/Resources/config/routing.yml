@@ -3,6 +3,11 @@ XmonteroEmperorsAdminBundle_dashboard:
     defaults: { _controller: XmonteroEmperorsAdminBundle:Default:dashboard }
     requirements: { _method: GET }
 
+XmonteroEmperorsAdminBundle_getGame:
+    pattern: /game/{gameId}/{turn}
+    defaults: { _controller: XmonteroEmperorsAdminBundle:Default:getGame }
+    requirements: { _method: GET }
+
 XmonteroEmperorsAdminBundle_users:
     pattern: /users/
     defaults: { _controller: XmonteroEmperorsAdminBundle:Users:main }

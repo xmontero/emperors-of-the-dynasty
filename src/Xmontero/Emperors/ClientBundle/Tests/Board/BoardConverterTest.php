@@ -4,6 +4,7 @@ namespace Xmontero\Emperors\ClientBundle\Tests\Board\BoardConverter;
 use Xmontero\Emperors\ClientBundle\Model\Board;
 use Xmontero\Emperors\ModelBundle\Model\Board\Board as ModelBoard;
 use Xmontero\Emperors\ModelBundle\Model\Pieces;
+use Xmontero\Emperors\ModelBundle\Model\Players;
 
 class BoardConverterTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,8 +13,8 @@ class BoardConverterTest extends \PHPUnit_Framework_TestCase
 		$modelBoard = new ModelBoard( 6, 4 );
 		$sutBoardConverter = new Board\BoardConverter();
 		
-		$emperor = new Pieces\Tokens\Emperor;
-		$pawn = new Pieces\Tokens\Pawn;
+		$emperor = new Pieces\Tokens\Emperor( 1 );
+		$pawn = new Pieces\Tokens\Pawn( 2 );
 		$chest = new Pieces\Items\Chest( 2 );
 		$life = new Pieces\Items\Life;
 		$wealth = new Pieces\Items\Wealth;

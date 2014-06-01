@@ -9,7 +9,7 @@ class PawnTest extends \PHPUnit_Framework_TestCase
 	
 	public function setup()
 	{
-		$this->sutPiece = new Pawn;
+		$this->sutPiece = new Pawn( 4 );
 	}
 	
 	public function testType()

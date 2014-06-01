@@ -6,11 +6,16 @@ use Xmontero\Emperors\ModelBundle\Model;
 class GameTest extends \PHPUnit_Framework_TestCase
 {
 	private $boardManagerStub;
+	private $pieceManagerStub;
 	private $objectStorageManagerStub;
 	
 	public function setup()
 	{
-		$boardManagerStub = $this->getMockBuilder( 'Xmontero\Emperors\ModelBundle\Model\ObjectStorage\BoardManager' )
+		$boardManagerStub = $this->getMockBuilder( 'Xmontero\Emperors\ModelBundle\Model\Board\BoardManager' )
+			->disableOriginalConstructor()
+			->getMock();
+		
+		$pieceManagerStub = $this->getMockBuilder( 'Xmontero\Emperors\ModelBundle\Model\Pieces\PieceManager' )
 			->disableOriginalConstructor()
 			->getMock();
 		
@@ -19,6 +24,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 		
 		$this->boardManagerStub = $boardManagerStub;
+		$this->pieceManagerStub = $pieceManagerStub;
 		$this->objectStorageManagerStub = $objectStorageManagerStub;
 	}
 	
@@ -30,7 +36,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
 	
 	public function testGetStartDate()
 	{
-		$sut = new Model\Game\Game( 1, $this->boardManagerStub, $this->objectStorageManagerStub );
+		$sut = new Model\Game\Game( 1, $this->boardManagerStub, $this->pieceManagerStub, $this->objectStorageManagerStub );
 		$startDate = $sut->getStartDate();
 		
 		$this->assertInstanceOf( '\DateTime', $startDate );

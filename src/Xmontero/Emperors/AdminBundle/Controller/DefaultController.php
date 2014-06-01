@@ -31,4 +31,24 @@ class DefaultController extends Controller
 		
 		return $this->render( 'XmonteroEmperorsAdminBundle:Pages:dirty.html.twig', $scope );
 	}
+	
+	public function getGameAction( $gameId, $turn )
+	{
+		$boardConverter = $this->get( 'emperors.client.board.converter' );
+		$gameManager = $this->get( 'emperors.game.manager' );
+		
+		$scope = array();
+		
+		$game = $gameManager->getGameById( $gameId );
+		$game->setTurn( $turn );
+		
+		$board = $game->getBoard();
+		$clientBoard = $boardConverter->convert( $board );
+		$scope[ 'game' ] = $game;
+		$scope[ 'clientBoard' ] = $clientBoard;
+		$scope[ 'modelBoard' ] = $board;
+		$scope[ 'lastOpenTurn' ] = $game->getLastOpenTurn();
+		
+		return $this->render( 'XmonteroEmperorsAdminBundle:Pages/GameEditor:game.html.twig', $scope );
+	}
 }

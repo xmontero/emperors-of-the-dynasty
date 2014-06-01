@@ -20,11 +20,28 @@ class PieceManagerTest extends \PHPUnit_Framework_TestCase
 	public function testGetAvailableTypes()
 	{
 		$availableTypes = $this->sutPieceManager->getAvailableTypes();
-		$this->assertTrue( in_array( 'emperor', $availableTypes ) );
-		$this->assertTrue( in_array( 'pawn', $availableTypes ) );
-		$this->assertTrue( in_array( 'chest', $availableTypes ) );
-		$this->assertTrue( in_array( 'life', $availableTypes ) );
-		$this->assertTrue( in_array( 'wealth', $availableTypes ) );
+		
+		$correctProperties = true;
+		$foundTypes = array();
+		foreach( $availableTypes as $value )
+		{
+			$isNotSetClass = ( ! isset( $value->class ) );
+			$isNotSetName = ( ! isset( $value->name ) );
+			if( $isNotSetClass || $isNotSetName )
+			{
+				$correctProperties = false;
+				break;
+			}
+			
+			$foundTypes[] = $value->name;
+		}
+		
+		$this->assertTrue( $correctProperties );
+		$this->assertTrue( in_array( 'emperor', $foundTypes ) );
+		$this->assertTrue( in_array( 'pawn', $foundTypes ) );
+		$this->assertTrue( in_array( 'chest', $foundTypes ) );
+		$this->assertTrue( in_array( 'life', $foundTypes ) );
+		$this->assertTrue( in_array( 'wealth', $foundTypes ) );
 	}
 	
 	public function testCreateNewPieceFromScratch()
@@ -32,9 +49,26 @@ class PieceManagerTest extends \PHPUnit_Framework_TestCase
 		$availableTypes = $this->sutPieceManager->getAvailableTypes();
 		foreach( $availableTypes as $pieceType )
 		{
-			$piece = $this->sutPieceManager->createNewPieceFromScratch( $pieceType );
+			switch( $pieceType->class )
+			{
+				case 'token':
+					
+					$piece = $this->sutPieceManager->createNewTokenFromScratch( $pieceType->name, 1 );
+					break;
+					
+				case 'item':
+					
+					$piece = $this->sutPieceManager->createNewItemFromScratch( $pieceType->name );
+					break;
+					
+				default:
+					
+					throw new \RuntimeException;
+					break;
+			}
+			
 			$this->assertInstanceOf( 'Xmontero\Emperors\ModelBundle\Model\Board\IPiece', $piece );
-			$this->assertEquals( $pieceType, $piece->getType() );
+			$this->assertEquals( $pieceType->name, $piece->getType() );
 		}
 	}
 }

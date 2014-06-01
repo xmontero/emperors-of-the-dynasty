@@ -12,11 +12,11 @@ class PieceManager extends Manager
 	{
 		$this->availableTypes = array
 		(
-			'emperor',
-			'pawn',
-			'chest',
-			'life',
-			'wealth',
+			( object )array( 'class' => 'token', 'name' => 'emperor' ),
+			( object )array( 'class' => 'token', 'name' => 'pawn' ),
+			( object )array( 'class' => 'item', 'name' => 'chest' ),
+			( object )array( 'class' => 'item', 'name' => 'life' ),
+			( object )array( 'class' => 'item', 'name' => 'wealth' ),
 		);
 	}
 	
@@ -25,20 +25,32 @@ class PieceManager extends Manager
 		return $this->availableTypes;
 	}
 	
-	public function createNewPieceFromScratch( $type )
+	public function createNewTokenFromScratch( $type, $playerId )
 	{
 		switch( $type )
 		{
 			case 'emperor':
 				
-				$piece = new Tokens\Emperor;
+				$piece = new Tokens\Emperor( $playerId );
 				break;
 				
 			case 'pawn':
 				
-				$piece = new Tokens\Pawn;
+				$piece = new Tokens\Pawn( $playerId );
 				break;
 				
+			default:
+			
+				throw new \DomainException( 'Token of type "' . $type . '" not recognized.' );
+		}
+		
+		return $piece;
+	}
+	
+	public function createNewItemFromScratch( $type )
+	{
+		switch( $type )
+		{
 			case 'chest':
 				
 				$piece = new Items\Chest;
@@ -56,7 +68,7 @@ class PieceManager extends Manager
 				
 			default:
 			
-				throw new \DomainException( 'Piece of type "' . $type . '" not recognized.' );
+				throw new \DomainException( 'Item of type "' . $type . '" not recognized.' );
 		}
 		
 		return $piece;

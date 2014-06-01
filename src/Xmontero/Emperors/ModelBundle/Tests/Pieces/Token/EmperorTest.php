@@ -9,7 +9,7 @@ class EmperorTest extends \PHPUnit_Framework_TestCase
 	
 	public function setup()
 	{
-		$this->sutPiece = new Emperor;
+		$this->sutPiece = new Emperor( 1 );
 	}
 	
 	public function testType()

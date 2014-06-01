@@ -6,7 +6,8 @@ use Xmontero\Emperors\ModelBundle\Model;
 class GameManagerTest extends \PHPUnit_Framework_TestCase
 {
 	private $sutGameManager;
-	private $loggerStub;
+	private $boardManagerStub;
+	private $pieceManagerStub;
 	private $objectStorageManagerStub;
 	
 	public function setup()
@@ -15,13 +16,18 @@ class GameManagerTest extends \PHPUnit_Framework_TestCase
 			->disableOriginalConstructor()
 			->getMock();
 		
+		$pieceManagerStub = $this->getMockBuilder( 'Xmontero\Emperors\ModelBundle\Model\Pieces\PieceManager' )
+			->disableOriginalConstructor()
+			->getMock();
+		
 		$objectStorageManagerStub = $this->getMockBuilder( 'Xmontero\Emperors\ModelBundle\Model\ObjectStorage\ObjectStorageManager' )
 			->disableOriginalConstructor()
 			->getMock();
 		
 		$this->boardManagerStub = $boardManagerStub;
+		$this->pieceManagerStub = $pieceManagerStub;
 		$this->objectStorageManagerStub = $objectStorageManagerStub;
-		$this->sutGameManager = new Model\Game\GameManager( $boardManagerStub, $objectStorageManagerStub );
+		$this->sutGameManager = new Model\Game\GameManager( $boardManagerStub, $pieceManagerStub, $objectStorageManagerStub );
 	}
 	
 	public function teardown()
