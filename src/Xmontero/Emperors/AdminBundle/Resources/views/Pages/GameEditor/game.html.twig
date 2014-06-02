@@ -8,7 +8,7 @@
 		Displaying turn: {{ game.turn }}
 		<br>
 		Select turn: 
-		{% for turnId in 0..lastOpenTurn %}
+		{% for turnId in 1..lastOpenTurn %}
 			<a href="{{ path( 'XmonteroEmperorsAdminBundle_getGame', { "gameId": game.id, "turn": turnId } ) }}"><span>{{ turnId }}</span></a>
 		{% endfor %}
 	</div>

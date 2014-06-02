@@ -14,7 +14,12 @@ class BoardConverterTest extends \PHPUnit_Framework_TestCase
 		$sutBoardConverter = new Board\BoardConverter();
 		
 		$emperor = new Pieces\Tokens\Emperor( 1 );
+		$emperor->setId( 1 );
+		
 		$pawn = new Pieces\Tokens\Pawn( 2 );
+		$pawn->setId( 30 );
+		$pawn->setWorkingForEmperorId( 1 );
+		
 		$chest = new Pieces\Items\Chest( 2 );
 		$life = new Pieces\Items\Life;
 		$wealth = new Pieces\Items\Wealth;
@@ -35,11 +40,11 @@ class BoardConverterTest extends \PHPUnit_Framework_TestCase
 		
 		$clientTiles = $clientBoard[ 'tiles' ];
 		$this->assertEquals( 'border', $clientTiles[ '1-1' ][ 'class' ] );
-		$this->assertEquals( 'emperor', $clientTiles[ '2-2' ][ 'class' ] );
+		$this->assertEquals( 'emperor-1', $clientTiles[ '2-2' ][ 'class' ] );
 		$this->assertEquals( 'free', $clientTiles[ '2-3' ][ 'class' ] );
 		$this->assertEquals( 'chest', $clientTiles[ '3-2' ][ 'class' ] );
 		$this->assertEquals( 'free', $clientTiles[ '3-3' ][ 'class' ] );
-		$this->assertEquals( 'pawn', $clientTiles[ '4-3' ][ 'class' ] );
+		$this->assertEquals( 'pawn-1', $clientTiles[ '4-3' ][ 'class' ] );
 		
 		$this->assertEquals( 'C2', $clientTiles[ '3-2' ][ 'caption' ] );
 	}

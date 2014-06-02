@@ -3,5 +3,14 @@
 $( '.tile' ).click( function(){
 	data = $( this ).children( '.object' );
 	tile = data.data( 'tile' );
-	$( '.tileDetails .tileName' ).text( 'Tile ' + tile.name );
+	
+	tableContent = '<tr><th>Key</th><th>Value</th></tr>';
+	
+	for( var key in tile )
+	{
+		value = tile[ key ];
+		tableContent = tableContent + '<tr><td>' + key + '</td><td>' + value + '</td></tr>'
+	}
+	
+	$( '.tileDescription > table' ).html( tableContent );
 });

@@ -52,8 +52,9 @@ class BoardManager extends Manager
 	
 	public function cloneBoard( $referenceBoard )
 	{
-		$json = $referenceBoard->saveToJson();
-		$clonedBoard = $this->loadBoardFromJson( $json );
+		//$json = $referenceBoard->saveToJson();
+		//$clonedBoard = $this->loadBoardFromJson( $json );
+		$clonedBoard = $referenceBoard;
 		return $clonedBoard;
 	}
 }

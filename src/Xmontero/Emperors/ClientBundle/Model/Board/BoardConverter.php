@@ -47,22 +47,22 @@ class BoardConverter
 			for( $y = 1; $y <= $board->getHeight(); $y++ )
 			{
 				$tileId = $board->buildTileIdFromCoordinates( $x, $y );
+				$tileName = $board->getTileName( $x, $y );
 				$tile = $board->getTile( $x, $y );
-				$tiles[ $tileId ] = $this->getTile( $tile );
+				$tiles[ $tileId ] = $this->getTile( $tile, $tileName, $x, $y );
 			}
 		}
 		
 		return $tiles;
 	}
 	
-	public function getTile( $modelTile )
+	public function getTile( $modelTile, $tileName, $x, $y )
 	{
 		$clientTile = array();
 		$clientTile[ 'class' ] = 'hidden';
 		$clientTile[ 'caption' ] = '';
 		
-		$clientTile[ 'object' ] = array();
-		$clientTile[ 'object' ][ 'name' ] = 'yieaung';
+		$clientTile[ 'object' ] = $this->getTileObject( $modelTile, $tileName, $x, $y );
 		
 		if( $modelTile->isOffBoard() )
 		{
@@ -77,6 +77,8 @@ class BoardConverter
 		
 		return $clientTile;
 	}
+	
+	//-- Private ----------------------------------------------------------//
 	
 	private function getOnBoardTile( $modelTile, & $clientTile )
 	{
@@ -111,7 +113,26 @@ class BoardConverter
 				$modelPieces->rewind();
 				$modelPiece = $modelPieces->current();
 				
-				$clientTile[ 'class' ] = $modelPiece->getType();
+				$pieceType = $modelPiece->getType();
+				
+				switch( $pieceType )
+				{
+					case 'emperor':
+						
+						$clientTile[ 'class' ] = $pieceType . '-' . $modelPiece->getId();
+						break;
+						
+					case 'pawn':
+						
+						$clientTile[ 'class' ] = $pieceType . '-' . $modelPiece->getWorkingForEmperorId();
+						break;
+						
+					default:
+						
+						$clientTile[ 'class' ] = $pieceType;
+						break;
+				}
+				
 				$clientTile[ 'caption' ] = $modelPiece->getName();
 			}
 			else
@@ -138,5 +159,38 @@ class BoardConverter
 	{
 		$clientTile[ 'caption' ] = $modelTile->getProperty( 'text' );
 		return $clientTile;
+	}
+	
+	private function getTileObject( $modelTile, $tileName, $x, $y )
+	{
+		$result = array();
+		$result[ 'name' ] = $tileName;
+		$result[ 'coords' ] = '(' . $x . ', ' . $y . ')';
+		
+		$onBoard = $modelTile->isOnBoard();
+		$result[ 'onBoard' ] = $onBoard;
+		
+		if( $onBoard )
+		{
+			foreach( $modelTile->getVisiblePieces() as $key => $piece )
+			{
+				$pieceType = $piece->getType();
+				
+				$result[ 'piece.type' ] = $pieceType;
+				$result[ 'piece.name' ] = $piece->getName();
+				
+				if( ( $pieceType == 'emperor' ) || ( $pieceType == 'pawn' ) )
+				{
+					$result[ 'piece.playerId' ] = $piece->getPlayerId();
+					
+					if( $pieceType == 'pawn' )
+					{
+						$result[ 'piece.workingForEmperorId' ] = $piece->getWorkingForEmperorId();
+					}
+				}
+			}
+		}
+		
+		return $result;
 	}
 }

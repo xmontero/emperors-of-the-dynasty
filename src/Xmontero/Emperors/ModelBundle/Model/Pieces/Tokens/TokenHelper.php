@@ -6,6 +6,8 @@ use Xmontero\Emperors\ModelBundle\Model\Pieces\PieceHelper;
 
 abstract class TokenHelper extends PieceHelper implements IToken
 {
+	private $playerId;
+	
 	public function __construct( $playerId )
 	{
 		$argumentType = gettype( $playerId );
@@ -13,5 +15,12 @@ abstract class TokenHelper extends PieceHelper implements IToken
 		{
 			throw new \InvalidArgumentException( 'Expected string, got ' . $argumentType . '.' );
 		}
+		
+		$this->playerId = $playerId;
+	}
+	
+	public function getPlayerId()
+	{
+		return $this->playerId;
 	}
 }
