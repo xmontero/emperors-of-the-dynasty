@@ -13,4 +13,5 @@ $( '.tile' ).click( function(){
 	}
 	
 	$( '.tileDescription > table' ).html( tableContent );
+	$( '.tileDetails .caption' ).hide();
 });
