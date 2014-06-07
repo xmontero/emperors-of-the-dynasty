@@ -34,6 +34,8 @@ class AppKernel extends Kernel
             new Xmontero\Emperors\ServerBundle\XmonteroEmperorsServerBundle(),
             new Xmontero\Emperors\UserBundle\XmonteroEmperorsUserBundle(),
             
+            new Xmontero\TurnBasedGame\Bundle\XmonteroTurnBasedGameBundle(),
+            
             # Assets
             new Xmontero\Emperors\AssetsBundle\XmonteroEmperorsAssetsBundle(),
         );
