@@ -20,15 +20,15 @@ class BoardEditorController extends Controller
 		// Chests
 		
 		$chestClosed = $pieceManager->createNewPieceFromScratch( 'chest' );
-		$chestClosed->setId( 1 );
+		$chestClosed->setId( "A" );
 		$chestClosed->close();
 		
 		$chestOpen = $pieceManager->createNewPieceFromScratch( 'chest' );
-		$chestOpen->setId( 2 );
+		$chestOpen->setId( "B" );
 		$chestOpen->open();
 		
 		$chestHidden = $pieceManager->createNewPieceFromScratch( 'chest' );
-		$chestHidden->setId( 3 );
+		$chestHidden->setId( "C" );
 		$chestHidden->close();
 		
 		$board->getTile( 4, 7 )->attachVisiblePiece( $chestClosed );
