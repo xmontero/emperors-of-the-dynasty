@@ -1,1 +1,1 @@
-bin/phpdoc run -d ./src -t ./doc/generated/api
+bin/phpdoc run -d ./src -t ./doc/generated/phpdoc

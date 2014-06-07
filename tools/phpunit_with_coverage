@@ -1,1 +1,1 @@
-time phpunit -c app --coverage-html doc/generated/coverage
+time phpunit -c app --coverage-html doc/generated/phpunit
