@@ -57,7 +57,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
 		$rule->configureMinimumNumberOfPlayers( 2 );
 		$sutGame->addRule( $rule );
 		
-		$expectedPlayers = $sutGame->addPlayer( $player1 );
+		$expectedPlayers = $sutGame->addPlayer( 1, $player1 );
 		$result = $sutGame->start( true );
 		$this->assertFalse( $result );
 		$this->assertEquals( 0, $sutGame->getTurn() );
@@ -66,7 +66,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse( $result );
 		$this->assertEquals( 0, $sutGame->getTurn() );
 		
-		$expectedPlayers = $sutGame->addPlayer( $player2 );
+		$expectedPlayers = $sutGame->addPlayer( 2, $player2 );
 		$result = $sutGame->start( true );
 		$this->assertTrue( $result );
 		$this->assertEquals( 0, $sutGame->getTurn() );
@@ -83,9 +83,9 @@ class GameTest extends \PHPUnit_Framework_TestCase
 		$rule->configureMaximumNumberOfPlayers( 2 );
 		$sutGame->addRule( $rule );
 		
-		$expectedPlayers = $sutGame->addPlayer( $player1 );
-		$expectedPlayers = $sutGame->addPlayer( $player2 );
-		$expectedPlayers = $sutGame->addPlayer( $player3 );
+		$expectedPlayers = $sutGame->addPlayer( 1, $player1 );
+		$expectedPlayers = $sutGame->addPlayer( 2, $player2 );
+		$expectedPlayers = $sutGame->addPlayer( 3, $player3 );
 		$result = $sutGame->start();
 		$this->assertFalse( $result );
 		$this->assertEquals( 0, $sutGame->getTurn() );
@@ -101,7 +101,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
 		{
 			$player = new Helpers\NullPlayer;
 			
-			$this->sutGame->addPlayer( $player );
+			$this->sutGame->addPlayer( $i, $player );
 			$players[] = $player;
 		}
 		
