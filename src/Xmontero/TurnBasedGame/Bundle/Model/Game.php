@@ -283,7 +283,7 @@ class Game
 	
 	private function raiseEventPreAbort( & $cancel )
 	{
-		$this->raiseGenericPreEvent( 'onGamePreEnd', $cancel );
+		$this->raiseGenericPreEvent( 'onGamePreAbort', $cancel );
 	}
 	
 	private function raiseEventPostAbort()

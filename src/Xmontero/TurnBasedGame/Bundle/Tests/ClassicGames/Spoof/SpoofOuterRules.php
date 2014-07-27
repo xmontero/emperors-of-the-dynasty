@@ -20,6 +20,8 @@ class SpoofOuterRules implements Model\Interfaces\GameObserver
 	
 	public function onGameTick( $outerGame )
 	{
+		// For each external turn, create and run a full inner game.
+		
 		//echo PHP_EOL . '- outer ------------- TICK ' . $outerGame->getTurn() . ' -------------------' . PHP_EOL;
 		
 		$this->initInnerGameRulesAndPlayers( $outerGame );
@@ -29,6 +31,8 @@ class SpoofOuterRules implements Model\Interfaces\GameObserver
 	
 	public function onGamePostCloseTurn( $outerGame, $turn )
 	{
+		// After closing a turn, if we have a looser, end.
+		
 		if( $this->weHaveLooser )
 		{
 			$outerGame->end();
@@ -63,6 +67,7 @@ class SpoofOuterRules implements Model\Interfaces\GameObserver
 		
 		$this->innerGame->addRule( $innerLimitRule );
 		$this->innerGame->addRule( $spoofInnerRules );
+		$this->innerGame->addElement( 'maxCoinsPerPlayer', $maxCoinsPerPlayer );
 	}
 	
 	private function initInnerPlayersX( $numberOfPlayers, $gameDesiresOfAllPlayers )
@@ -82,22 +87,17 @@ class SpoofOuterRules implements Model\Interfaces\GameObserver
 	
 	private function initInnerPlayers( $outerGame )
 	{
-		$innerPlayer1 = $outerGame->getPlayer( 1 );
-		$innerPlayer2 = $outerGame->getPlayer( 2 );
+		$outerGamePlayers = $outerGame->getPlayers();
 		
-		$this->innerGame->addPlayer( 1, $innerPlayer1 );
-		$this->innerGame->addPlayer( 2, $innerPlayer2 );
-		
-		//$innerPlayers = $this->getNonWinners( $game->getPlayers() );
-		
-		/*
-		//echo( $innerPlayers->count() . PHP_EOL );
-		foreach( $innerPlayers as $player )
+		foreach( $outerGamePlayers as $playerId => $player )
 		{
-			$innerGame->addPlayer( $player );
+			$tag = $player->getTag();
+			
+			if( $tag == '' )
+			{
+				$this->innerGame->addPlayer( $playerId, $player );
+			}
 		}
-		
-		*/
 	}
 	
 	private function getNonWinners( $players )
@@ -119,10 +119,25 @@ class SpoofOuterRules implements Model\Interfaces\GameObserver
 	
 	private function processInnerResults( $outerGame )
 	{
+		// A game ends when we have a looser.
+		// A liar is always a looser.
+		// If no liar is found, the looser is the last non-winner.
+		
 		$outerGamePlayers = $outerGame->getPlayers();
 		$outerGamePlayersCount = $outerGamePlayers->count();
 		
-		if( $outerGamePlayersCount == 2 )
+		// First, search for a liar
+		foreach( $outerGamePlayers as $playerId => $player )
+		{
+			if( $player->getTag() == 'liar' )
+			{
+				$this->weHaveLooser = true;
+				$player->setTag( 'looser' );
+			}
+		}
+		
+		// If no liar, then search for the last non-liar.
+		if( ( ! $this->weHaveLooser ) && ( $outerGamePlayersCount == 2 ) )
 		{
 			$p1 = $outerGamePlayers[ 1 ];
 			$p2 = $outerGamePlayers[ 2 ];

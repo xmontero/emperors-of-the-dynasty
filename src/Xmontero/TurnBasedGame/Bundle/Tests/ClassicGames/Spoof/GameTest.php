@@ -38,6 +38,8 @@ class GameTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGame( $gameSetup, $gameDesires, $expectedLooserId, $expectedEndOfGameTurn )
 	{
+		//echo PHP_EOL . "++++++++++++++++++++++++++++++ NEW GAME +++++++++" . PHP_EOL;
+		
 		$gameManager = new Model\GameManager;
 		$numberOfPlayers = $gameSetup[ 'numberOfPlayers' ];
 		$maxCoinsPerPlayer = $gameSetup[ 'maxCoinsPerPlayer' ];
@@ -62,12 +64,12 @@ class GameTest extends \PHPUnit_Framework_TestCase
 		// expectedLooser: The number of the player to be found as looser.
 		
 		$game1 = $this->providerGame1();
-		//$game2 = $this->providerGame2();
+		$game2 = $this->providerGame2();
 		
 		return array
 		(
 			$game1,
-			//$game2,
+			$game2,
 		);
 	}
 	
@@ -121,13 +123,13 @@ class GameTest extends \PHPUnit_Framework_TestCase
 		);
 		
 		$player1PickDesires = array( 2, 1, 1, 0, 2, 0, 0, 0 );
-		$player1SayDesires  = array( x, x, x, x, x, x, x, x );
-		$player2PickDesires = array( x, x, x, x, x, x, x, x );
-		$player2SayDesires  = array( x, x, x, x, x, x, x, x );
-		$player3PickDesires = array( x, x, x, x, x, x, x, x );
-		$player3SayDesires  = array( x, x, x, x, x, x, x, x );
-		$player4PickDesires = array( x, x, x, x, x, x, x, x );
-		$player4SayDesires  = array( x, x, x, x, x, x, x, x );
+		$player1SayDesires  = array( 5, 4, 2, 1, 4, 0, 0, 0 );
+		$player2PickDesires = array( 0, 0, 0, 0, 0, 0, 0, 0 );
+		$player2SayDesires  = array( 3, 4, 2, 3, 0, 0, 0, 0 );
+		$player3PickDesires = array( 1, 2, 1, 1, 1, 0, 0, 0 );
+		$player3SayDesires  = array( 1, 6, 6, 2, 2, 0, 0, 0 );
+		$player4PickDesires = array( 1, 2, 1, 2, 1, 0, 0, 0 );
+		$player4SayDesires  = array( 2, 8, 5, 2, 4, 6, 0, 0 );
 		
 		$player1Desires = array
 		(
@@ -156,11 +158,11 @@ class GameTest extends \PHPUnit_Framework_TestCase
 		$gameDesires = array();
 		$gameDesires[ 1 ] = $player1Desires;
 		$gameDesires[ 2 ] = $player2Desires;
-		$gameDesires[ 3 ] = $player2Desires;
-		$gameDesires[ 4 ] = $player2Desires;
+		$gameDesires[ 3 ] = $player3Desires;
+		$gameDesires[ 4 ] = $player4Desires;
 		
 		$expectedLooserId = 4;
-		$expectedEndOfGameTurn = 5;
+		$expectedEndOfGameTurn = 2;
 		
 		return array
 		(
@@ -174,203 +176,133 @@ class GameTest extends \PHPUnit_Framework_TestCase
 
 /*
 ==================================================
+TEST #1
 
-GAME 1
+2 people, 3 coins, liar looses
 
-2 people, 3 coins, Player 1 says first in 1srt turn, lier looses
+--------------------------------------------------
+Outer #1, with 2 players = P1, P2.
 
-Turn 1
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   2   |  2   |      1       |
-|   P2   |   3   |  4   |      2       |
-+--------+-------+------+--------------+
+Test #1, Outer #1, Inner #1
++--------+-------+------+
+| Player | Picks | Says |
++--------+-------+------+
+|   P1   |   2   |  2   |
+|   P2   |   3   |  4   |
++--------+-------+------+
 Inner Outcome => Nothing
 
-Turn 2
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   5   |  1   |      2       |
-|   P2   |   3   |  4   |      1       |
-+--------+-------+------+--------------+
-|   P1   |   0   |  2   |      2       |
-|   P2   |   3   |  5   |      1       |
-+--------+-------+------+--------------+
+Test #1, Outer #1, Inner #2
++--------+-------+------+
+| Player | Picks | Says |
++--------+-------+------+
+|   P1   |   5   |  1   |
+|   P2   |   3   |  4   |
++--------+-------+------+
+|   P1   |   0   |  2   |
+|   P2   |   3   |  5   |
++--------+-------+------+
 Player 1 picks 5 so, when the quantity is disclosed, the
 turn cannot be closed as it is invalid and needs to be played again.
 -> Can also be seen as the Desire is derictly rejected by the system
 but we want to test the "pre close turn" event.
 Inner Outcome => Nothing
 
-Turn 3
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   2   |  3   |      1       |
-|   P2   |   1   |  3   |      2       |
-|   P2   |       |  5   |              |
-+--------+-------+------+--------------+
+Test #1, Outer #1, Inner #3
++--------+-------+------+
+| Player | Picks | Says |
++--------+-------+------+
+|   P1   |   2   |  3   |
+|   P2   |   2   |  3   |
+|   P2   |       |  1   |
++--------+-------+------+
 P1, picks 2, says 3
-P2, picks 1, says 3 => should be rejected because of "number already said"
+P2, picks 2, says 3 => should be rejected because of "number already said"
 -> We will test the "pre add desire" event here.
 P2, says 5
 Inner Outcome => Nothing
 
-Turn 4
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   2   |  2   |      2       |
-|   P2   |   3   |  5   |      1       |
-+--------+-------+------+--------------+
+Test #1, Outer #1, Inner #4
++--------+-------+------+
+| Player | Picks | Says |
++--------+-------+------+
+|   P1   |   2   |  2   |
+|   P2   |   3   |  5   |
++--------+-------+------+
 Inner Outcome => P2 is labelled "winner"
-Outer Outcome => P1 labelled "looser"
+Outer Outcome => No more players left, so P1 labelled "looser"
 
 ==================================================
 
-GAME 2
+TEST 2
 
-4 people, 2 coins, Player 1 says first in 1rst turn, lier looses
+4 people, 2 coins, liar looses
 
-Round 1, 4 players P1, P2, P3, P4
+--------------------------------------------------
+Outer #1, with 4 players = P1, P2, P3, P4.
 
-Turn 1
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   2   |  5   |      1       |
-|   P2   |   0   |  3   |      2       |
-|   P3   |   1   |  1   |      3       |
-|   P4   |   1   |  2   |      4       |
-+--------+-------+------+--------------+
+Test #2, Outer #1, Inner #1
++--------+-------+------+
+| Player | Picks | Says |
++--------+-------+------+
+|   P1   |   2   |  5   |
+|   P2   |   0   |  3   |
+|   P3   |   1   |  1   |
+|   P4   |   1   |  2   |
++--------+-------+------+
 Inner Outcome => Nothing
 
-Turn 2
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   1   |  4   |      4       |
-|        |       |  2   |      4       |
-|   P2   |   0   |  4   |      1       |
-|   P3   |   2   |  6   |      2       |
-|   P4   |   2   |  8   |      3       |
-+--------+-------+------+--------------+
-P1 says 4 after P2 having said 4, so desire is invalid.
+Test #2, Outer #1, Inner #2
++--------+-------+------+
+| Player | Picks | Says |
++--------+-------+------+
+|   P1   |   1   |  4   |
+|   P2   |   0   |  4   |
+|        |       |  2   |
+|   P3   |   2   |  6   |
+|   P4   |   2   |  8   |
++--------+-------+------+
+P2 desire is invalid, as desire "4" is repeated (previously said by P1).
 Inner Outcome => Nothing
 
-Turn 3
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   1   |  2   |      3       |
-|   P2   |   0   |  3   |      4       |
-|   P3   |   1   |  6   |      1       |
-|   P4   |   1   |  5   |      2       |
-+--------+-------+------+--------------+
+Test #2, Outer #1, Inner #3
++--------+-------+------+
+| Player | Picks | Says |
++--------+-------+------+
+|   P1   |   1   |  2   |
+|   P2   |   0   |  3   |
+|   P3   |   1   |  6   |
+|   P4   |   1   |  5   |
++--------+-------+------+
 Inner Outcome => Player P2 is labelled "winner"
 Outer outcome => P2 is eliminated and another game is organized with P1, P3, and P4
 
-Round 2, 3 players P1, P3, P4
+--------------------------------------------------
+Outer #2, with 3 players = P1, P3, P4
 
-Turn 1
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   0   |  1   |      3       |
-|   P3   |   1   |  2   |      1       |
-|   P4   |   2   |  2   |      2       |
-|        |       |  4   |      2       |
-+--------+-------+------+--------------+
+Test #2, Outer #1, Inner #1
++--------+-------+------+
+| Player | Picks | Says |
++--------+-------+------+
+|   P1   |   0   |  1   |
+|   P3   |   1   |  2   |
+|   P4   |   2   |  2   |
+|        |       |  4   |
++--------+-------+------+
 P4 says 2, but that number was already said. Then says 3.
 Inner Outcome => Nothing
 
-Turn 2
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   2   |  4   |      2       |
-|   P3   |   1   |  2   |      3       |
-|   P4   |   1   |  6   |      1       |
-+--------+-------+------+--------------+
-Inner Outcome => Player P4 is a lier, because with 1 coins it is
+Test #2, Outer #1, Inner #2
++--------+-------+------+
+| Player | Picks | Says |
++--------+-------+------+
+|   P1   |   2   |  4   |
+|   P3   |   1   |  2   |
+|   P4   |   1   |  6   |
++--------+-------+------+
+Inner Outcome => Player P4 is a liar, because with 1 coins it is
 impossible to get a result of 6, the maximum would be 5.
-So 4 he is marked as "looser".
-Outer outcome => does nothing as there is a looser found.
-
-==================================================
-
-GAME 3
-
-// CREATE A GAME IN WHICH LOOSER IS P2 OR P3
-// MAYBE ALSO GAME 2 SHOULD RESULT DIFFERENT.
-
-3 people, 4 coins, Player 1 says first in 1rst turn, lier looses
-
-Round 1, 4 players P1, P2, P3, P4
-
-Turn 1
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   2   |  5   |      1       |
-|   P2   |   0   |  3   |      2       |
-|   P3   |   1   |  1   |      3       |
-|   P4   |   1   |  2   |      4       |
-+--------+-------+------+--------------+
-Inner Outcome => Nothing
-
-Turn 2
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   1   |  4   |      4       |
-|        |       |  2   |      4       |
-|   P2   |   0   |  4   |      1       |
-|   P3   |   2   |  6   |      2       |
-|   P4   |   2   |  8   |      3       |
-+--------+-------+------+--------------+
-P1 says 4 after P2 having said 4, so desire is invalid.
-Inner Outcome => Nothing
-
-Turn 3
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   1   |  2   |      3       |
-|   P2   |   0   |  3   |      4       |
-|   P3   |   1   |  6   |      1       |
-|   P4   |   1   |  5   |      2       |
-+--------+-------+------+--------------+
-Inner Outcome => Player P2 is labelled "winner"
-Outer outcome => P2 is eliminated and another game is organized with P1, P3, and P4
-
-Round 2, 3 players P1, P3, P4
-
-Turn 1
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   0   |  1   |      3       |
-|   P3   |   1   |  2   |      1       |
-|   P4   |   2   |  2   |      2       |
-|        |       |  4   |      2       |
-+--------+-------+------+--------------+
-P4 says 2, but that number was already said. Then says 3.
-Inner Outcome => Nothing
-
-Turn 1
-+--------+-------+------+--------------+
-| Player | Picks | Says | Saying order |
-+--------+-------+------+--------------+
-|   P1   |   2   |  4   |      2       |
-|   P3   |   1   |  2   |      3       |
-|   P4   |   1   |  6   |      1       |
-+--------+-------+------+--------------+
-Inner Outcome => Player P4 is a lier, because with 1 coins it is
-impossible to get a result of 6, the maximum would be 5.
-So he is marked as "looser".
-Outer outcome => does nothing as there is a looser found.
+So 4 he is marked as "liar".
+Outer outcome => "liar" found, mark as "looser" and terminate.
 
 */
